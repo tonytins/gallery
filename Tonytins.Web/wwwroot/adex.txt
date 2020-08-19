@@ -1,0 +1,5 @@
+---
+permalink: .well-known/adex.txt
+---
+
+adex-publisher=0x352E1776B8EDF36bc94F53B79cf3183D4EC5BE6a
