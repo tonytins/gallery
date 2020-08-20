@@ -2,14 +2,27 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title></title>
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
 
     <div style="text-align: center; align-content: center; padding: 0%;">
         <p>Sorry, we can't find that page that you're looking for. You can try again by going <a href="/">back to the homepage</a></p>
-        <img src="images/404.jpg" style="width: 400px;">
+        <p><img src="images/404.jpg" style="width: 400px;"></p>
+        <p>
+            <iframe src="https://viewm.moonicorn.network/#%7B%22options%22%3A%7B%22publisherAddr%22%3A%220x352E1776B8EDF36bc94F53B79cf3183D4EC5BE6a%22%2C%22whitelistedTokens%22%3A%5B%220x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359%22%2C%220x6B175474E89094C44Da98b954EedeAC495271d0F%22%5D%2C%22whitelistedType%22%3A%22legacy_468x60%22%2C%22randomize%22%3Atrue%2C%22targeting%22%3A%5B%7B%22tag%22%3A%22engineering%20%26%20technology%22%2C%22score%22%3A50%7D%2C%7B%22tag%22%3A%22software%22%2C%22score%22%3A50%7D%2C%7B%22tag%22%3A%22cryptocurrency%22%2C%22score%22%3A50%7D%5D%2C%22width%22%3A%22468%22%2C%22height%22%3A%2260%22%2C%22minPerImpression%22%3A%220%22%2C%22minTargetingScore%22%3A%220%22%2C%22fallbackUnit%22%3Anull%2C%22marketSlot%22%3A%22QmQajsu3iL73Qcwae3ASGeLtZv3u2xbGa8hV4BWxM4WakU%22%7D%7D"
+                    width="468" height="60" scrolling="no" frameborder="0" style="border: 0;" onload="window.addEventListener('message', function(ev) {
+  if (ev.data.hasOwnProperty('adexHeight') && ('https://viewm.moonicorn.network' === ev.origin)) {
+    for (let f of document.getElementsByTagName('iframe')) {
+      if (f.contentWindow === ev.source) {
+        f.height = ev.data.adexHeight;
+      }
+    }
+  }
+}, false)"></iframe>
+        </p>
     </div>
-
 </body>
 </html>
