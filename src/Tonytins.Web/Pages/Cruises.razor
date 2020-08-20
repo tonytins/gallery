@@ -30,7 +30,8 @@ else
     <td>@cruise.Date.ToShortDateString()</td>
     <td>@cruise.Ship</td>
     <td>@Countdown(cruise.Date)</td>
-</tr>}
+</tr>
+}
     </tbody>
 </table>}
 
@@ -40,6 +41,7 @@ else
     {
 
         var time = date - DateTime.UtcNow;
+
         if (time.Days < 0)
             return "0";
 
