@@ -1,0 +1,52 @@
+@page "/cruises"
+@using Tonytins.Models
+@using System
+@inject HttpClient Http
+
+<h1>Cruise Schedule</h1>
+
+<p>Occasionally, once every year or two, I go on cruises. Here is a schedule for when I'll be out.</p>
+
+@if (cruises == null)
+{
+<div class="loading">
+    <p><img src="../images/tony.gif" /></p>
+    <p>Loading...</p>
+</div> }
+else
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Ship</th>
+            <th>Days Remaining</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cruise in cruises)
+        {
+<tr>
+    <td>@cruise.Date.ToShortDateString()</td>
+    <td>@cruise.Ship</td>
+    <td>@Countdown(cruise.Date)</td>
+</tr>}
+    </tbody>
+</table>}
+
+@code { Cruise[] cruises;
+
+    string Countdown(DateTime date)
+    {
+
+        var time = date - DateTime.UtcNow;
+        if (time.Days < 0)
+            return "0";
+
+        return time.Days.ToString();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        cruises = await Http.GetFromJsonAsync<Cruise[]>("data/cruises.json");
+    } }
