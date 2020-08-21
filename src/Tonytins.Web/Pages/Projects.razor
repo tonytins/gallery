@@ -1,0 +1,44 @@
+@page "/projects"
+@using Tonytins.Web.Models
+@using System
+@inject HttpClient Http
+
+<h1>Cruise Schedule</h1>
+
+<p>Occasionally, once every year or two, I go on cruises. Here is a schedule for when I'll be out.</p>
+
+@if (_projects == null)
+{
+    <div class="tonytins-center">
+        <p><img src="../images/tony.gif" /></p>
+        <p>Loading...</p>
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Project</th>
+            <th>Url</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var projects in _projects)
+        {
+            <tr>
+                <td>@projects.Project</td>
+                <td><a href="@projects.Url">@projects.Url</a></td>
+            </tr>
+        }
+        </tbody>
+    </table>}
+
+@code {
+    ProjectsModel[] _projects;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _projects = await Http.GetFromJsonAsync<ProjectsModel[]>("data/projects.json");
+    }
+}

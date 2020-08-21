@@ -1,8 +1,8 @@
 using System;
 
-namespace Tonytins.Models
+namespace Tonytins.Web.Models
 {
-    public class Cruise
+    public class CruiseModel
     {
         public DateTime Date { get; set; }
         public string Ship { get; set; }
