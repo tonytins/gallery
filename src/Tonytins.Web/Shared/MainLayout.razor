@@ -26,4 +26,20 @@
         @Body
     </div>
 
+    <footer>
+        <div class="col-sm"></div>
+        <div class="col-sm"><div class="text-center">@Slogans</div></div>
+        <div class="col-sm"></div>
+    </footer>
+
 </div>
+
+@code { string Slogans
+    {
+        get
+        {
+            var rng = new Random();
+            var phrases = new string[] { "📡 Internet of Tins", "🍣 The Full Snack Developer" };
+            return phrases[rng.Next(phrases.Length)];
+        }
+    } }
