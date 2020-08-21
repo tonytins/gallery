@@ -1,14 +1,7 @@
-﻿[
-    {
-        "project": "Casey Universe",
-        "url": "https://github.com/tonytins/caseyuniverse"
-    },
-    {
-        "project": "Awesome LTS",
-        "url": "https://github.com/tonytins/awesome-lts"
-    },
+[
     {
         "project": "Z Programming Language",
-        "url": "https://github.com/tonytins/zlang"
+        "page": "/project/zlang",
+        "repo": "https://github.com/tonytins/zlang"
     }
 ]
