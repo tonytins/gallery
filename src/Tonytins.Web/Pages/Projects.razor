@@ -1,11 +1,10 @@
 @page "/projects"
 @using Tonytins.Web.Models
-@using System
 @inject HttpClient Http
 
-<h1>Cruise Schedule</h1>
+<h1>Projects</h1>
 
-<p>Occasionally, once every year or two, I go on cruises. Here is a schedule for when I'll be out.</p>
+<p>These are a list of the projects I'm working on Github.</p>
 
 @if (_projects == null)
 {
@@ -20,19 +19,21 @@ else
         <thead>
         <tr>
             <th>Project</th>
-            <th>Url</th>
+            <th>Repository</th>
         </tr>
         </thead>
         <tbody>
         @foreach (var projects in _projects)
         {
             <tr>
-                <td>@projects.Project</td>
-                <td><a href="@projects.Url">@projects.Url</a></td>
+                <td><NavLink href="@projects.Page">@projects.Project</NavLink></td>
+                <td><a href="@projects.Repo">@projects.Repo</a></td>
             </tr>
         }
         </tbody>
-    </table>}
+    </table>
+
+}
 
 @code {
     ProjectsModel[] _projects;
