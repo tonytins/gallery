@@ -13,7 +13,7 @@ jobs:
         runs-on: ${{ matrix.os }}
         strategy:
             matrix:
-                dotnet: ["3.1.200", "3.1.201"]
+                dotnet: ["3.1.302", "3.1.401"]
                 os: [ubuntu-latest, windows-latest, macOS-latest]
 
         steps:
