@@ -1,5 +1,6 @@
 @page "/projects"
 @using Tonytins.Web.Models
+@using Tonytins.Web.Components
 @inject HttpClient Http
 
 <h1>Projects</h1>
@@ -8,38 +9,29 @@
 
 @if (_projects == null)
 {
-    <div class="tonytins-center">
-        <p><img src="../images/tony.gif" /></p>
-        <p>Loading...</p>
-    </div>
-}
-else
-{
-    <table class="table">
-        <thead>
+<LoadingComponent /> }
+            else
+            {
+<table class="table">
+    <thead>
         <tr>
             <th>Project</th>
             <th>Repository</th>
         </tr>
-        </thead>
-        <tbody>
+    </thead>
+    <tbody>
         @foreach (var projects in _projects)
         {
-            <tr>
-                <td><NavLink href="@projects.Page">@projects.Project</NavLink></td>
-                <td><a href="@projects.Repo">@projects.Repo</a></td>
-            </tr>
-        }
-        </tbody>
-    </table>
+<tr>
+    <td><NavLink href="@projects.Page">@projects.Project</NavLink></td>
+    <td><a href="@projects.Repo">@projects.Repo</a></td>
+</tr>}
+    </tbody>
+</table>}
 
-}
+@code { ProjectsModel[] _projects;
 
-@code {
-    ProjectsModel[] _projects;
-
-    protected override async Task OnInitializedAsync()
-    {
-        _projects = await Http.GetFromJsonAsync<ProjectsModel[]>("data/projects.json");
-    }
-}
+            protected override async Task OnInitializedAsync()
+            {
+                _projects = await Http.GetFromJsonAsync<ProjectsModel[]>("data/projects.json");
+            } }

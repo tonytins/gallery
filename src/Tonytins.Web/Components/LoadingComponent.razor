@@ -1,0 +1,9 @@
+@namespace Tonytins.Web.Components
+<div class="tonytins-center">
+    <p><img src="@Image" /></p>
+    <p><span class="fa fa-spinner"></span> Loading...</p>
+</div>
+
+@code { [Parameter]
+            public string Image { get; set; } = "../images/tony.gif";
+}
