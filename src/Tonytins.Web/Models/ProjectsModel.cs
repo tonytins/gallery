@@ -1,4 +1,5 @@
-﻿namespace Tonytins.Web.Models
+// Anthony Leland licenses this file to you under the MIT license.
+namespace Tonytins.Web.Models
 {
     public class ProjectsModel
     {

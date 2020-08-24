@@ -1,25 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <RazorLangVersion>3.0</RazorLangVersion>
-    <AssemblyName>tonytins</AssemblyName>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <RazorLangVersion>3.0</RazorLangVersion>
+        <AssemblyName>tonytins</AssemblyName>
+        <UserSecretsId>bee4b3a1-2b5c-4fdd-ac00-6c494b42143a</UserSecretsId>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="bundleconfig.json" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Google.Cloud.Firestore" Version="2.1.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.1" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.1" PrivateAssets="all" />
+        <PackageReference Include="Nethereum.Web3" Version="3.8.0" />
+        <PackageReference Include="System.Net.Http.Json" Version="3.2.0" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Include="bundleconfig.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.1" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.1" PrivateAssets="all" />
-    <PackageReference Include="Nethereum.Web3" Version="3.8.0" />
-    <PackageReference Include="System.Net.Http.Json" Version="3.2.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Tonytins.Web.Components\Tonytins.Web.Components.csproj" />
+    </ItemGroup>
 
 </Project>
