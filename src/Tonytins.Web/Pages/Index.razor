@@ -1,36 +1,3 @@
 @page "/"
-@using System.Diagnostics
-@using Tonytins.Web.Models
-@using Tonytins.Web.Components
-@inject HttpClient Http
-@if (Debugger.IsAttached)
-{
-<div>
-    <div class="col col-10"></div>
-    <div class="col col-5">
-        @if (_sm == null)
-        {
-<LoadingComponent /> }
-else
-{
-<ul>
-    @foreach (var social in _sm)
-    {
-<li class="fa fa-@social.Social.ToLowerInvariant()" aria-hidden="true"> @social.Username.ToLowerInvariant()</li>
-}
-</ul>}
-    </div>
-</div> }
-            else
-            {
-<div class="tonytins-center">Coming Soon!</div>}
 
-
-
-@code { SocialModel[] _sm;
-
-    protected override async Task OnInitializedAsync()
-    {
-        _sm = await Http.GetFromJsonAsync<SocialModel[]>
-    ("data/social.json");
-    } }
+    <h1>Coming Soon!</h1>

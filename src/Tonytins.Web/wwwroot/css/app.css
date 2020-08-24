@@ -36,7 +36,7 @@ a, .btn-link {
 
 @media only screen and (orientation: landscape) and (min-width: 1024px) {
     app {
-        max-width: 1024px;
+        max-width: 1200px;
         position: center;
         margin: 0 auto;
     }
