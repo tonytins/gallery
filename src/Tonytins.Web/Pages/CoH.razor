@@ -6,16 +6,17 @@
 
 @if (_heroes == null)
 {
-<LoadingComponent /> }
-            else
-            {
+<LoadingComponent />
+ }
+else
+{
 
 <div class="row">
     @foreach (var hero in _heroes)
     {
 <div class="col-sm">
     <CoHComponent Hero=@hero.Hero Image=@hero.Image Backstory=@hero.Backstory
-                  ServerName=@hero.Server ServerLink=@ServerLink(hero.Server) />
+                  ServerName=@hero.Server ServerShard=@hero.Shard ServerLink=@ServerLink(hero.Server) />
 </div>}
 </div>      }
 

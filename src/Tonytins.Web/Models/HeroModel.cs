@@ -7,11 +7,12 @@ namespace Tonytins.Web.Models
     /// </summary>
     public class HeroModel
     {
-        public string Hero { get; set; } = "Lorem ipsum";
+        public string Hero { get; set; } = "Example Hero";
 
-        public string Backstory { get; set; } = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et condimentum sem. Curabitur et congue leo. In.";
+        public string Backstory { get; set; } = string.Empty;
 
         public string Image { get; set; } = "../images/brands/coh-card.png";
         public string Server { get; set; } = "Freedom";
+        public string Shard { get; set; } = "Freedom";
     }
 }
