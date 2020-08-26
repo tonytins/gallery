@@ -6,23 +6,38 @@
 
 @if (_heroes == null)
 {
-    <LoadingComponent />
- }
-else
-{
+<LoadingComponent /> }
+            else
+            {
 
-    <div class="row">
-        @foreach (var hero in _heroes)
-        {
-            <div class="col-sm">
-                <CoHComponent Hero=@hero.Hero Backstory=@hero.Backstory
-                              ServerName=@hero.Server.Name ServerLink=@hero.Server.Link />
-            </div>}
-    </div>      }
+<div class="row">
+    @foreach (var hero in _heroes)
+    {
+<div class="col-sm">
+    <CoHComponent Hero=@hero.Hero Image=@hero.Image Backstory=@hero.Backstory
+                  ServerName=@hero.Server ServerLink=@ServerLink(hero.Server) />
+</div>}
+</div>      }
 
 @code { HeroModel[] _heroes;
 
     protected override async Task OnInitializedAsync()
     {
         _heroes = await Http.GetFromJsonAsync<HeroModel[]>("data/heroes.json");
+    }
+
+    string ServerLink(string server)
+    {
+        switch (server.ToLowerInvariant())
+        {
+            case "victory":
+                return "https://cityofheroes.dev/";
+            case "rebirth":
+                return "https://play.cityofheroesrebirth.com/";
+            case "homecoming":
+                return "https://forums.homecomingservers.com/";
+            case "city of heroes":
+            default:
+                return "https://web.archive.org/web/20120508032355/http://na.cityofheroes.com/en";
+        }
     } }

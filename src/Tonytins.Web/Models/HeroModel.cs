@@ -7,21 +7,11 @@ namespace Tonytins.Web.Models
     /// </summary>
     public class HeroModel
     {
-        const string TBA = "Coming Soon";
+        public string Hero { get; set; } = "Lorem ipsum";
 
-        public string Hero { get; set; } = TBA;
+        public string Backstory { get; set; } = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et condimentum sem. Curabitur et congue leo. In.";
 
-        public string Backstory { get; set; } = TBA;
-
-        public string Image { get; set; } = "../images/brands/coh-card.png";
-
-        public CohServer Server { get; set; }
-    }
-
-    public class CohServer
-    {
-        public string Name { get; set; } = "Example";
-
-        public string Link { get; set; } = "https://example.com";
+        public string Image { get; set; } = @"../images/brands/coh-card.png";
+        public string Server { get; set; } = "City of Heroes";
     }
 }
