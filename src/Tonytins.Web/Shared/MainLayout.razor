@@ -33,8 +33,11 @@
         get
         {
             var rng = new Random();
-            var phrases = new[] { "📡 Internet of Tins",
-                "🍣 The Full Snack Developer","🏙️ City of Tins" };
-            return phrases[rng.Next(phrases.Length)];
+            var slogan = new[] {
+                "📡 Internet of Tins",
+                "🍣 The Full Snack Developer",
+                "🏙️ City of Tins"
+            };
+            return slogan[rng.Next(slogan.Length)];
         }
     } }

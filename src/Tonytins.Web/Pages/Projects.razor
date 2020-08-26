@@ -1,7 +1,6 @@
 @page "/projects"
 @using Tonytins.Models
 @using Tonytins.Web.Components
-@using System.Text.Json
 @inject HttpClient Http
 
 <h1>Projects</h1>
@@ -35,6 +34,5 @@
     protected override async Task OnInitializedAsync()
     {
         _projects = await Http.GetFromJsonAsync<ProjectsModel[]>(
-            "data/projects.json",
-            new JsonSerializerOptions { IgnoreNullValues = true });
+            "data/projects.json");
     } }

@@ -1,7 +1,6 @@
 @page "/coh"
 @using Tonytins.Web.Models
 @using Tonytins.Web.Components
-@using System.Text.Json
 @inject HttpClient Http
 <h3>City of Heroes</h3>
 
@@ -24,9 +23,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _heroes = await Http.GetFromJsonAsync<HeroModel[]>(
-            "data/heroes.json",
-            new JsonSerializerOptions { IgnoreNullValues = true });
+        _heroes = await Http.GetFromJsonAsync<HeroModel[]>("data/heroes.json");
     }
 
     string ServerLink(string server)
