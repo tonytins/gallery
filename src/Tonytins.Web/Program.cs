@@ -20,7 +20,6 @@ namespace Tonytins.Web
             {
                 BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
             });
-
             builder.Services.AddSingleton(serv =>
             {
                 // Get the service address from appsettings.json

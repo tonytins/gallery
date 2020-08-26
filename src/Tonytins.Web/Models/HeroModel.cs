@@ -12,6 +12,6 @@ namespace Tonytins.Web.Models
         public string Backstory { get; set; } = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et condimentum sem. Curabitur et congue leo. In.";
 
         public string Image { get; set; } = "../images/brands/coh-card.png";
-        public string Server { get; set; } = "City of Heroes";
+        public string Server { get; set; } = "Freedom";
     }
 }
