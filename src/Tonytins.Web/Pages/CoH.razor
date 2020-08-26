@@ -1,0 +1,28 @@
+@page "/coh"
+@using Tonytins.Web.Models
+@using Tonytins.Web.Components
+@inject HttpClient Http
+<h3>City of Heroes</h3>
+
+@if (_heroes == null)
+{
+    <LoadingComponent />
+ }
+else
+{
+
+    <div class="row">
+        @foreach (var hero in _heroes)
+        {
+            <div class="col-sm">
+                <CoHComponent Hero=@hero.Hero Backstory=@hero.Backstory
+                              ServerName=@hero.Server.Name ServerLink=@hero.Server.Link />
+            </div>}
+    </div>      }
+
+@code { HeroModel[] _heroes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _heroes = await Http.GetFromJsonAsync<HeroModel[]>("data/heroes.json");
+    } }

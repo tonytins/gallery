@@ -1,5 +1,5 @@
 @page "/projects"
-@using Tonytins.Web.Models
+@using Tonytins.Models
 @using Tonytins.Web.Components
 @inject HttpClient Http
 
@@ -9,7 +9,8 @@
 
 @if (_projects == null)
 {
-<LoadingComponent /> }
+<LoadingComponent />
+ }
             else
             {
 <table class="table">
@@ -22,10 +23,11 @@
     <tbody>
         @foreach (var projects in _projects)
         {
-<tr>
-    <td><NavLink href="@projects.Page">@projects.Project</NavLink></td>
-    <td><a href="@projects.Repo">@projects.Repo</a></td>
-</tr>}
+        <tr>
+            <td><NavLink href="@projects.Page">@projects.Project</NavLink></td>
+            <td><a href="@projects.Repo">@projects.Repo</a></td>
+        </tr>
+}
     </tbody>
 </table>}
 

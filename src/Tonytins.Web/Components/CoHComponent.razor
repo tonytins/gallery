@@ -1,0 +1,23 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <img class="card-img-top" src="@Image" />
+        <h5 class="card-title">@Hero</h5>
+        <p class="card-text">@Backstory</p>
+        <a href="@ServerLink" class="btn btn-primary">CoH: @ServerName</a>
+    </div>
+</div>
+
+@code { [Parameter]
+    public string Hero { get; set; }
+
+    [Parameter]
+    public string Backstory { get; set; }
+
+    [Parameter]
+    public string Image { get; set; }
+
+    [Parameter]
+    public string ServerName { get; set; }
+
+    [Parameter]
+    public string ServerLink { get; set; } }
