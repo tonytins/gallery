@@ -17,34 +17,18 @@
     <div class="content px-4">
         @Body
     </div>
-
-    <div class="tins-footer">
-        <div class="row">
-            <div class="col-sm"><div class="text-center">@Slogans</div></div>
-            <div class="col-sm">
-                <h5>Social</h5>
-                <ul class="list-unstyled">
-                    <li><a href="https://github.com/tonytins">Github</a></li>
-                    <li><a href="https://twitter.com/tonyt1ns">Twitter</a></li>
-                </ul>
-            </div>
-            <div class="col-sm"></div>
-        </div>
-    </div>
-
 </div>
 
-@code { string Slogans
-    {
-        get
-        {
-            var rng = new Random();
-            var slogan = new[] {
-                "📡 Internet of Tins",
-                "🍣 The Full Snack Developer",
-                "🏙️ City of Tins"
-            };
-
-            return slogan[rng.Next(slogan.Length)];
-        }
-    } }
+<!-- <div>
+    <div class="row">
+        <div class="col-sm"><div class="text-center"><TaglineComponent /></div></div>
+        <div class="col-sm">
+            <h5>Social</h5>
+            <ul class="list-unstyled">
+                <li><a href="https://github.com/tonytins">Github</a></li>
+                <li><a href="https://twitter.com/tonyt1ns">Twitter</a></li>
+            </ul>
+        </div>
+        <div class="col-sm"></div>
+    </div>
+</div> -->

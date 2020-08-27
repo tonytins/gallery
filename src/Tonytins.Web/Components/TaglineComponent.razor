@@ -1,0 +1,18 @@
+@inject HttpClient Http
+<p>@Taglines</p>
+
+@code { string Taglines
+    {
+        get
+        {
+            var tagline = new[]
+           {
+         "📡 Internet of Tins",
+        "🍣 The Full Snack Developer",
+        "🏙️ City of Tins"
+     };
+            var rng = new Random();
+
+            return tagline[rng.Next(tagline.Length)];
+        }
+    } }
