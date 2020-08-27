@@ -7,12 +7,15 @@ namespace Tonytins.Web.Models
     /// </summary>
     public class HeroModel
     {
+        const string NA = "N/A";
+        const string DEFAULT_SERVER = "Freedom";
+
         public string Hero { get; set; } = "Example Hero";
-        public string Origin { get; set; } = string.Empty;
-        public string Archetype { get; set; } = string.Empty;
-        public string Affilation { get; set; } = "N/A";
+        public string Origin { get; set; } = NA;
+        public string Archetype { get; set; } = NA;
+        public string Affilation { get; set; } = NA;
         public string Image { get; set; } = "../images/brands/coh-card.png";
-        public string Server { get; set; } = "Freedom";
-        public string Shard { get; set; } = "Freedom";
+        public string Server { get; set; } = DEFAULT_SERVER;
+        public string Shard { get; set; } = DEFAULT_SERVER;
     }
 }
