@@ -8,9 +8,9 @@ namespace Tonytins.Web.Models
     public class HeroModel
     {
         public string Hero { get; set; } = "Example Hero";
-
-        public string Backstory { get; set; } = string.Empty;
-
+        public string Origin { get; set; } = string.Empty;
+        public string Archetype { get; set; } = string.Empty;
+        public string Affilation { get; set; } = "N/A";
         public string Image { get; set; } = "../images/brands/coh-card.png";
         public string Server { get; set; } = "Freedom";
         public string Shard { get; set; } = "Freedom";

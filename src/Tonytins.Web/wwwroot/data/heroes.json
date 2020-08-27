@@ -1,6 +1,9 @@
 [
     {
         "hero": "Super Anthony",
+        "origin": "Technology",
+        "archetype": "Brute",
+        "image": "../images/heroes/super-anthony.png",
         "server": "Homecoming",
         "shard": "Torchbearer"
     }

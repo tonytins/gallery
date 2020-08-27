@@ -36,4 +36,8 @@
       </Protobuf>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\images\heroes\" />
+    </ItemGroup>
+
 </Project>

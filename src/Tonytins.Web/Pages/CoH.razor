@@ -3,7 +3,6 @@
 @using Tonytins.Web.Components
 @inject HttpClient Http
 <h3>City of Heroes</h3>
-
 @if (_heroes == null)
 {
 <LoadingComponent />
@@ -15,8 +14,14 @@ else
     @foreach (var hero in _heroes)
     {
 <div class="col-sm">
-    <CoHComponent Hero=@hero.Hero Image=@hero.Image Backstory=@hero.Backstory
-                  ServerName=@hero.Server ServerShard=@hero.Shard ServerLink=@ServerLink(hero.Server) />
+    <HeroInfoboxComponent Hero=@hero.Hero
+                          Image=@hero.Image
+                          Origin=@hero.Origin
+                          Archetype=@hero.Archetype
+                          Affilation=@hero.Affilation
+                          ServerName=@hero.Server
+                          ServerShard=@hero.Shard
+                          ServerLink=@ServerLink(hero.Server) />
 </div>}
 </div>      }
 
