@@ -2,8 +2,8 @@
 namespace Tonytins.Web.Models
 {
     /// <summary>
-    /// Basic hero profile with another model
-    /// containing the CoH server.
+    /// Basic hero profile contains the type, affilation and server.
+    /// If no info is given, the model uses it's defualt values.
     /// </summary>
     public class HeroModel
     {

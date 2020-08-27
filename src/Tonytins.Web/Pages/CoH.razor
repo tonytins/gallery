@@ -3,12 +3,19 @@
 @using Tonytins.Web.Components
 @inject HttpClient Http
 <h3>City of Heroes</h3>
+<p>City of Heroes is a MMORPG where you create and play as a hero, villian or in-between based on many tropes and types. The game was shut down in 2012 for financial reasons but the source code was leaked in 2019. Since then, private servers have rebooted the game.</p>
+<p><button class="btn btn-primary" @onclick="ShowVideo">Toggle Trailer</button></p>
+
+@if (IsVideoHidden)
+{
+<p><YouTubeComponent Video="0eHB9zxtet4" /></p>}
+<p>This page contains a card-based list of all of my heroes on varies servers.</p>
+
 @if (_heroes == null)
 {
-<LoadingComponent />
- }
-else
-{
+<LoadingComponent /> }
+            else
+            {
 
 <div class="row">
     @foreach (var hero in _heroes)
@@ -27,9 +34,19 @@ else
 
 @code { HeroModel[] _heroes;
 
+    bool IsVideoHidden { get; set; } = false;
+
     protected override async Task OnInitializedAsync()
     {
         _heroes = await Http.GetFromJsonAsync<HeroModel[]>("data/heroes.json");
+    }
+
+    void ShowVideo(MouseEventArgs e)
+    {
+        if (IsVideoHidden == true)
+            IsVideoHidden = false;
+        else
+            IsVideoHidden = true;
     }
 
     string ServerLink(string server)
