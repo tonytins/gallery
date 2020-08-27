@@ -3,7 +3,7 @@
 @using Tonytins.Web.Components
 @inject HttpClient Http
 <h3>City of Heroes</h3>
-<p>City of Heroes is a MMORPG where you create and play as a hero, villain or in-between based on many tropes and types. It was developed by developed by Paragon Studios, formally Cryptic Studios, and was published by NCsoft. On August 31, 2012, NCsoft terminated its Paragon Studios development team, ending all production on City of Heroes with the last day of services on November 30, 2012. In April 2019, source code capable of running a City of Heroes server was distributed widely. New servers have been created since then. NCSoft has taken action as of @DateTime.UtcNow.Year.</p>
+<p>City of Heroes is a MMORPG where you create and play as a hero, villain or in-between based on many tropes and types. It was developed by developed by Paragon Studios, formally Cryptic Studios, and was published by NCsoft. On August 31, 2012, NCsoft terminated its Paragon Studios development team, ending all production on City of Heroes with the last day of services on November 30, 2012. In April 2019, source code capable of running a City of Heroes server was distributed widely. New servers have been created since then. As of @MonthYearNow NCSoft has not taken action to shut down the servers.</p>
 <p><button class="btn btn-primary" @onclick="ShowVideo">Toggle Trailer</button></p>
 
 @if (IsVideoHidden)
@@ -35,6 +35,8 @@
 @code { HeroModel[] _heroes;
 
     bool IsVideoHidden { get; set; } = false;
+
+    string MonthYearNow => $"{DateTime.UtcNow.Month} {DateTime.UtcNow.Year}";
 
     protected override async Task OnInitializedAsync()
     {
