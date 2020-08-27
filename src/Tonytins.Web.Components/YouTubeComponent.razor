@@ -1,0 +1,22 @@
+<iframe width=@Width height=@Height src=@Video frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+@code { string _video = string.Empty;
+
+    [Parameter]
+    public string Video
+    {
+        get
+        {
+            return _video;
+        }
+        set
+        {
+            _video = $@"https://www.youtube-nocookie.com/embed/{value}";
+        }
+    }
+
+    [Parameter]
+    public string Width { get; set; } = "560";
+
+    [Parameter]
+    public string Height { get; set; } = "315"; }
