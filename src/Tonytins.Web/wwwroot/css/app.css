@@ -12,6 +12,9 @@ a, .btn-link {
     color: #0366d6;
 }
 
+.tins-fa-padding {
+    padding: 5px;
+}
 
 .tins-center {
     position: fixed;
