@@ -10,11 +10,13 @@ namespace Tonytins.Web.Models
         const string NA = "N/A";
         const string DEFAULT_SERVER = "Freedom";
 
-        public string Hero { get; set; } = "Example Hero";
+        public string Name { get; set; } = "Example Hero";
         public string Origin { get; set; } = NA;
         public string Archetype { get; set; } = NA;
         // I'm not sure if Affilation needs to be an array
         public string Affilation { get; set; } = NA;
+        public string Primary { get; set; } = NA;
+        public string Secondary { get; set; } = NA;
         public string Image { get; set; } = "../images/brands/coh-card.png";
         public string Server { get; set; } = DEFAULT_SERVER;
         public string Shard { get; set; } = DEFAULT_SERVER;

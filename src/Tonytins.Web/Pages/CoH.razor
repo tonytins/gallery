@@ -13,19 +13,20 @@
 <h4>Heroes</h4>
 @if (_heroes == null)
 {
-<LoadingComponent />
- }
-else
-{
+<LoadingComponent /> }
+            else
+            {
 
 <div class="row">
     @foreach (var hero in _heroes)
     {
 <div class="col-auto">
-    <HeroInfoboxComponent Hero=@hero.Hero
+    <HeroInfoboxComponent Name=@hero.Name
                           Image=@hero.Image
                           Origin=@hero.Origin
                           Archetype=@hero.Archetype
+                          Primary=@hero.Primary
+                          Secondary=@hero.Secondary
                           Affilation=@hero.Affilation
                           ServerName=@hero.Server
                           ServerShard=@hero.Shard
