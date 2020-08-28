@@ -10,7 +10,9 @@ jobs:
       with:
         dotnet-version: 3.1.401
     - name: Publish with dotnet
-      run: dotnet publish src/Tonytins.Web --configuration Release --output build
+      run: |
+        dotnet publish src/Tonytins.Web --configuration Release --output build
+        cp build/index.html build/404.html
     - name: Deploy to Github Pages
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
