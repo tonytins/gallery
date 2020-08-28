@@ -4,6 +4,9 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, 'Josefin Sans', Arial, sans-serif;
 }
 
+.card {
+    display: inline-block;
+}
 
 a, .btn-link {
     color: #0366d6;

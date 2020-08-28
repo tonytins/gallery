@@ -10,8 +10,7 @@
 @if (IsVideoHidden)
 {
 <p><YouTubeComponent Video="0eHB9zxtet4" /></p>}
-<p>This page contains a card-based list of all of my heroes on varies servers.</p>
-
+<h4>Heroes</h4>
 @if (_heroes == null)
 {
 <LoadingComponent />
@@ -22,7 +21,7 @@ else
 <div class="row">
     @foreach (var hero in _heroes)
     {
-<div class="col-sm">
+<div class="col-auto">
     <HeroInfoboxComponent Hero=@hero.Hero
                           Image=@hero.Image
                           Origin=@hero.Origin
