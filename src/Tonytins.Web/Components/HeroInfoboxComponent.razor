@@ -1,13 +1,17 @@
 <div class="card" style="width: 18rem;">
     <img class="card-img-top" width="286" height="190" src="@Image" />
     <div class="card-body">
-        <h5 class="card-title">@Name</h5>
+        <h4 class="card-title">@Name</h4>
         <p class="card-text">
             <a href="https://archive.paragonwiki.com/wiki/Category:Origins">Origin</a>: @Origin
             <br /><a href="https://archive.paragonwiki.com/wiki/Archetypes">Archetype</a>: @Archetype
-            <br />Primary Power: @Primary
-            <br />Secondary Power: @Secondary
             <br />Affilation: @Affilation
+        </p>
+        <h5 class="card-title">Powers</h5>
+        <p class="card-text">
+            Primary: @Primary
+            <br />Secondary: @Secondary
+            <br />Supplemental: @Supplemental
         </p>
         <div class="row">
             <div class="col"></div>
@@ -47,4 +51,7 @@
     public string Primary { get; set; }
 
     [Parameter]
-    public string Secondary { get; set; } }
+    public string Secondary { get; set; }
+
+    [Parameter]
+    public string Supplemental { get; set; } }

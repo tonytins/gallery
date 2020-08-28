@@ -13,9 +13,10 @@
 <h4>Heroes</h4>
 @if (_heroes == null)
 {
-<LoadingComponent /> }
-            else
-            {
+<LoadingComponent />
+ }
+else
+{
 
 <div class="row">
     @foreach (var hero in _heroes)
@@ -27,6 +28,7 @@
                           Archetype=@hero.Archetype
                           Primary=@hero.Primary
                           Secondary=@hero.Secondary
+                          Supplemental=@hero.Supplemental
                           Affilation=@hero.Affilation
                           ServerName=@hero.Server
                           ServerShard=@hero.Shard
