@@ -23,7 +23,7 @@ else
     {
 <div class="col-auto">
     <HeroInfoboxComponent Name=@hero.Name
-                          Image=@hero.Image
+                          Image=@SiteHelper.ResolveImagePath(hero.Image, "heroes")
                           Origin=@hero.Origin
                           Archetype=@hero.Archetype
                           Primary=@hero.Primary

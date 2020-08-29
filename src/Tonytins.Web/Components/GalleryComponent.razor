@@ -1,0 +1,18 @@
+<div class="card shadow-sm text-dark" style="margin-bottom: 10px;">
+    <img class="card-img-top" style="width: 15em;" src=@Image />
+    <div class="card-body">
+        <h4 class="card-title">@Title</h4>
+        <p class="card-text">
+            Art by @Credits
+            <br /><sup>@Copyrights</sup>
+        </p>
+    </div>
+</div>
+
+@code { [Parameter] public string Image { get; set; }
+
+    [Parameter] public string Title { get; set; }
+
+    [Parameter] public string Copyrights { get; set; }
+
+    [Parameter] public string Credits { get; set; } }

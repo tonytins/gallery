@@ -1,27 +1,38 @@
 [
     {
-        "credits": "chewycuticle",
-        "character": "Aidan Chedar",
-        "image": "chewycuticle_aidan.jpg"
+        "credits": "Fingo Fox",
+        "image": "commission-icons-steve-and-anthony-2020-full.jpg",
+        "title": "Anthony & Stefen",
+        "copyrights": "Stefen © Stefen Auris"
     },
     {
-        "credits": "Andreas",
-        "character": "Aidan Chedar",
-        "image": "andreas_aidan-cheddar_color.png"
+        "credits": "chewycuticle",
+        "title": "Aidan Chedar",
+        "image": "chewycuticle-aidan.jpg"
+    },
+    {
+        "credits": "Andreas Foxen",
+        "title": "Aidan Chedar",
+        "image": "andreas-aidan-cheddar-color.png"
     },
     {
         "credits": "Pyro",
-        "character": "Super Anthony",
-        "image": "super_anthony.jpg"
+        "title": "Super Anthony",
+        "image": "super-anthony.jpg"
     },
     {
         "credits": "Pate",
-        "character": "Tom",
+        "title": "Tom",
         "image": "tomas.png"
     },
     {
-        "credits": "Fingo Fox",
-        "image": "Commission_Icons_Steve_And_Anthony_2020_Full.jpg",
-        "character": "Anthony & Stefen"
+        "credits": "Stuart Otterson",
+        "title": "Anti-Aidan",
+        "image": "anti-aidan-1-by-stuart.jpg"
+    },
+    {
+        "credits": "Stuart Otterson",
+        "title": "Anti-Aidan v2",
+        "image": "anti-aidan-2-by-stuart.jpg"
     }
 ]

@@ -6,14 +6,13 @@
         <div class="sidebar">
             <NavMenu />
         </div>
-        <div class="main">
+        <div class="main @DarkModeCssClass">
             <div class="top-row">
                 <div class="col-sm"></div>
                 <div class="col-sm">
                     <AdexComponent />
                 </div>
                 <div class="col-sm"></div>
-
             </div>
             <div class="content px-4">
                 @Body
@@ -21,13 +20,26 @@
         </div>
     </div>
     <div class="row bottom-row">
-        <div class="col-sm"><div class="text-center align-self-center"><TaglineComponent /></div></div>
-        <div class="col-sm">
-            <h5>Social</h5>
+        <div class="col-sm"></div>
+        <div class="col-sm-auto"><div class="text-center align-self-center"><TaglineComponent /></div></div>
+        <div class="col-sm-auto">
             <ul class="list-unstyled">
                 <li><span class="fab fa-github"></span> <a href="https://github.com/tonytins">Github</a></li>
                 <li><span class="fab fa-twitter"></span> <a href="https://twitter.com/tonyt1ns">Twitter</a></li>
             </ul>
         </div>
+        <div class="col-md-auto">
+            <button @onclick="ToggleDarkMode">Dark Mode</button>
+        </div>
+        <div class="col-sm"></div>
     </div>
 </div>
+
+@code { bool _isDarkMode = false;
+
+    string DarkModeCssClass => _isDarkMode ? "bg-dark btn-dark" : null;
+
+    void ToggleDarkMode()
+    {
+        _isDarkMode = !_isDarkMode;
+    } }
