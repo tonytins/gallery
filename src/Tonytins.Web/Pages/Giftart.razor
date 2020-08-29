@@ -1,0 +1,29 @@
+@page "/giftart"
+@using Tonytins.Web.Models
+@using Tonytins.Web.Components
+@inject HttpClient Http
+<h3>Gift Art</h3>
+<a>All art was commissioned by varies freinds.</a>
+<div style="width: 48em; margin: 0 auto;">
+    @if (_art == null)
+    {
+<LoadingComponent /> }
+else
+{
+<div class="row">
+    @foreach (var art in _art)
+    {
+<div class="col-auto">
+    <GiftArtComponent Image=@art.Image Character=@art.Character Credits=@art.Credits />
+</div>}
+</div>}
+</div>
+<p>Art &copy; their respective owners.</p>
+<p>Stefen &copy; Stefen Auris</p> <!-- TODO: add additional copyrights into the card -->
+
+@code { GiftArtModel[] _art;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _art = await Http.GetFromJsonAsync<GiftArtModel[]>("data/giftart.json");
+    } }

@@ -1,0 +1,15 @@
+<div class="card shadow-sm text-dark" style="margin-bottom: 10px;">
+    <img class="card-img-top" style="width: 200px;" src=@SiteHelper.ResolveImagePath(Image, "giftart") />
+    <div class="card-body">
+        <p class="card-text">
+            @Character
+            <br />Art by @Credits
+        </p>
+    </div>
+</div>
+
+@code { [Parameter] public string Image { get; set; }
+
+    [Parameter] public string Character { get; set; }
+
+    [Parameter] public string Credits { get; set; } }
