@@ -13,10 +13,9 @@
 <h4>Heroes</h4>
 @if (_heroes == null)
 {
-<LoadingComponent />
- }
-else
-{
+<LoadingComponent /> }
+            else
+            {
 
 <div class="row">
     @foreach (var hero in _heroes)
@@ -40,7 +39,7 @@ else
 
     bool IsVideoHidden { get; set; } = false;
 
-    string MonthYearNow => $"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.UtcNow.Month)} {DateTime.UtcNow.Year}";
+    string MonthYearNow => $"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTimeOffset.UtcNow.Month)} {DateTimeOffset.UtcNow.Year}";
 
     protected override async Task OnInitializedAsync()
     {

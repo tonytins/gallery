@@ -1,34 +1,34 @@
 @inherits LayoutComponentBase
 @using Tonytins.Web.Components
-<div class="sidebar">
-    <NavMenu />
-</div>
 
-<div class="main">
-    <div class="top-row">
-        <div class="col-sm"></div>
-        <div class="col-sm">
-            <AdexComponent />
-        </div>
-        <div class="col-sm"></div>
-
-    </div>
-
-    <div class="content px-4">
-        @Body
-    </div>
-</div>
-
-<!-- <div>
+<div class="container-fluid">
     <div class="row">
-        <div class="col-sm"><div class="text-center"><TaglineComponent /></div></div>
+        <div class="sidebar">
+            <NavMenu />
+        </div>
+        <div class="main">
+            <div class="top-row">
+                <div class="col-sm"></div>
+                <div class="col-sm">
+                    <AdexComponent />
+                </div>
+                <div class="col-sm"></div>
+
+            </div>
+
+            <div class="content px-4">
+                @Body
+            </div>
+        </div>
+    </div>
+    <div class="row bottom-row">
+        <div class="col-sm"><div class="text-center align-self-center"><TaglineComponent /></div></div>
         <div class="col-sm">
             <h5>Social</h5>
             <ul class="list-unstyled">
-                <li><a href="https://github.com/tonytins">Github</a></li>
-                <li><a href="https://twitter.com/tonyt1ns">Twitter</a></li>
+                <li><span class="fab fa-github"></span> <a href="https://github.com/tonytins">Github</a></li>
+                <li><span class="fab fa-twitter"></span> <a href="https://twitter.com/tonyt1ns">Twitter</a></li>
             </ul>
         </div>
-        <div class="col-sm"></div>
     </div>
-</div> -->
+</div>
