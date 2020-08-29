@@ -11,12 +11,13 @@
 {
 <p><YouTubeComponent Video="0eHB9zxtet4" /></p>}
 <h4>Heroes</h4>
-@if (_heroes == null)
-{
-<LoadingComponent /> }
-            else
-            {
 
+<div style="width: 38em; margin: 0 auto;">
+    @if (_heroes == null)
+    {
+<LoadingComponent /> }
+else
+{
 <div class="row">
     @foreach (var hero in _heroes)
     {
@@ -33,7 +34,9 @@
                           ServerShard=@hero.Shard
                           ServerLink=@ServerLink(hero.Server) />
 </div>}
-</div>      }
+</div>}
+</div>
+
 
 @code { HeroModel[] _heroes;
 

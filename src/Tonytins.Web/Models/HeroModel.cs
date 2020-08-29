@@ -18,7 +18,7 @@ namespace Tonytins.Web.Models
         public string Primary { get; set; } = NA;
         public string Secondary { get; set; } = NA;
         public string Supplemental { get; set; } = NA;
-        public string Image { get; set; } = "../images/brands/coh-card.png";
+        public string Image { get; set; } = "coh-card.png";
         public string Server { get; set; } = DEFAULT_SERVER;
         public string Shard { get; set; } = DEFAULT_SERVER;
     }
