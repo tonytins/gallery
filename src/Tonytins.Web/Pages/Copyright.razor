@@ -5,15 +5,16 @@
 <h4><span class="fab fa-creative-commons"></span> Character Usage</h4>
 <p>Though copyrighted by me, the usage of my characters are licensed under the Creative Commons CC-BY terms.</p>
 <button class="btn btn-primary" style="margin-bottom:10px;" @onclick="ToggleCollapse">Toggle Usage License</button>
+
+@if (_isToggled)
+{
+<CCBYComponent />}
+
 <h4>Other Copyrights</h4>
 <p>
     <ul>City of Heroes &copy; NCSoft &Aacute; Paragon Studios</ul>
 </p>
 
-@if (_isToggled)
-{
-<CCBYComponent />
-}
 
 @code { bool _isToggled = false;
 
