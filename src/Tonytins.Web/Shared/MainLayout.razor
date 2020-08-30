@@ -21,15 +21,20 @@
     </div>
     <div class="row bottom-row">
         <div class="col-sm"></div>
-        <div class="col-sm-auto"><div class="text-center align-self-center"><TaglineComponent /></div></div>
         <div class="col-sm-auto">
-            <ul class="list-unstyled">
-                <li><span class="fab fa-github"></span> <a href="https://github.com/tonytins">Github</a></li>
-                <li><span class="fab fa-twitter"></span> <a href="https://twitter.com/tonyt1ns">Twitter</a></li>
-            </ul>
+            <div class="text-center align-self-center">
+                <TaglineComponent />
+            </div>
         </div>
-        <div class="col-md-auto">
-            <button @onclick="ToggleDarkMode">Dark Mode</button>
+        <div class="col-sm"></div>
+        <div class="col-sm">
+            <SocialListComponent />
+        </div>
+        <div class="col-sm">
+            <LegalNoticesListComponent />
+        </div>
+        <div class="col-sm-auto">
+            <button class="btn btn-secondary" @onclick="ToggleDarkMode">Dark Mode</button>
         </div>
         <div class="col-sm"></div>
     </div>

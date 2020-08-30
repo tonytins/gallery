@@ -1,0 +1,23 @@
+@page "/copyrights"
+@using Tonytins.Web.Components
+<h3>Copyright</h3>
+<p>Super Anthony, Aidan Cheddar, Tom &copy; Tonytins (me). <NavLink href="fanart">Works of my characters</NavLink> are &copy; their respective artists.</p>
+<h4><span class="fab fa-creative-commons"></span> Character Usage</h4>
+<p>Though copyrighted by me, the usage of my characters are licensed under the Creative Commons CC-BY terms.</p>
+<button class="btn btn-primary" style="margin-bottom:10px;" @onclick="ToggleCollapse">Toggle Usage License</button>
+<h4>Other Copyrights</h4>
+<p>
+    <ul>City of Heroes &copy; NCSoft &Aacute; Paragon Studios</ul>
+</p>
+
+@if (_isToggled)
+{
+<CCBYComponent />
+}
+
+@code { bool _isToggled = false;
+
+    void ToggleCollapse()
+    {
+        _isToggled = !_isToggled;
+    } }
