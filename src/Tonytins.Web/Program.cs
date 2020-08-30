@@ -2,10 +2,7 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Grpc.Net.Client;
-using Grpc.Net.Client.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Tonytins.Web
@@ -20,17 +17,6 @@ namespace Tonytins.Web
             {
                 BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
             });
-            builder.Services.AddSingleton(serv =>
-            {
-                // Get the service address from appsettings.json
-                var cfg = serv.GetRequiredService<IConfiguration>();
-                var backendUrl = cfg["BackendUrl"];
-
-                var httpHandler = new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler());
-
-                return GrpcChannel.ForAddress(backendUrl, new GrpcChannelOptions { HttpHandler = httpHandler });
-            });
-
             await builder.Build().RunAsync();
         }
     }

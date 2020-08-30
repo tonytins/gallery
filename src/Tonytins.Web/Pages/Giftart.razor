@@ -1,5 +1,5 @@
 @page "/giftart"
-@using Tonytins.Web.Models
+@using Tonytins.Models
 @using Tonytins.Web.Components
 @inject HttpClient Http
 <h3>Gift Art</h3>
@@ -7,18 +7,18 @@
 <div style="width: 50em; margin: 0 auto; margin-top: 10px;">
     @if (_art == null)
     {
-<LoadingComponent /> }
+    <LoadingComponent /> }
 else
 {
-<div class="row">
-    @foreach (var art in _art)
+    <div class="row">
+        @foreach (var art in _art)
     {
-<div class="col-auto">
-    <GalleryComponent Title=@art.Title
-                      Image=@SiteHelper.ResolveImagePath(art.Image, "giftart")
-                      Copyrights=@art.Copyrights Credits=@art.Credits />
-</div>}
-</div>}
+        <div class="col-auto">
+            <GalleryComponent Title=@art.Title
+                              Image=@SiteHelper.ResolveImagePath(art.Image, "giftart")
+                              Copyrights=@art.Copyrights Credits=@art.Credits />
+        </div>}
+    </div>}
 </div>
 <p>Art &copy; their respective owners.</p>
 

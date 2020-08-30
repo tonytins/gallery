@@ -1,4 +1,4 @@
-namespace Tonytins.Web.Models
+namespace Tonytins.Models
 {
     public class GalleryModel
     {

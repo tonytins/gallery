@@ -172,7 +172,7 @@ app {
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
     app {
         flex-direction: row;
     }
