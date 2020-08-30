@@ -6,7 +6,7 @@
         "primary": "Time Manipulation",
         "secondary": "Energy Blast",
         "supplemental": "Sorcery",
-        "image": "../images/heroes/incredible-tins.png",
+        "image": "incredible-tins.png",
         "server": "Homecoming",
         "shard": "Torchbearer"
     }
