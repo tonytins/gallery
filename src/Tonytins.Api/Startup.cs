@@ -1,3 +1,8 @@
+using System;
+using System.Diagnostics;
+using Certes;
+using FluffySpoon.AspNet.EncryptWeMust;
+using FluffySpoon.AspNet.EncryptWeMust.Certes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +24,28 @@ namespace Tonytins.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            if (!Debugger.IsAttached)
+            {
+                services.AddFluffySpoonLetsEncrypt(new LetsEncryptOptions
+                {
+                    Email = "noreply@tonytins.xyz",
+                    UseStaging = false,
+                    Domains = new[] { "api.tonytins.xyz" },
+                    TimeUntilExpiryBeforeRenewal = TimeSpan.FromDays(30),
+                    TimeAfterIssueDateBeforeRenewal = TimeSpan.FromDays(7),
+                    CertificateSigningRequest = new CsrInfo
+                    {
+                        CountryName = "United States",
+                        Locality = "US",
+                        Organization = "Sixam",
+                        OrganizationUnit = "Tonytins",
+                        State = "SC"
+                    }
+                });
+                services.AddFluffySpoonLetsEncryptFileCertificatePersistence();
+                services.AddFluffySpoonLetsEncryptFileChallengePersistence();
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,6 +57,10 @@ namespace Tonytins.Api
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
+            if (!Debugger.IsAttached)
+            {
+                app.UseFluffySpoonLetsEncrypt();
+            }
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
