@@ -16,4 +16,10 @@
         <ProjectReference Include="..\Tonytins.Models\Tonytins.Models.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <None Include="wwwroot\.well-known\acme-challenge\web.config">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
 </Project>
