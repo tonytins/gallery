@@ -26,5 +26,5 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        _art = await Http.GetFromJsonAsync<GalleryModel[]>("http://api.tonytins.xyz/gallery");
+        _art = await Http.GetFromJsonAsync<GalleryModel[]>("https://api.tonytins.xyz/gallery");
     } }
