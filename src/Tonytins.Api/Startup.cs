@@ -20,12 +20,14 @@ namespace Tonytins.Api
 
         public IConfiguration Configuration { get; }
 
+        bool UseEncryption => Configuration.GetValue<bool>("LetsEncrypt");
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
 
-            if (!Debugger.IsAttached)
+            if (!Debugger.IsAttached || UseEncryption)
             {
                 services.AddFluffySpoonLetsEncrypt(new LetsEncryptOptions
                 {
@@ -57,10 +59,10 @@ namespace Tonytins.Api
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
-            if (!Debugger.IsAttached)
-            {
+
+            if (!Debugger.IsAttached || UseEncryption)
                 app.UseFluffySpoonLetsEncrypt();
-            }
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
