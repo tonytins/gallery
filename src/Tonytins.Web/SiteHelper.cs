@@ -1,4 +1,6 @@
 
+using System;
+
 namespace Tonytins.Web
 {
     public static class SiteHelper
@@ -11,5 +13,17 @@ namespace Tonytins.Web
         /// <param name="path">path to image</param>
         /// <returns></returns>
         public static string ResolveImagePath(string image, string path) => @$"../images/{path}/{image}";
+
+        public static Uri HyperProtocol(string address)
+        {
+            if (address.Contains("hyper"))
+                return new Uri(address.Replace("hyper", "https"));
+
+            if (address.Contains("dat"))
+                return new Uri(address.Replace("dat", "https"));
+
+            return new Uri(address);
+
+        }
     }
 }

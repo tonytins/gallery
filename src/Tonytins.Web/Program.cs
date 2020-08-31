@@ -1,5 +1,4 @@
 // Anthony Leland licenses this file to you under the MIT license.
-using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
@@ -16,7 +15,7 @@ namespace Tonytins.Web
             builder.RootComponents.Add<App>("app");
             builder.Services.AddScoped(sp => new HttpClient
             {
-                BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+                BaseAddress = SiteHelper.HyperProtocol(builder.HostEnvironment.BaseAddress)
             });
             builder.Services.AddBlazoredLocalStorage();
 
