@@ -27,12 +27,12 @@ namespace Tonytins.Api
         {
             services.AddControllers();
 
-            if (!Debugger.IsAttached || !UseEncryption)
+            if (!Debugger.IsAttached)
             {
                 services.AddFluffySpoonLetsEncrypt(new LetsEncryptOptions
                 {
                     Email = "noreply@tonytins.xyz",
-                    UseStaging = false,
+                    UseStaging = Configuration.GetValue<bool>("Staging"),
                     Domains = new[] { "api.tonytins.xyz" },
                     TimeUntilExpiryBeforeRenewal = TimeSpan.FromDays(30),
                     TimeAfterIssueDateBeforeRenewal = TimeSpan.FromDays(7),
@@ -60,7 +60,7 @@ namespace Tonytins.Api
             app.UseRouting();
             app.UseAuthorization();
 
-            if (!Debugger.IsAttached || !UseEncryption)
+            if (!Debugger.IsAttached)
                 app.UseFluffySpoonLetsEncrypt();
 
             app.UseEndpoints(endpoints =>
