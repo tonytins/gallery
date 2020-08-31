@@ -1,8 +1,8 @@
-@if (IsOffline)
+@if (Display)
 {
 <div class="alert alert-@AlertAsString"><strong>@UppercaseFirst(AlertAsString)</strong>: @Message</div>}
 
-@code { [Parameter] public bool IsOffline { get; set; } = false;
+@code { [Parameter] public bool Display { get; set; } = false;
     [Parameter] public string Message { get; set; } = "Connection to API server failed.";
     [Parameter] public AlertType Alert { get; set; } = AlertType.Warning;
 
