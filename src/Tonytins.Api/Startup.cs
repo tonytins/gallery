@@ -20,34 +20,36 @@ namespace Tonytins.Api
 
         public IConfiguration Configuration { get; }
 
-        bool UseEncryption => Configuration.GetValue<bool>("LetsEncrypt");
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
 
-            if (!Debugger.IsAttached)
+            try
             {
-                services.AddFluffySpoonLetsEncrypt(new LetsEncryptOptions
+                if (!Debugger.IsAttached)
                 {
-                    Email = "noreply@tonytins.xyz",
-                    UseStaging = Configuration.GetValue<bool>("Staging"),
-                    Domains = new[] { "api.tonytins.xyz" },
-                    TimeUntilExpiryBeforeRenewal = TimeSpan.FromDays(30),
-                    TimeAfterIssueDateBeforeRenewal = TimeSpan.FromDays(7),
-                    CertificateSigningRequest = new CsrInfo
+                    services.AddFluffySpoonLetsEncrypt(new LetsEncryptOptions
                     {
-                        CountryName = "United States",
-                        Locality = "US",
-                        Organization = "Sixam",
-                        OrganizationUnit = "Tonytins",
-                        State = "SC"
-                    }
-                });
-                services.AddFluffySpoonLetsEncryptFileCertificatePersistence();
-                services.AddFluffySpoonLetsEncryptFileChallengePersistence();
+                        Email = "noreply@tonytins.xyz",
+                        UseStaging = Configuration.GetValue<bool>("Staging"),
+                        Domains = new[] { "api.tonytins.xyz" },
+                        TimeUntilExpiryBeforeRenewal = TimeSpan.FromDays(30),
+                        TimeAfterIssueDateBeforeRenewal = TimeSpan.FromDays(7),
+                        CertificateSigningRequest = new CsrInfo
+                        {
+                            CountryName = "United States",
+                            Locality = "US",
+                            Organization = "Sixam",
+                            OrganizationUnit = "Tonytins",
+                            State = "SC"
+                        }
+                    });
+                    services.AddFluffySpoonLetsEncryptFileCertificatePersistence();
+                    services.AddFluffySpoonLetsEncryptFileChallengePersistence();
+                }
             }
+            catch { }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,8 +62,12 @@ namespace Tonytins.Api
             app.UseRouting();
             app.UseAuthorization();
 
-            if (!Debugger.IsAttached)
-                app.UseFluffySpoonLetsEncrypt();
+            try
+            {
+                if (!Debugger.IsAttached)
+                    app.UseFluffySpoonLetsEncrypt();
+            }
+            catch { }
 
             app.UseEndpoints(endpoints =>
             {
