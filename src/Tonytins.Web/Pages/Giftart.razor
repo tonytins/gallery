@@ -7,18 +7,18 @@
 <div style="width: 50em; margin: 0 auto; margin-top: 10px;">
     @if (_art == null)
     {
-    <LoadingComponent /> }
+<LoadingComponent /> }
 else
 {
-    <div class="row">
-        @foreach (var art in _art)
+<div class="row">
+    @foreach (var art in _art)
     {
-        <div class="col-auto">
-            <GalleryComponent Title=@art.Title
-                              Image=@SiteHelper.ResolveImagePath(art.Image, "giftart")
-                              Copyrights=@art.Copyrights Credits=@art.Credits />
-        </div>}
-    </div>}
+<div class="col-auto">
+    <GalleryComponent Title=@art.Title
+                      Image=@SiteHelper.ResolveImagePath(art.Image, "giftart")
+                      Copyrights=@art.Copyrights Credits=@art.Credits />
+</div>}
+</div>}
 </div>
 <p>Art &copy; their respective owners.</p>
 
@@ -26,5 +26,5 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        _art = await Http.GetFromJsonAsync<GalleryModel[]>("data/giftart.json");
+        _art = await Http.GetFromJsonAsync<GalleryModel[]>("http://api.tonytins.xyz/gallery");
     } }

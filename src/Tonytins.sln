@@ -16,12 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tonytins.Web.Components", "Tonytins.Web.Components\Tonytins.Web.Components.csproj", "{3DC43D2D-61B7-4C0F-B786-82B67F46B859}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tonytins.Api", "Tonytins.Api\Tonytins.Api.csproj", "{12171AB4-B7E8-44CD-9658-0EEFBFE1368E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{0D24A448-F338-4851-B07C-B783BC94C6A2} = {0D24A448-F338-4851-B07C-B783BC94C6A2}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tonytins.Models", "Tonytins.Models\Tonytins.Models.csproj", "{0D24A448-F338-4851-B07C-B783BC94C6A2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tonytins.Api", "Tonytins.Api\Tonytins.Api.csproj", "{031B88AF-2F06-4CAD-8387-29BF584A099C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,14 +34,14 @@ Global
 		{3DC43D2D-61B7-4C0F-B786-82B67F46B859}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DC43D2D-61B7-4C0F-B786-82B67F46B859}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DC43D2D-61B7-4C0F-B786-82B67F46B859}.Release|Any CPU.Build.0 = Release|Any CPU
-		{12171AB4-B7E8-44CD-9658-0EEFBFE1368E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{12171AB4-B7E8-44CD-9658-0EEFBFE1368E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{12171AB4-B7E8-44CD-9658-0EEFBFE1368E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{12171AB4-B7E8-44CD-9658-0EEFBFE1368E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0D24A448-F338-4851-B07C-B783BC94C6A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0D24A448-F338-4851-B07C-B783BC94C6A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D24A448-F338-4851-B07C-B783BC94C6A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D24A448-F338-4851-B07C-B783BC94C6A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{031B88AF-2F06-4CAD-8387-29BF584A099C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{031B88AF-2F06-4CAD-8387-29BF584A099C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{031B88AF-2F06-4CAD-8387-29BF584A099C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{031B88AF-2F06-4CAD-8387-29BF584A099C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
