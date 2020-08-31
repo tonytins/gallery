@@ -27,7 +27,7 @@ namespace Tonytins.Api
         {
             services.AddControllers();
 
-            if (!Debugger.IsAttached || UseEncryption)
+            if (!Debugger.IsAttached || !UseEncryption)
             {
                 services.AddFluffySpoonLetsEncrypt(new LetsEncryptOptions
                 {
@@ -60,7 +60,7 @@ namespace Tonytins.Api
             app.UseRouting();
             app.UseAuthorization();
 
-            if (!Debugger.IsAttached || UseEncryption)
+            if (!Debugger.IsAttached || !UseEncryption)
                 app.UseFluffySpoonLetsEncrypt();
 
             app.UseEndpoints(endpoints =>
