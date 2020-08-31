@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
@@ -15,8 +14,8 @@ namespace Tonytins.Api
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    if (!Debugger.IsAttached)
-                        webBuilder.UseUrls(new string[] { "http://*", "https://*" });
+                    //if (!Debugger.IsAttached)
+                    //    webBuilder.UseUrls(new string[] { "http://*", "https://*" });
 
                     webBuilder.UseStartup<Startup>();
                 });
