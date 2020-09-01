@@ -1,5 +1,4 @@
-
-using System;
+// Anthony Leland licenses this file to you under the MIT license.
 
 namespace Tonytins.Web
 {
@@ -13,17 +12,32 @@ namespace Tonytins.Web
         /// <param name="path">path to image</param>
         /// <returns></returns>
         public static string ResolveImagePath(string image, string path) => @$"../images/{path}/{image}";
-
-        public static Uri HyperProtocol(string address)
+        /*
+        public static Uri HyperToHttp(string address)
         {
-            if (address.Contains("hyper"))
+            if (IsHyperProtocol(address))
                 return new Uri(address.Replace("hyper", "https"));
 
             if (address.Contains("dat"))
                 return new Uri(address.Replace("dat", "https"));
 
             return new Uri(address);
-
         }
+
+        public static bool IsHyperProtocol(string address)
+        {
+            if (address.Contains("hyper"))
+                return true;
+
+            return false;
+        }
+
+        public static string HttpToHyper(string address)
+        {
+            if (address.Contains("http"))
+                return address.Replace("http", "hyper");
+
+            return address.Replace("https", "hyper");
+        } */
     }
 }

@@ -1,0 +1,36 @@
+@page "/legal/licenses"
+@using Tonytins.Web.Components.Licenses
+<h3>Licenses</h3>
+<h4><span class="fab fa-creative-commons-by"></span> Creative Commons</h4>
+<p>Though <a href="legal/copyright">copyrighted by me</a>, the usage of my characters are licensed under the Creative Commons CC-BY 4.0 terms.</p>
+<p>
+    <button class="btn btn-primary" @onclick="ToggleCCBy">CC-BY 4.0</button>
+    <a class="btn btn-primary" href="https://creativecommons.org/licenses/by/4.0/">Simplified Version</a>
+</p>
+
+@if (isCCBY)
+{
+<CCBYComponent />
+}
+
+<h4><span class="fab fa-osi"></span> Open Source</h4>
+<p>This site is licensed under the MIT license.</p>
+<p>
+    <button class="btn btn-primary" @onclick="ToggleMIT">MIT License</button>
+</p>
+@if (isMIT)
+{
+<MITComponent Author="Tonytins" />
+}
+
+@code { bool isCCBY = false;
+    bool isMIT = false;
+
+    void ToggleCCBy()
+    {
+        isCCBY = !isCCBY;
+    }
+    void ToggleMIT()
+    {
+        isMIT = !isMIT;
+    } }

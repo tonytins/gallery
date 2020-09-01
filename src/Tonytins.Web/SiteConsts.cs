@@ -5,6 +5,7 @@ namespace Tonytins.Web
     {
         public const string SiteName = "Tonytins";
 
-        public static string SiteVersion => $"{ThisAssembly.Git.SemVer.Major}.{ThisAssembly.Git.SemVer.Minor}.{ThisAssembly.Git.SemVer.Patch}-{ThisAssembly.Git.Commit}";
+        public static string SiteVersion =>
+            $"{ThisAssembly.Git.SemVer.Major}.{ThisAssembly.Git.SemVer.Minor}.{ThisAssembly.Git.SemVer.Patch}-{ThisAssembly.Git.Commit}";
     }
 }

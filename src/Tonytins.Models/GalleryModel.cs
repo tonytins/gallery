@@ -1,3 +1,4 @@
+// Anthony Leland licenses this file to you under the MIT license.
 namespace Tonytins.Models
 {
     public class GalleryModel
