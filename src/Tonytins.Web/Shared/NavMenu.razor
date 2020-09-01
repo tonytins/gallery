@@ -34,11 +34,13 @@
     </ul>
 </div>
 
-@code { bool _collapseNavMenu = true;
+@code {
+    bool _collapseNavMenu = true;
 
     string NavMenuCssClass => _collapseNavMenu ? "collapse" : null;
 
     void ToggleNavMenu()
     {
         _collapseNavMenu = !_collapseNavMenu;
-    } }
+    }
+}

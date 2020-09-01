@@ -38,7 +38,8 @@ else
 </div>
 
 
-@code { HeroModel[] _heroes;
+@code {
+    HeroModel[] _heroes;
 
     bool IsVideoHidden { get; set; } = false;
 
@@ -68,4 +69,5 @@ else
             default:
                 return "https://web.archive.org/web/20120508032355/http://na.cityofheroes.com/en";
         }
-    } }
+    }
+}

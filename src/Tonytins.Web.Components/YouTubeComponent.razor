@@ -1,7 +1,8 @@
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{Video}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <br /><sup>This embed uses <a href="https://support.google.com/youtube/answer/171780">Pri­va­cy-Enhanced Mode</a>.</sup>
 
-@code { string _video = string.Empty;
+@code {
+    string _video = string.Empty;
 
     [Parameter]
     public string Video { get; set; }
@@ -10,4 +11,5 @@
     public string Width { get; set; } = "560";
 
     [Parameter]
-    public string Height { get; set; } = "315"; }
+    public string Height { get; set; } = "315";
+}

@@ -39,11 +39,13 @@
     </div>
 </div>
 
-@code { bool _isDarkMode = false;
+@code {
+    bool _isDarkMode = false;
 
     string DarkModeCssClass => _isDarkMode ? "bg-dark btn-dark" : null;
 
     void ToggleDarkMode()
     {
         _isDarkMode = !_isDarkMode;
-    } }
+    }
+}

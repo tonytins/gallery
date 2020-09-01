@@ -23,9 +23,11 @@ else
 </div>
 <p>Art &copy; their respective owners.</p>
 
-@code { GalleryModel[] _art;
+@code {
+    GalleryModel[] _art;
 
     protected override async Task OnInitializedAsync()
     {
         _art = await Http.GetFromJsonAsync<GalleryModel[]>("data/giftart.json");
-    } }
+    }
+}
