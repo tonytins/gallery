@@ -1,0 +1,70 @@
+@page "/gallery/{Database}/{Id}"
+@using Tonytins.Models
+@using Tonytins.Web.Components
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+<AlertComponent Display=@true Message="This is still a work in progress!" />
+@if (_gallery == null)
+{
+<LoadingComponent />
+ }
+else
+{
+<div class="row justify-content-lg-center">
+    <div class="col-sm"></div>
+    <div class="col-lg-auto">
+        <div class="card @DarkModeCss" style="margin: 0 auto; float: none;">
+            <div class="card-header"><h5>@Title</h5></div>
+            <img src=@SiteHelper.ImageCDN(Image, Database) class="card-img tins-center-img" />
+            @if (!string.IsNullOrEmpty(Description))
+            {
+<div class="card-text" style="padding: 5px;">
+
+    <p>@Description</p>
+
+</div>}
+            @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
+            {
+<div class="card-footer">
+    <p>
+        by @Credits
+        <br \><small>@Copyrights</small>
+    </p>
+</div>}
+        </div>
+    </div>
+    <div class="col-sm"></div>
+</div>}
+
+@code { [Parameter] public string Id { get; set; }
+    [Parameter] public string Database { get; set; }
+
+    string Image { get; set; }
+    string Description { get; set; }
+    string Title { get; set; }
+    string Credits { get; set; }
+    string Copyrights { get; set; }
+
+    bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+    string DarkModeCss => IsDarkMode ? "bg-dark text-light" : null;
+
+    GalleryModel[] _gallery;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Database));
+
+        foreach (var art in gallery)
+        {
+            if (Id == art.Id)
+            {
+                Image = art.Image;
+                Title = art.Title;
+                Description = art.Description;
+                Credits = art.Credits;
+                Copyrights = art.Copyrights;
+            }
+        }
+
+        _gallery = gallery;
+    } }
