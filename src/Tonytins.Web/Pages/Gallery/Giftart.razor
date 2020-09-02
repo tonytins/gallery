@@ -17,7 +17,7 @@ else
     {
         var permalink = $"giftart/{art.Id}";
 <GalleryComponent Title=@art.Title
-                  Image=@SiteHelper.ResolveImagePath(art.Image, "giftart")
+                  Image=@SiteHelper.ImageCDN(art.Image, "giftart")
                   Permalink=@permalink
                   Copyrights=@art.Copyrights
                   Credits=@art.Credits />}
@@ -31,5 +31,5 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        art = await Http.GetFromJsonAsync<GalleryModel[]>("data/giftart.json");
+        art = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN("giftart"));
     } }

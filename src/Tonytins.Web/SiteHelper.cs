@@ -12,6 +12,11 @@ namespace Tonytins.Web
         /// <param name="path">path to image</param>
         /// <returns></returns>
         public static string ResolveImagePath(string image, string path) => @$"../images/{path}/{image}";
+
+        public static string JsonCDN(string json) => $@"https://cdn.tonytins.xyz/db/{json}.json";
+
+        public static string ImageCDN(string image, string path) => $@"https://cdn.tonytins.xyz/images/{path}/{image}";
+
         /*
         public static Uri HyperToHttp(string address)
         {
