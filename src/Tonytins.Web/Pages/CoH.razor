@@ -11,13 +11,11 @@
 {
 <p><YouTubeComponent Video="0eHB9zxtet4" /></p>}
 <h4>Heroes</h4>
-
-<div style="width: 38em; margin: 0 auto;">
-    @if (_heroes == null)
-    {
-<LoadingComponent /> }
-else
+@if (_heroes == null)
 {
+<LoadingComponent /> }
+            else
+            {
 <div class="card-columns">
     @foreach (var hero in _heroes)
     {
@@ -33,7 +31,7 @@ else
                       ServerShard=@hero.Shard
                       ServerLink=@ServerLink(hero.Server) />}
 </div>}
-</div>
+
 
 
 @code {

@@ -2,51 +2,34 @@
 @using Tonytins.Web.Components
 @using Tonytins.Web.Components.Footer
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
-<div class="container-fluid shadow">
-    <div class="row">
-        <div class="sidebar">
-            <NavMenu />
-        </div>
-        <div class="main @DarkModeCssClass">
-            <div class="top-row">
-                <div class="col-sm"></div>
-                <div class="col-sm">
-                    <AdexComponent />
-                </div>
-                <div class="col-sm"></div>
-            </div>
-            <div class="content px-4">
-                @Body
-            </div>
+<div class="container-fluid shadow  @DarkModeCssClass">
+    <NavMenu />
+    <div class="main">
+        <div class="content px-4">
+            @Body
         </div>
     </div>
-    <div class="row bottom-row">
-        <div class="col-sm"></div>
-        <div class="col-sm-auto">
-            <div class="text-center align-self-center">
-                <TaglineComponent />
-            </div>
-        </div>
-        <div class="col-sm"></div>
-        <div class="col-sm">
+    <div class="row">
+        <div class="col"><AdexComponent /></div>
+        <div class="col-md"></div>
+        <div class="col">
             <SocialListComponent />
         </div>
-        <div class="col-sm">
+        <div class="col">
             <LegalNoticesListComponent />
         </div>
-        <div class="col-sm-auto">
-            <ul class="btn-group-vertical">
+        <div class="col">
+            <class class="btn-group-vertical">
                 <button class="btn btn-secondary" @onclick="ToggleDarkMode">Dark Mode</button>
                 <button class="btn btn-secondary" @onclick="TogglePreview">
                     Preview Mode
                 </button>
-            </ul>
+            </class>
         </div>
     </div>
 </div>
 
-@code {
-    bool IsDarkMode
+@code { bool IsDarkMode
     {
         get
         {
@@ -70,7 +53,7 @@
         }
     }
 
-    string DarkModeCssClass => IsDarkMode ? "bg-dark text-light" : null;
+    string DarkModeCssClass => IsDarkMode ? "bg-dark text-light" : "bg-light text-dark";
 
     void TogglePreview()
     {
