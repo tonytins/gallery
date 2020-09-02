@@ -4,16 +4,23 @@
 
 @code { [Parameter] public bool Display { get; set; } = false;
     [Parameter] public string Message { get; set; } = "Connection to API server failed.";
-    [Parameter] public AlertType Alert { get; set; } = AlertType.Warning;
+    [Parameter] public AlertType Alert { get; set; } = AlertType.Info;
 
     public string AlertAsString
     {
         get
         {
-            if (Alert == AlertType.Danger)
-                return "danger";
+            switch (Alert)
+            {
 
-            return "warning";
+                case AlertType.Warning:
+                    return "warning";
+                case AlertType.Danger:
+                    return "danger";
+                case AlertType.Info:
+                default:
+                    return "info";
+            }
         }
     }
 

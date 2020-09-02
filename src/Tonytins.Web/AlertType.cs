@@ -3,6 +3,7 @@ namespace Tonytins.Web
 {
     public enum AlertType
     {
+        Info,
         Warning,
         Danger
     }

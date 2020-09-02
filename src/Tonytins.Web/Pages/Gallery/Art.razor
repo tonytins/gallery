@@ -1,0 +1,41 @@
+@page "/gallery/{Database}/{Id}"
+@using Tonytins.Models
+@using Tonytins.Web.Components
+@inject HttpClient Http
+<AlertComponent Display=@true Message="This is still a work in progress!" />
+@if (_gallery == null)
+{
+<LoadingComponent /> }
+            else
+            {
+<div class="align-content-center">
+    <img src=@SiteHelper.ResolveImagePath(Image, Database) style="max-width:80%" />
+    <h5>@Title</h5>
+    <!-- TODO: add description -->
+</div>}
+
+@code {
+    [Parameter] public string Id { get; set; }
+
+    [Parameter] public string Database { get; set; }
+
+    string Image { get; set; }
+    string Title { get; set; }
+
+    GalleryModel[] _gallery;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var gallery = await Http.GetFromJsonAsync<GalleryModel[]>($"data/{Database}.json");
+
+        foreach (var art in gallery)
+        {
+            if (art.Id == Id)
+            {
+                Image = art.Image;
+                Title = art.Title;
+            }
+        }
+
+        _gallery = gallery;
+    } }

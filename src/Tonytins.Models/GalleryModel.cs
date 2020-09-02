@@ -10,5 +10,7 @@ namespace Tonytins.Models
         public string Credits { get; set; }
 
         public string Copyrights { get; set; }
+
+        public string Id { get; set; }
     }
 }
