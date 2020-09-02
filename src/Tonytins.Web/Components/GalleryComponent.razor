@@ -1,5 +1,5 @@
-<div class="card shadow-sm text-dark" style="margin-bottom: 10px;">
-    <img class="card-img-top" style="width: 15em;" src=@Image />
+<div class="card shadow-sm @DarkModeCssClass" style="margin-bottom: 10px;">
+    <img class="card-img-top" style="width: 100%;" src=@Image />
     <div class="card-body">
         <h4 class="card-title">@Title</h4>
         <p class="card-text">
@@ -9,10 +9,17 @@
     </div>
 </div>
 
-@code { [Parameter] public string Image { get; set; }
+@code {
+    [Parameter] public string Image { get; set; }
 
     [Parameter] public string Title { get; set; }
 
     [Parameter] public string Copyrights { get; set; }
 
-    [Parameter] public string Credits { get; set; }}
+    [Parameter] public string Credits { get; set; }
+
+    [Parameter] public bool DarkMode { get; set; }
+
+    string DarkModeCssClass => DarkMode ? "bg-dark border-light" : "bg-light text-dark";
+
+}
