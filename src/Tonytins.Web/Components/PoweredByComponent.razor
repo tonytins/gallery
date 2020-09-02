@@ -7,10 +7,6 @@
     <div class="col-sm">
         <a href="https://dot.net"><img src="../images/brands/dotnet.png" height="@ImageScale" /></a>
     </div>
-    <div class="col-sm">
-        <a href="https://firebase.google.com/"><img src="../images/brands/firebase.png" height="@ImageScale" /></a>
-    </div>
-
 </div>
 
-@code { string ImageScale { get; } = "100px"; }
+@code { [Parameter] public string ImageScale { get; set; } = "100px"; }
