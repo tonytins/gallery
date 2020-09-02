@@ -3,7 +3,6 @@
 @using Tonytins.Web.Components
 @inject HttpClient Http
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
-<AlertComponent Display=@true Message="This is still a work in progress!" />
 @if (_gallery == null)
 {
 <LoadingComponent />
@@ -36,7 +35,8 @@ else
     <div class="col-sm"></div>
 </div>}
 
-@code { [Parameter] public string Id { get; set; }
+@code {
+    [Parameter] public string Id { get; set; }
     [Parameter] public string Database { get; set; }
 
     string Image { get; set; }
