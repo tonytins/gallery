@@ -11,15 +11,17 @@
 <div class="align-content-center">
     <img src=@SiteHelper.ResolveImagePath(Image, Database) style="max-width:80%" />
     <h5>@Title</h5>
-    <!-- TODO: add description -->
+    @if (!string.IsNullOrEmpty(Description))
+    {
+<p>@Description</p>}
 </div>}
 
 @code {
     [Parameter] public string Id { get; set; }
-
     [Parameter] public string Database { get; set; }
 
     string Image { get; set; }
+    string Description { get; set; }
     string Title { get; set; }
 
     GalleryModel[] _gallery;
@@ -34,6 +36,7 @@
             {
                 Image = art.Image;
                 Title = art.Title;
+                Description = art.Description;
             }
         }
 
