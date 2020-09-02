@@ -1,6 +1,7 @@
 @inherits LayoutComponentBase
 @using Tonytins.Web.Components
 @using Tonytins.Web.Components.Footer
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 <div class="container-fluid shadow">
     <div class="row">
         <div class="sidebar">
@@ -34,18 +35,52 @@
             <LegalNoticesListComponent />
         </div>
         <div class="col-sm-auto">
-            <button class="btn btn-secondary" @onclick="ToggleDarkMode">Dark Mode</button>
+            <ul class="list-unstyled">
+                <li><button class="btn btn-secondary" @onclick="ToggleDarkMode">Dark Mode</button></li>
+                <li>
+                    <button class="btn btn-secondary" @onclick="TogglePreview">
+                        Preview Mode
+                    </button>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
 
 @code {
-    bool _isDarkMode = false;
+    bool IsDarkMode
+    {
+        get
+        {
+            return localStorage.GetItem<bool>("darkmode");
+        }
+        set
+        {
+            localStorage.SetItem("darkmode", value);
+        }
+    }
 
-    string DarkModeCssClass => _isDarkMode ? "bg-dark btn-dark" : null;
+    bool IsPreview
+    {
+        get
+        {
+            return localStorage.GetItem<bool>("preview");
+        }
+        set
+        {
+            localStorage.SetItem("preview", value);
+        }
+    }
+
+    string DarkModeCssClass => IsDarkMode ? "bg-dark btn-dark" : null;
+
+    void TogglePreview()
+    {
+        IsPreview = true;
+    }
 
     void ToggleDarkMode()
     {
-        _isDarkMode = !_isDarkMode;
+        IsDarkMode = true;
     }
 }
