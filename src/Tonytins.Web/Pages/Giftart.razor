@@ -1,33 +1,29 @@
 @page "/giftart"
 @using Tonytins.Models
 @using Tonytins.Web.Components
-@using System.Text.Json
 @inject HttpClient Http
 <h3>Gift Art</h3>
 <a>All art was commissioned by varies freinds.</a>
 <div style="width: 50em; margin: 0 auto; margin-top: 10px;">
-    @if (_art == null)
+    @if (art == null)
     {
 <LoadingComponent /> }
 else
 {
-<div class="row">
-    @foreach (var art in _art)
+<div class="card-columns">
+    @foreach (var art in art)
     {
-<div class="col-auto">
-    <GalleryComponent Title=@art.Title
+<GalleryComponent Title=@art.Title
                       Image=@SiteHelper.ResolveImagePath(art.Image, "giftart")
-                      Copyrights=@art.Copyrights Credits=@art.Credits />
-</div>}
+                      Copyrights=@art.Copyrights Credits=@art.Credits />}
 </div>}
 </div>
-<p>Art &copy; their respective owners.</p>
 
 @code {
-    GalleryModel[] _art;
+    GalleryModel[] art;
 
     protected override async Task OnInitializedAsync()
     {
-        _art = await Http.GetFromJsonAsync<GalleryModel[]>("data/giftart.json");
-    }
+        art = await Http.GetFromJsonAsync<GalleryModel[]>("data/giftart.json");
+    } 
 }

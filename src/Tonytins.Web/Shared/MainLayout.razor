@@ -35,13 +35,11 @@
             <LegalNoticesListComponent />
         </div>
         <div class="col-sm-auto">
-            <ul class="list-unstyled">
-                <li><button class="btn btn-secondary" @onclick="ToggleDarkMode">Dark Mode</button></li>
-                <li>
-                    <button class="btn btn-secondary" @onclick="TogglePreview">
+            <ul class="btn-group-vertical">
+                <button class="btn btn-secondary" @onclick="ToggleDarkMode">Dark Mode</button>
+                <button class="btn btn-secondary" @onclick="TogglePreview">
                         Preview Mode
                     </button>
-                </li>
             </ul>
         </div>
     </div>
@@ -76,11 +74,11 @@
 
     void TogglePreview()
     {
-        IsPreview = true;
+        IsPreview = !IsPreview;
     }
 
     void ToggleDarkMode()
     {
-        IsDarkMode = true;
+        IsDarkMode = !IsDarkMode;
     }
 }
