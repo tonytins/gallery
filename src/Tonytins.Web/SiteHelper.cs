@@ -1,4 +1,7 @@
 // Anthony Leland licenses this file to you under the MIT license.
+using System;
+using Ganss.XSS;
+using Markdig;
 
 namespace Tonytins.Web
 {
@@ -16,6 +19,25 @@ namespace Tonytins.Web
         public static string JsonCDN(string json) => $@"https://cdn.tonytins.xyz/db/{json}.json";
 
         public static string ImageCDN(string image, string path) => $@"https://cdn.tonytins.xyz/images/{path}/{image}";
+
+        public static string MarkdownToHtml(string content)
+        {
+            try
+            {
+                var pipeline = new MarkdownPipelineBuilder()
+                    .DisableHtml()
+                    .Build();
+
+                return Markdown.ToHtml(content, pipeline);
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine($"{ex.StackTrace}{Environment.NewLine}{ex.Message}");
+                var santize = new HtmlSanitizer();
+                return santize.Sanitize(content);
+            }
+
+        }
 
         /*
         public static Uri HyperToHttp(string address)
