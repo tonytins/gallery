@@ -1,14 +1,15 @@
 @page "/gallery/{Database}/{Id}"
 @using Tonytins.Models
 @using Tonytins.Web.Components
+@using Markdig
 @inject HttpClient Http
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+@inject Ganss.XSS.IHtmlSanitizer HtmlSanitizer
 @if (_gallery == null)
 {
-<LoadingComponent />
- }
-else
-{
+<LoadingComponent /> }
+            else
+            {
 <div class="row justify-content-lg-center">
     <div class="col-sm"></div>
     <div class="col-lg-auto">
@@ -48,11 +49,24 @@ else
     [Parameter] public string Database { get; set; }
 
     string Image { get; set; }
-    string Description { get; set; }
+    string Description
+    {
+        get
+        {
+            return _content;
+        }
+        set
+        {
+            _content = value;
+            HtmlContent = ConvertStringToMarkup(_content);
+        }
+    }
     string Title { get; set; }
     string Credits { get; set; }
     string Copyrights { get; set; }
+    MarkupString HtmlContent { get; set; }
 
+    string _content = string.Empty;
     bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
     string DarkModeCss => IsDarkMode ? "bg-dark text-light" : null;
 
@@ -75,4 +89,20 @@ else
         }
 
         _gallery = gallery;
+    }
+
+    MarkupString ConvertStringToMarkup(string content)
+    {
+        if (!string.IsNullOrWhiteSpace(content))
+        {
+            var builder = new MarkdownPipelineBuilder()
+                .UseAdvancedExtensions()
+                .Build();
+            var html = Markdown.ToHtml(content, builder);
+            var sanitize = HtmlSanitizer.Sanitize(html);
+
+            return new MarkupString(sanitize);
+        }
+
+        return new MarkupString();
     } }

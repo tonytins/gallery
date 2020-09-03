@@ -3,6 +3,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
+using Ganss.XSS;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,6 +18,12 @@ namespace Tonytins.Web
             builder.Services.AddScoped(sp => new HttpClient
             {
                 BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+            });
+            builder.Services.AddScoped<HtmlSanitizer, HtmlSanitizer>(x =>
+            {
+                var sanantize = new HtmlSanitizer();
+                sanantize.AllowedAttributes.Add("class");
+                return sanantize;
             });
             builder.Services.AddBlazoredLocalStorage();
 
