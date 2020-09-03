@@ -4,7 +4,6 @@
 @using Markdig
 @inject HttpClient Http
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
-@inject Ganss.XSS.IHtmlSanitizer HtmlSanitizer
 @if (_gallery == null)
 {
 <LoadingComponent />
@@ -46,7 +45,8 @@ else
     <div class="col-sm"></div>
 </div>}
 
-@code { [Parameter] public string Id { get; set; }
+@code {
+    [Parameter] public string Id { get; set; }
     [Parameter] public string Database { get; set; }
 
     string Image { get; set; }
@@ -54,9 +54,7 @@ else
     string Title { get; set; }
     string Credits { get; set; }
     string Copyrights { get; set; }
-    MarkupString HtmlContent { get; set; }
 
-    string _content = string.Empty;
     bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
     string DarkModeCss => IsDarkMode ? "bg-dark text-light" : null;
 
@@ -79,20 +77,4 @@ else
         }
 
         _gallery = gallery;
-    }
-
-    MarkupString ConvertStringToMarkup(string content)
-    {
-        if (!string.IsNullOrWhiteSpace(content))
-        {
-            var builder = new MarkdownPipelineBuilder()
-                .UseAdvancedExtensions()
-                .Build();
-            var html = Markdown.ToHtml(content, builder);
-            var sanitize = HtmlSanitizer.Sanitize(html);
-
-            return new MarkupString(sanitize);
-        }
-
-        return new MarkupString();
     } }
