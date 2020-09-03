@@ -63,8 +63,11 @@ else
     protected override async Task OnInitializedAsync()
     {
         var markdown = new MarkdownPipelineBuilder()
-            .DisableHtml()
-            .Build();
+         .UseEmojiAndSmiley()
+         .UseEmphasisExtras()
+         .UseBootstrap()
+         .DisableHtml()
+         .Build();
 
         var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Database));
 
