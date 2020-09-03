@@ -62,6 +62,10 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        var markdown = new MarkdownPipelineBuilder()
+            .DisableHtml()
+            .Build();
+
         var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Database));
 
         foreach (var art in gallery)
@@ -70,7 +74,7 @@ else
             {
                 Image = art.Image;
                 Title = art.Title;
-                Description = Markdown.ToHtml(art.Description);
+                Description = Markdown.ToHtml(art.Description, markdown);
                 Credits = art.Credits;
                 Copyrights = art.Copyrights;
             }
