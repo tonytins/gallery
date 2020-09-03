@@ -5,10 +5,9 @@
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 @if (_gallery == null)
 {
-<LoadingComponent />
- }
-else
-{
+<LoadingComponent /> }
+            else
+            {
 <div class="row justify-content-lg-center">
     <div class="col-sm"></div>
     <div class="col-lg-auto">
@@ -25,46 +24,54 @@ else
             @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
             {
 <div class="card-footer">
-    <p>
-        by @Credits
-        <br \><small>@Copyrights</small>
-    </p>
+    <div class="container">
+        @if (!string.IsNullOrEmpty(Credits))
+        {
+<div class="row">
+    <div class="col">Art by @Credits</div>
+</div>}
+        @if (!string.IsNullOrEmpty(Copyrights))
+        {
+<div class="row">
+    <div class="col"><small class="text-muted">@Copyrights</small></div>
+</div>}
+
+    </div>
 </div>}
         </div>
     </div>
     <div class="col-sm"></div>
 </div>}
 
-@code {
-    [Parameter] public string Id { get; set; }
-    [Parameter] public string Database { get; set; }
+@code { [Parameter] public string Id { get; set; }
+            [Parameter] public string Database { get; set; }
 
-    string Image { get; set; }
-    string Description { get; set; }
-    string Title { get; set; }
-    string Credits { get; set; }
-    string Copyrights { get; set; }
+            string Image { get; set; }
+            string Description { get; set; }
+            string Title { get; set; }
+            string Credits { get; set; }
+            string Copyrights { get; set; }
 
-    bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
-    string DarkModeCss => IsDarkMode ? "bg-dark text-light" : null;
+            bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+            string DarkModeCss => IsDarkMode ? "bg-dark text-light" : null;
 
-    GalleryModel[] _gallery;
+            GalleryModel[] _gallery;
 
-    protected override async Task OnInitializedAsync()
-    {
-        var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Database));
-
-        foreach (var art in gallery)
-        {
-            if (Id == art.Id)
+            protected override async Task OnInitializedAsync()
             {
-                Image = art.Image;
-                Title = art.Title;
-                Description = art.Description;
-                Credits = art.Credits;
-                Copyrights = art.Copyrights;
-            }
-        }
+                var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Database));
 
-        _gallery = gallery;
-    } }
+                foreach (var art in gallery)
+                {
+                    if (Id == art.Id)
+                    {
+                        Image = art.Image;
+                        Title = art.Title;
+                        Description = art.Description;
+                        Credits = art.Credits;
+                        Copyrights = art.Copyrights;
+                    }
+                }
+
+                _gallery = gallery;
+            } }

@@ -2,15 +2,29 @@
     <a href="/gallery/@Permalink"><img class="card-img-top" style="width: 100%;" src=@Image /></a>
     <div class="card-body">
         <h4 class="card-title">@Title</h4>
-        <p class="card-text">
-            Art by @Credits
-            <br /><sup>@Copyrights</sup>
-        </p>
+        @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
+        {
+<p class="card-text">
+    <div class="container">
+        @if (!string.IsNullOrEmpty(Credits))
+        {
+<div class="row">
+    <div class="col">Art by @Credits</div>
+</div>}
+        @if (!string.IsNullOrEmpty(Copyrights))
+        {
+<div class="row">
+    <div class="col"><small class="text-muted">@Copyrights</small></div>
+</div>}
+
+    </div>
+
+</p>}
+
     </div>
 </div>
 
-@code {
-    [Parameter] public string Image { get; set; }
+@code { [Parameter] public string Image { get; set; }
 
     [Parameter] public string Title { get; set; }
 
