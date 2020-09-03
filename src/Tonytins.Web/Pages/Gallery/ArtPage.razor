@@ -5,15 +5,16 @@
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 @if (_gallery == null)
 {
-<LoadingComponent /> }
-            else
-            {
+<LoadingComponent />
+ }
+else
+{
 <div class="row justify-content-lg-center">
     <div class="col-sm"></div>
     <div class="col-lg-auto">
         <div class="card @DarkModeCss" style="margin: 0 auto; float: none;">
             <div class="card-header"><h5>@Title</h5></div>
-            <img src=@SiteHelper.ImageCDN(Image, Database) class="card-img tins-center-img" />
+            <img src=@SiteHelper.ImageCDN(Image, Database) class="tins-center-img" />
             @if (!string.IsNullOrEmpty(Description))
             {
 <div class="card-text" style="padding: 5px;">
@@ -44,34 +45,34 @@
 </div>}
 
 @code { [Parameter] public string Id { get; set; }
-            [Parameter] public string Database { get; set; }
+    [Parameter] public string Database { get; set; }
 
-            string Image { get; set; }
-            string Description { get; set; }
-            string Title { get; set; }
-            string Credits { get; set; }
-            string Copyrights { get; set; }
+    string Image { get; set; }
+    string Description { get; set; }
+    string Title { get; set; }
+    string Credits { get; set; }
+    string Copyrights { get; set; }
 
-            bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
-            string DarkModeCss => IsDarkMode ? "bg-dark text-light" : null;
+    bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+    string DarkModeCss => IsDarkMode ? "bg-dark text-light" : null;
 
-            GalleryModel[] _gallery;
+    GalleryModel[] _gallery;
 
-            protected override async Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
+    {
+        var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Database));
+
+        foreach (var art in gallery)
+        {
+            if (Id == art.Id)
             {
-                var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Database));
+                Image = art.Image;
+                Title = art.Title;
+                Description = art.Description;
+                Credits = art.Credits;
+                Copyrights = art.Copyrights;
+            }
+        }
 
-                foreach (var art in gallery)
-                {
-                    if (Id == art.Id)
-                    {
-                        Image = art.Image;
-                        Title = art.Title;
-                        Description = art.Description;
-                        Credits = art.Credits;
-                        Copyrights = art.Copyrights;
-                    }
-                }
-
-                _gallery = gallery;
-            } }
+        _gallery = gallery;
+    } }
