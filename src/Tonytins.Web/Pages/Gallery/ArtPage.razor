@@ -78,9 +78,6 @@
                 if (!string.IsNullOrEmpty(art.Description))
                 {
                     var markdown = new MarkdownPipelineBuilder()
-                        .UseEmojiAndSmiley()
-                        .UseEmphasisExtras()
-                        .UseBootstrap()
                         .DisableHtml()
                         .Build();
 
