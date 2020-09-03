@@ -20,7 +20,7 @@ else
             {
 <div class="card-text" style="padding: 5px;">
 
-    <p>@Description</p>
+    <p>@((MarkupString) Description)</p>
 
 </div>}
             @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
@@ -70,7 +70,7 @@ else
             {
                 Image = art.Image;
                 Title = art.Title;
-                Description = art.Description;
+                Description = Markdown.ToHtml(art.Description);
                 Credits = art.Credits;
                 Copyrights = art.Copyrights;
             }
