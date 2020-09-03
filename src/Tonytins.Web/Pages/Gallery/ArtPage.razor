@@ -6,10 +6,9 @@
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 @if (_gallery == null)
 {
-<LoadingComponent />
- }
-else
-{
+<LoadingComponent /> }
+            else
+            {
 <div class="row justify-content-lg-center">
     <div class="col-sm"></div>
     <div class="col-lg-auto">
@@ -62,24 +61,31 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var markdown = new MarkdownPipelineBuilder()
-         .UseEmojiAndSmiley()
-         .UseEmphasisExtras()
-         .UseBootstrap()
-         .DisableHtml()
-         .Build();
-
         var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Database));
 
         foreach (var art in gallery)
         {
             if (Id == art.Id)
             {
+
+
                 Image = art.Image;
                 Title = art.Title;
-                Description = Markdown.ToHtml(art.Description, markdown);
                 Credits = art.Credits;
                 Copyrights = art.Copyrights;
+
+
+                if (!string.IsNullOrEmpty(art.Description))
+                {
+                    var markdown = new MarkdownPipelineBuilder()
+                        .UseEmojiAndSmiley()
+                        .UseEmphasisExtras()
+                        .UseBootstrap()
+                        .DisableHtml()
+                        .Build();
+
+                    Description = Markdown.ToHtml(art.Description, markdown);
+                }
             }
         }
 
