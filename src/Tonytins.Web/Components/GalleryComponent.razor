@@ -1,5 +1,5 @@
 <div class="card shadow-sm bg-light text-dark" style="margin-bottom: 10px;">
-    <a href="/gallery/@Permalink"><img class="card-img-top" style="width: 100%;" src=@Image /></a>
+    <a href="/gallery/@PermalinkTrim(Permalink)"><img class="card-img-top" style="width: 100%;" src=@Image /></a>
     <div class="card-body">
         <h4 class="card-title">@Title</h4>
         <p class="card-text">
@@ -18,4 +18,12 @@
 
     [Parameter] public string Credits { get; set; }
 
-    [Parameter] public string Permalink { get; set; } }
+    [Parameter] public string Permalink { get; set; }
+
+    string PermalinkTrim(string id)
+    {
+        if (id.Contains('-'))
+            return id.Replace("-", string.Empty);
+
+        return id;
+    } }
