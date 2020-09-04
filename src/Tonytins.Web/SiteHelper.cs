@@ -12,7 +12,7 @@ namespace Tonytins.Web
         /// aid galleries where the metadata is offloaded to a JSON, for example, and resolved by this function.
         /// </summary>
         /// <param name="image">image itself</param>
-        /// <param name="path">path to image</param>
+        /// <param name="path">path relative to images directory</param>
         /// <returns></returns>
         public static string ResolveImagePath(string image, string path) => @$"../images/{path}/{image}";
 

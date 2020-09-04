@@ -1,7 +1,6 @@
-@page "/gallery/{Database}/{Id}"
+@page "/gallery/{Database}/{Key}"
 @using Tonytins.Models
 @using Tonytins.Web.Components
-@using Markdig
 @inject HttpClient Http
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 @if (_gallery == null)
@@ -46,7 +45,7 @@ else
 </div>}
 
 @code {
-    [Parameter] public string Id { get; set; }
+    [Parameter] public string Key { get; set; }
     [Parameter] public string Database { get; set; }
 
     string Image { get; set; }
@@ -60,13 +59,12 @@ else
 
     GalleryModel[] _gallery;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Database));
-
         foreach (var art in gallery)
         {
-            if (Id == art.Key)
+            if (Key == art.Key)
             {
                 Image = art.Image;
                 Title = art.Title;
