@@ -9,19 +9,19 @@
 <div style="margin: 0 auto; margin-top: 10px;">
     @if (art == null)
     {
-<LoadingComponent /> }
-else
-{
-<div class="card-columns">
-    @foreach (var art in art)
+        <LoadingComponent /> }
+    else
     {
-        var permalink = $"doc/{art.Id}";
-<GalleryComponent Title=@art.Title
-                  Image=@SiteHelper.ImageCDN(art.Image, "doc")
-                  Permalink=@permalink
-                  Copyrights=@art.Copyrights
-                  Credits=@art.Credits />}
-</div>}
+        <div class="card-columns">
+            @foreach (var art in art)
+            {
+                var permalink = $"doc/{art.Key}";
+                <GalleryComponent Title=@art.Title
+                                  Image=@SiteHelper.ImageCDN(art.Image, "doc")
+                                  Permalink=@permalink
+                                  Copyrights=@art.Copyrights
+                                  Credits=@art.Credits />}
+        </div>}
 </div>
 
 @code { GalleryModel[] art;

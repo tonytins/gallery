@@ -13,6 +13,14 @@ a, .btn-link {
     color: #0366d6;
 }
 
+.footerNifty {
+    position: absolute;
+    top: -20px;
+    left: 796px;
+    float: right;
+    z-index: 1;
+}
+
 .tins-fa-padding {
     padding: 5px;
 }
