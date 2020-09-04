@@ -3,6 +3,9 @@
 @using Tonytins.Web.Components
 @inject HttpClient Http
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+@if (!string.IsNullOrEmpty(AlertMessage))
+{
+<AlertComponent Display=@true Alert=@AlertType.Warning Message=@AlertMessage />}
 @if (_gallery == null)
 {
 <LoadingComponent />
@@ -53,6 +56,7 @@ else
     string Title { get; set; }
     string Credits { get; set; }
     string Copyrights { get; set; }
+    string AlertMessage { get; set; }
 
     bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
     string DarkModeCss => IsDarkMode ? "bg-dark text-light" : null;
@@ -61,21 +65,28 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
-        var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Database));
-        foreach (var art in gallery)
+        try
         {
-            if (Key == art.Key)
+            var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Database));
+            foreach (var art in gallery)
             {
-                Image = art.Image;
-                Title = art.Title;
-                Credits = art.Credits;
-                Copyrights = art.Copyrights;
+                if (Key == art.Key)
+                {
+                    Image = art.Image;
+                    Title = art.Title;
+                    Credits = art.Credits;
+                    Copyrights = art.Copyrights;
 
 
-                if (!string.IsNullOrEmpty(art.Description))
-                    Description = SiteHelper.MarkdownToHtml(art.Description);
+                    if (!string.IsNullOrEmpty(art.Description))
+                        Description = SiteHelper.MarkdownToHtml(art.Description);
+                }
             }
-        }
 
-        _gallery = gallery;
+            _gallery = gallery;
+        }
+        catch (Exception err)
+        {
+            AlertMessage = err.Message;
+        }
     } }

@@ -3,8 +3,7 @@
 @using Tonytins.Web.Components
 @inject HttpClient Http
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
-@if (!string.IsNullOrEmpty(PageDescription))
-{@((MarkupString) PageDescription)}
+@inject NavigationManager NavigationManager
 <div style="margin: 0 auto; margin-top: 10px;">
     @if (art == null)
     {
@@ -23,17 +22,23 @@ else
 </div>}
 </div>
 
-@code {
-    GalleryModel[] art;
+@code { GalleryModel[] art;
 
-    [Parameter] public string Name { get; set; }
+            [Parameter] public string Name { get; set; }
 
-    string PageDescription { get; set; }
+            string PageDescription { get; set; }
 
-    bool GetDarkMode => localStorage.GetItem<bool>("darkmode");
+            bool GetDarkMode => localStorage.GetItem<bool>("darkmode");
 
-    protected override async Task OnParametersSetAsync()
-    {
-        var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Name));
-        art = gallery;
-    } }
+            protected override async Task OnParametersSetAsync()
+            {
+                try
+                {
+                    var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Name));
+                    art = gallery;
+                }
+                catch
+                {
+                    NavigationManager.NavigateTo($"/v2/gallery/{Name}");
+                }
+            } }
