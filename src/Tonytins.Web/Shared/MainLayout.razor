@@ -2,15 +2,15 @@
 @using Tonytins.Web.Components
 @using Tonytins.Web.Components.Footer
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
-<div class="container-fluid shadow  @DarkModeCssClass">
+<div class="container-fluid shadow" style="padding-left: 0px; padding-right: 0px;">
     <NavMenu />
-    <div class="main">
+    <div class="main @MainDarkModeCssClass">
         <div class="content px-4">
             @Body
         </div>
     </div>
-    <div class="row">
-        <div class="col"><AdexComponent /></div>
+    <div class="row @FooterDarkMode" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col" style="padding:10px;"><AdexComponent /></div>
         <div class="col-md"></div>
         <div class="col">
             <SocialListComponent />
@@ -53,7 +53,8 @@
         }
     }
 
-    string DarkModeCssClass => IsDarkMode ? "bg-dark text-light" : "bg-light text-dark";
+    string MainDarkModeCssClass => IsDarkMode ? "bg-dark text-light" : "bg-light text-dark";
+    string FooterDarkMode => IsDarkMode ? "bg-dark text-light" : "bg-secondary text-light";
 
     void TogglePreview()
     {

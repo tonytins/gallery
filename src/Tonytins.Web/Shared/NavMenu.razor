@@ -31,7 +31,7 @@
 
     bool _getDarkMode => localStorage.GetItem<bool>("darkmode");
 
-    string NavBarDarkMode => _getDarkMode ? "bg-dark navbar-dark" : "navbar-light";
+    string NavBarDarkMode => _getDarkMode ? "bg-dark navbar-dark" : "bg-secondary navbar-dark";
 
     string NavMenuCssClass => _collapseNavMenu ? "navbar-collapse" : null;
 
