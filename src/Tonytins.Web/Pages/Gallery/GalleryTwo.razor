@@ -1,0 +1,40 @@
+@page "/v2/gallery/{Name}"
+@using Tonytins.Models
+@using Tonytins.Web.Components
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+<AlertComponent Display=@true Message="This feature is in preview." />
+@if (!string.IsNullOrEmpty(PageDescription))
+{@((MarkupString) PageDescription)}
+<div style="margin: 0 auto; margin-top: 10px;">
+    @if (art == null)
+    {
+<LoadingComponent /> }
+else
+{
+<div class="card-columns">
+    @foreach (var art in art)
+    {
+        var permalink = $"doc/{art.Key}";
+<GalleryComponent Title=@art.Title
+                  Image=@SiteHelper.ImageCDN(art.Image, Name)
+                  Permalink=@permalink
+                  Copyrights=@art.Copyrights
+                  Credits=@art.Credits />}
+</div>}
+</div>
+
+@code { GalleryModel[] art;
+
+    [Parameter] public string Name { get; set; }
+
+    string PageDescription { get; set; }
+
+    bool GetDarkMode => localStorage.GetItem<bool>("darkmode");
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var gallery = await Http.GetFromJsonAsync<GalleryTwoModel>(SiteHelper.JsonCDN($"v2/{Name}"));
+        PageDescription = SiteHelper.MarkdownToHtml(gallery.Description);
+        art = gallery.Artwork;
+    } }
