@@ -4,9 +4,7 @@
 @inject HttpClient Http
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 <AlertComponent Display=@true Message="This feature is in preview." />
-@if (!string.IsNullOrEmpty(AlertMessage))
-{
-<AlertComponent Display=@true Alert=@AlertType.Warning Message=@AlertMessage />}
+<AlertComponent Display=@DisplayAlert Alert=@AlertType.Warning Message=@AlertMessage />
 @if (!string.IsNullOrEmpty(PageDescription))
 {@((MarkupString) PageDescription)}
 <div style="margin: 0 auto; margin-top: 10px;">
@@ -28,23 +26,25 @@ else
 </div>
 @code { GalleryModel[] art;
 
-    [Parameter] public string Name { get; set; }
+            [Parameter] public string Name { get; set; }
 
-    string PageDescription { get; set; }
-    string AlertMessage { get; set; }
+            string PageDescription { get; set; }
+            string AlertMessage { get; set; }
+            bool DisplayAlert { get; set; }
 
-    bool GetDarkMode => localStorage.GetItem<bool>("darkmode");
+            bool GetDarkMode => localStorage.GetItem<bool>("darkmode");
 
-    protected override async Task OnParametersSetAsync()
-    {
-        try
-        {
-            var gallery = await Http.GetFromJsonAsync<GalleryTwoModel>(SiteHelper.JsonCDN($"v2/{Name}"));
-            PageDescription = SiteHelper.MarkdownToHtml(gallery.Description);
-            art = gallery.Artwork;
-        }
-        catch (Exception err)
-        {
-            AlertMessage = err.Message;
-        }
-    } }
+            protected override async Task OnParametersSetAsync()
+            {
+                try
+                {
+                    var gallery = await Http.GetFromJsonAsync<GalleryTwoModel>(SiteHelper.JsonCDN($"v2/{Name}"));
+                    PageDescription = SiteHelper.MarkdownToHtml(gallery.Description);
+                    art = gallery.Artwork;
+                }
+                catch (Exception err)
+                {
+                    AlertMessage = err.Message;
+                    DisplayAlert = true;
+                }
+            } }

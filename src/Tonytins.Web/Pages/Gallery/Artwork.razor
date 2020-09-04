@@ -3,15 +3,12 @@
 @using Tonytins.Web.Components
 @inject HttpClient Http
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
-@if (!string.IsNullOrEmpty(AlertMessage))
-{
-<AlertComponent Display=@true Alert=@AlertType.Warning Message=@AlertMessage />}
+<AlertComponent Display=@DisplayAlert Alert=@AlertType.Warning Message=@AlertMessage />
 @if (_gallery == null)
 {
-<LoadingComponent />
- }
-else
-{
+<LoadingComponent /> }
+            else
+            {
 <div class="row justify-content-lg-center">
     <div class="col-sm"></div>
     <div class="col-lg-auto">
@@ -47,46 +44,47 @@ else
     <div class="col-sm"></div>
 </div>}
 
-@code {
-    [Parameter] public string Key { get; set; }
-    [Parameter] public string Database { get; set; }
+@code { [Parameter] public string Key { get; set; }
+            [Parameter] public string Database { get; set; }
 
-    string Image { get; set; }
-    string Description { get; set; }
-    string Title { get; set; }
-    string Credits { get; set; }
-    string Copyrights { get; set; }
-    string AlertMessage { get; set; }
+            string Image { get; set; }
+            string Description { get; set; }
+            string Title { get; set; }
+            string Credits { get; set; }
+            string Copyrights { get; set; }
+            string AlertMessage { get; set; }
+            bool DisplayAlert { get; set; }
 
-    bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
-    string DarkModeCss => IsDarkMode ? "bg-dark text-light" : null;
+            bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+            string DarkModeCss => IsDarkMode ? "bg-dark text-light" : null;
 
-    GalleryModel[] _gallery;
+            GalleryModel[] _gallery;
 
-    protected override async Task OnParametersSetAsync()
-    {
-        try
-        {
-            var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Database));
-            foreach (var art in gallery)
+            protected override async Task OnParametersSetAsync()
             {
-                if (Key == art.Key)
+                try
                 {
-                    Image = art.Image;
-                    Title = art.Title;
-                    Credits = art.Credits;
-                    Copyrights = art.Copyrights;
+                    var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Database));
+                    foreach (var art in gallery)
+                    {
+                        if (Key == art.Key)
+                        {
+                            Image = art.Image;
+                            Title = art.Title;
+                            Credits = art.Credits;
+                            Copyrights = art.Copyrights;
 
 
-                    if (!string.IsNullOrEmpty(art.Description))
-                        Description = SiteHelper.MarkdownToHtml(art.Description);
+                            if (!string.IsNullOrEmpty(art.Description))
+                                Description = SiteHelper.MarkdownToHtml(art.Description);
+                        }
+                    }
+
+                    _gallery = gallery;
                 }
-            }
-
-            _gallery = gallery;
-        }
-        catch (Exception err)
-        {
-            AlertMessage = err.Message;
-        }
-    } }
+                catch (Exception err)
+                {
+                    AlertMessage = err.Message;
+                    DisplayAlert = true;
+                }
+            } }
