@@ -1,5 +1,5 @@
 <div class="card shadow-sm bg-light text-dark" style="margin-bottom: 10px;">
-    <a href="/gallery/@Permalink"><img class="card-img-top" style="width: 100%;" src=@Image /></a>
+    <a href=@Permalink><img class="card-img-top" style="width: 100%;" src=@Image /></a>
     <div class="card-body">
         <h4 class="card-title">@Title</h4>
         @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
@@ -24,7 +24,8 @@
     </div>
 </div>
 
-@code { [Parameter] public string Image { get; set; }
+@code {
+    [Parameter] public string Image { get; set; }
 
     [Parameter] public string Title { get; set; }
 
@@ -32,4 +33,22 @@
 
     [Parameter] public string Credits { get; set; }
 
-    [Parameter] public string Permalink { get; set; } }
+    [Parameter] public bool VersionTwo { get; set; } = false;
+
+    [Parameter]
+    public string Permalink
+    {
+        get
+        {
+            if (VersionTwo)
+                return $"/v2/gallery/{_permalink}";
+
+            return $"/gallery/{_permalink}";
+        }
+        set
+        {
+            _permalink = value;
+        }
+    }
+
+    string _permalink = string.Empty; }

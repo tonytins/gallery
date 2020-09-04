@@ -1,0 +1,82 @@
+@page "/v2/gallery/{Database}/{Key}"
+@using Tonytins.Models
+@using Tonytins.Web.Components
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+<AlertComponent Display=@true Message="This feature is in preview." />
+<AlertComponent Display=@DisplayAlert Alert=@AlertType.Warning Message=@AlertMessage />
+<div class="row justify-content-lg-center">
+    <div class="col-sm"></div>
+    <div class="col-lg-auto">
+        <div class="card @DarkModeCss" style="margin: 0 auto; float: none;">
+            <div class="card-header"><h5>@Title</h5></div>
+            <img src=@SiteHelper.ImageCDN(Image, Database) class="tins-center-img" />
+            @if (!string.IsNullOrEmpty(Description))
+            {
+<div class="card-text" style="padding: 5px;">
+
+    <p>@((MarkupString) Description)</p>
+
+</div>}
+            @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
+            {
+<div class="card-footer">
+    <div class="container">
+        @if (!string.IsNullOrEmpty(Credits))
+        {
+<div class="row">
+    <div class="col">Art by @Credits</div>
+</div>}
+        @if (!string.IsNullOrEmpty(Copyrights))
+        {
+<div class="row">
+    <div class="col"><small class="text-muted">@Copyrights</small></div>
+</div>}
+
+    </div>
+</div>}
+        </div>
+    </div>
+    <div class="col-sm"></div>
+</div>
+
+@code { [Parameter] public string Key { get; set; }
+            [Parameter] public string Database { get; set; }
+
+            string Image { get; set; }
+            string Description { get; set; }
+            string Title { get; set; }
+            string Credits { get; set; }
+            string Copyrights { get; set; }
+            string AlertMessage { get; set; }
+            bool DisplayAlert { get; set; }
+
+            bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+            string DarkModeCss => IsDarkMode ? "bg-dark text-light" : null;
+
+            protected override async Task OnParametersSetAsync()
+            {
+                try
+                {
+                    var gallery = await Http.GetFromJsonAsync<GalleryTwoModel>(SiteHelper.JsonCDN(Database));
+                    foreach (var art in gallery.Artwork)
+                    {
+                        if (Key == art.Key)
+                        {
+                            Image = art.Image;
+                            Title = art.Title;
+                            Credits = art.Credits;
+                            Copyrights = art.Copyrights;
+
+
+                            if (!string.IsNullOrEmpty(art.Description))
+                                Description = SiteHelper.MarkdownToHtml(art.Description);
+                        }
+                    }
+                }
+                catch (Exception err)
+                {
+                    AlertMessage = err.Message;
+                    DisplayAlert = true;
+                }
+            } }
