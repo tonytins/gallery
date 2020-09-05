@@ -6,6 +6,24 @@
     [Parameter] public string Message { get; set; } = "Connection to API server failed.";
     [Parameter] public AlertType Alert { get; set; } = AlertType.Info;
 
+    public string AlertAsString
+    {
+        get
+        {
+            switch (Alert)
+            {
+
+                case AlertType.Warning:
+                    return "warning";
+                case AlertType.Danger:
+                    return "danger";
+                case AlertType.Info:
+                default:
+                    return "info";
+            }
+        }
+    }
+
     void Dismiss()
     {
         Display = false;
