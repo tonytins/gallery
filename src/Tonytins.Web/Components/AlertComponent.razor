@@ -1,27 +1,14 @@
 @if (Display)
 {
-<div class="alert alert-@AlertAsString"><strong>@UppercaseFirst(AlertAsString)</strong>: @Message</div>}
+<div class="alert alert-@AlertAsString">@Message <button type="button" class="close" @onclick="Dismiss"><span class="fa fa-times"></span></button></div>}
 
 @code { [Parameter] public bool Display { get; set; } = false;
     [Parameter] public string Message { get; set; } = "Connection to API server failed.";
     [Parameter] public AlertType Alert { get; set; } = AlertType.Info;
 
-    public string AlertAsString
+    void Dismiss()
     {
-        get
-        {
-            switch (Alert)
-            {
-
-                case AlertType.Warning:
-                    return "warning";
-                case AlertType.Danger:
-                    return "danger";
-                case AlertType.Info:
-                default:
-                    return "info";
-            }
-        }
+        Display = false;
     }
 
     // https://www.dotnetperls.com/uppercase-first-letter
