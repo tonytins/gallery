@@ -21,6 +21,5 @@ namespace Tonytins.Models
         public string Supplemental { get; set; } = string.Empty;
         public string Image { get; set; } = "coh-card.png";
         public string Server { get; set; } = DEFAULT_SERVER;
-        public string Shard { get; set; } = DEFAULT_SERVER;
     }
 }

@@ -9,28 +9,28 @@
 
 @if (IsVideoHidden)
 {
-<p><YouTubeComponent Video="0eHB9zxtet4" /></p>}
+    <p><YouTubeComponent Video="0eHB9zxtet4" /></p>}
 <h4>Heroes</h4>
 @if (_heroes == null)
 {
-<LoadingComponent /> }
-            else
-            {
-<div class="card-columns">
-    @foreach (var hero in _heroes)
-    {
-<HeroInfoboxComponent Name=@hero.Name
-                      Image=@SiteHelper.ImageCDN(hero.Image, "heroes")
-                      Origin=@hero.Origin
-                      Archetype=@hero.Archetype
-                      Primary=@hero.Primary
-                      Secondary=@hero.Secondary
-                      Supplemental=@hero.Supplemental
-                      Affilation=@hero.Affilation
-                      ServerName=@hero.Server
-                      ServerShard=@hero.Shard
-                      ServerLink=@ServerLink(hero.Server) />}
-</div>}
+    <LoadingComponent />
+ }
+else
+{
+    <div class="card-columns">
+        @foreach (var hero in _heroes)
+        {
+            <HeroInfoboxComponent Name=@hero.Name
+                                  Image=@SiteHelper.ImageCDN(hero.Image, "heroes")
+                                  Origin=@hero.Origin
+                                  Archetype=@hero.Archetype
+                                  Primary=@hero.Primary
+                                  Secondary=@hero.Secondary
+                                  Supplemental=@hero.Supplemental
+                                  Affilation=@hero.Affilation
+                                  ServerName=@hero.Server
+                                  ServerLink=@ServerLink(hero.Server) />}
+    </div>}
 
 
 
