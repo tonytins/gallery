@@ -1,4 +1,4 @@
-<div class="card shadow-sm bg-light text-dark" style="width: 18em; margin-bottom: 10px;">
+<div class="card shadow-sm @DarkModeCss" style="width: 18em; margin-bottom: 10px;">
     <img class="card-img-top" width="286" height="190" src="@Image" />
     <div class="card-body">
         <h4 class="card-title">@Name</h4>
@@ -44,5 +44,8 @@
 
     [Parameter] public string Secondary { get; set; }
 
-    [Parameter] public string Supplemental { get; set; } 
+    [Parameter] public string Supplemental { get; set; }
+
+    bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+    string DarkModeCss => IsDarkMode ? "bg-secondary text-light" : "bg-light text-dark";
 }

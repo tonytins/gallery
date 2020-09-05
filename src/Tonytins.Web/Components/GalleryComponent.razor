@@ -1,6 +1,6 @@
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 <div class="card shadow-sm @DarkModeCss" style="margin-bottom: 10px;">
-    <a href=@Permalink><img class="card-img-top" style="width: 100%;" src=@Image /></a>
+    <a href=@Permalink><img class="card-img-top" src=@Image /></a>
     <div class="card-body">
         <h4 class="card-title">@Title</h4>
         @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
