@@ -38,33 +38,5 @@ namespace Tonytins.Web
             }
 
         }
-
-        /*
-        public static Uri HyperToHttp(string address)
-        {
-            if (IsHyperProtocol(address))
-                return new Uri(address.Replace("hyper", "https"));
-
-            if (address.Contains("dat"))
-                return new Uri(address.Replace("dat", "https"));
-
-            return new Uri(address);
-        }
-
-        public static bool IsHyperProtocol(string address)
-        {
-            if (address.Contains("hyper"))
-                return true;
-
-            return false;
-        }
-
-        public static string HttpToHyper(string address)
-        {
-            if (address.Contains("http"))
-                return address.Replace("http", "hyper");
-
-            return address.Replace("https", "hyper");
-        } */
     }
 }

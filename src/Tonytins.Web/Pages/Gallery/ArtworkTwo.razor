@@ -5,6 +5,8 @@
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 <AlertComponent Display=@true Message="This feature is in preview." />
 <AlertComponent Display=@DisplayAlert Alert=@AlertType.Warning Message=@AlertMessage />
+@if (isReady)
+{
 <div class="row justify-content-lg-center">
     <div class="col-sm"></div>
     <div class="col-lg-auto">
@@ -38,45 +40,49 @@
         </div>
     </div>
     <div class="col-sm"></div>
-</div>
+</div>}
 
-@code { [Parameter] public string Key { get; set; }
-            [Parameter] public string Database { get; set; }
+@code {
+    [Parameter] public string Key { get; set; }
+    [Parameter] public string Database { get; set; }
 
-            string Image { get; set; }
-            string Description { get; set; }
-            string Title { get; set; }
-            string Credits { get; set; }
-            string Copyrights { get; set; }
-            string AlertMessage { get; set; }
-            bool DisplayAlert { get; set; }
+    string Image { get; set; }
+    string Description { get; set; }
+    string Title { get; set; }
+    string Credits { get; set; }
+    string Copyrights { get; set; }
+    string AlertMessage { get; set; }
+    bool DisplayAlert { get; set; }
+    bool isReady { get; set; } = false;
 
-            bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
-            string DarkModeCss => IsDarkMode ? "bg-dark text-light" : null;
+    bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+    string DarkModeCss => IsDarkMode ? "bg-secondary text-light" : "bg-light text-dark";
 
-            protected override async Task OnParametersSetAsync()
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            var gallery = await Http.GetFromJsonAsync<GalleryTwoModel>(SiteHelper.JsonCDN(Database));
+            foreach (var art in gallery.Artwork)
             {
-                try
+                if (Key == art.Key)
                 {
-                    var gallery = await Http.GetFromJsonAsync<GalleryTwoModel>(SiteHelper.JsonCDN(Database));
-                    foreach (var art in gallery.Artwork)
-                    {
-                        if (Key == art.Key)
-                        {
-                            Image = art.Image;
-                            Title = art.Title;
-                            Credits = art.Credits;
-                            Copyrights = art.Copyrights;
+                    Image = art.Image;
+                    Title = art.Title;
+                    Credits = art.Credits;
+                    Copyrights = art.Copyrights;
 
 
-                            if (!string.IsNullOrEmpty(art.Description))
-                                Description = SiteHelper.MarkdownToHtml(art.Description);
-                        }
-                    }
+                    if (!string.IsNullOrEmpty(art.Description))
+                        Description = SiteHelper.MarkdownToHtml(art.Description);
+
+                    isReady = true;
                 }
-                catch (Exception err)
-                {
-                    AlertMessage = err.Message;
-                    DisplayAlert = true;
-                }
-            } }
+            }
+        }
+        catch (Exception err)
+        {
+            AlertMessage = err.Message;
+            DisplayAlert = true;
+        }
+    } }
