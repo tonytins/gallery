@@ -4,15 +4,40 @@
     <div class="card-body">
         <h4 class="card-title">@Name</h4>
         <p class="card-text">
-            <a href="https://archive.paragonwiki.com/wiki/Category:Origins">Origin</a>: @Origin
-            <br /><a href="https://archive.paragonwiki.com/wiki/Archetypes">Archetype</a>: @Archetype
-            <br />Affilation: @Affilation
+            <div class="row">
+                <div class="col">Origin: @Origin</div>
+            </div>
+            <div class="row">
+                <div class="col">Archetype: @Archetype</div>
+            </div>
+            @if (!string.IsNullOrEmpty(Affilation))
+            {
+<div class="row">
+    <div class="col">
+        Affilation: @Affilation
+    </div>
+</div>}
+
         </p>
         <h5 class="card-title">Powers</h5>
         <p class="card-text">
-            Primary: @Primary
-            <br />Secondary: @Secondary
-            <br />Supplemental: @Supplemental
+            <div class="row">
+                <div class="col">
+                    Primary: @Primary
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    Secondary: @Secondary
+                </div>
+            </div>
+            @if (!string.IsNullOrEmpty(Supplemental))
+            {
+<div class="row">
+    <div class="col">
+        Supplemental: @Supplemental
+    </div>
+</div>}
         </p>
         <div class="row">
             <div class="col"></div>
