@@ -1,0 +1,27 @@
+@page "/diagnostics"
+@page "/debug"
+@using System.Runtime.InteropServices;
+@using Tonytins.Web.Components
+<h2>Diagnostics</h2>
+<AlertComponent Alert=AlertType.Warning Display=@ThisAssembly.Git.IsDirty Message="There are uncommitted changes." />
+<div class="row">
+    <div class="col">
+        <h3>System</h3>
+        <p>Framework: @RuntimeInformation.FrameworkDescription</p>
+    </div>
+    <div class="col">
+        <h2>Git</h2>
+        <p>Repository: <a href=@GetRepository>@GetRepository</a></p>
+        <p>Branch: @ThisAssembly.Git.Branch</p>
+        <p>Commit: @ThisAssembly.Git.Sha</p>
+    </div>
+</div>
+
+@code { string GetRepository
+    {
+        get
+        {
+            return ThisAssembly.Git.RepositoryUrl
+                .Replace(".git", string.Empty);
+        }
+    } }
