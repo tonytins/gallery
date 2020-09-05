@@ -3,15 +3,14 @@
 @using System.Runtime.InteropServices;
 @using Tonytins.Web.Components
 <h2>Diagnostics</h2>
-<AlertComponent Alert=AlertType.Warning Display=@ThisAssembly.Git.IsDirty Message="There are uncommitted changes." />
 <div class="container container-fluid">
-    <div class="row flex-column">
+    <div class="row">
         <div class="col">
             <h3>System</h3>
             <p>Framework: @RuntimeInformation.FrameworkDescription</p>
         </div>
         <div class="col">
-            <h2>Git</h2>
+            <h3>Git</h3>
             <p>Repository: <a href=@ThisAssembly.Git.RepositoryUrl>@ThisAssembly.Git.RepositoryUrl</a></p>
             <p>Branch: @ThisAssembly.Git.Branch</p>
             <p>Commit: @ThisAssembly.Git.Sha</p>
