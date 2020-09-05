@@ -45,7 +45,8 @@ else
     <div class="col-sm"></div>
 </div>}
 
-@code { [Parameter] public string Key { get; set; }
+@code {
+    [Parameter] public string Key { get; set; }
     [Parameter] public string Database { get; set; }
 
     string Image { get; set; }
@@ -57,7 +58,7 @@ else
     bool DisplayAlert { get; set; }
 
     bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
-    string DarkModeCss => IsDarkMode ? "bg-secondary text-light" : "bg-light text-dark";
+    string DarkModeCss => IsDarkMode ? Themes.DarkCards : Themes.Light;
 
     GalleryModel[] _gallery;
 

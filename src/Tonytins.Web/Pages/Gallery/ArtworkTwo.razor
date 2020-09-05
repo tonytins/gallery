@@ -56,7 +56,7 @@
     bool isReady { get; set; } = false;
 
     bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
-    string DarkModeCss => IsDarkMode ? "bg-secondary text-light" : "bg-light text-dark";
+    string DarkModeCss => IsDarkMode ? Themes.DarkCards : Themes.Light;
 
     protected override async Task OnParametersSetAsync()
     {

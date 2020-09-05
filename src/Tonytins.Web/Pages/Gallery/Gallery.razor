@@ -24,21 +24,19 @@ else
 
 @code { GalleryModel[] art;
 
-            [Parameter] public string Name { get; set; }
+    [Parameter] public string Name { get; set; }
 
-            string PageDescription { get; set; }
+    string PageDescription { get; set; }
 
-            bool GetDarkMode => localStorage.GetItem<bool>("darkmode");
-
-            protected override async Task OnParametersSetAsync()
-            {
-                try
-                {
-                    var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Name));
-                    art = gallery;
-                }
-                catch
-                {
-                    NavigationManager.NavigateTo($"/v2/gallery/{Name}");
-                }
-            } }
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Name));
+            art = gallery;
+        }
+        catch
+        {
+            NavigationManager.NavigateTo($"/v2/gallery/{Name}");
+        }
+    } }

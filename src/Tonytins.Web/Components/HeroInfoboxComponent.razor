@@ -49,8 +49,7 @@
     </div>
     @if (!string.IsNullOrEmpty(ServerShard))
     {
-        <div class="card-footer"><small>Shard: @ServerShard</small></div>
-    }
+<div class="card-footer"><small>Shard: @ServerShard</small></div>}
 </div>
 
 @code { [Parameter] public string Name { get; set; }
@@ -76,4 +75,4 @@
     [Parameter] public string Supplemental { get; set; }
 
     bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
-    string DarkModeCss => IsDarkMode ? "bg-secondary text-light" : "bg-light text-dark"; }
+    string DarkModeCss => IsDarkMode ? Themes.DarkCards : Themes.Light; }
