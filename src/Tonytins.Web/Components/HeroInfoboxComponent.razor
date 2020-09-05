@@ -1,3 +1,4 @@
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 <div class="card shadow-sm @DarkModeCss" style="width: 18em; margin-bottom: 10px;">
     <img class="card-img-top" width="286" height="190" src="@Image" />
     <div class="card-body">
@@ -23,8 +24,7 @@
     </div>
 </div>
 
-@code {
-    [Parameter] public string Name { get; set; }
+@code { [Parameter] public string Name { get; set; }
 
     [Parameter] public string Image { get; set; }
 
@@ -47,5 +47,4 @@
     [Parameter] public string Supplemental { get; set; }
 
     bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
-    string DarkModeCss => IsDarkMode ? "bg-secondary text-light" : "bg-light text-dark";
-}
+    string DarkModeCss => IsDarkMode ? "bg-secondary text-light" : "bg-light text-dark"; }
