@@ -1,6 +1,6 @@
 namespace Tonytins.Web
 {
-    public struct Themes
+    public readonly struct Themes
     {
         public const string DarkCards = "bg-secondary text-light";
 

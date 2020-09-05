@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Tonytins.Web
 {
-    public struct SiteConsts
+    public readonly struct SiteConsts
     {
         public const string SiteName = "Tonytins";
 
