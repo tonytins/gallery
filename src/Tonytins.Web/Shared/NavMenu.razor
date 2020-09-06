@@ -35,12 +35,14 @@
  </ul>
 </nav>
 
-@code { bool _collapseNavMenu = true;
+@code {
 
- bool _getDarkMode => localStorage.GetItem<bool>("darkmode");
+ [Parameter] public bool DarkMode { get; set; }
 
- string NavBarDarkMode => _getDarkMode ? "bg-dark navbar-dark" : "bg-primary navbar-dark";
- string SocialDarkMode => _getDarkMode ? "text-light" : "text-light";
+ bool _collapseNavMenu = true;
+
+ string NavBarDarkMode => DarkMode ? "bg-dark navbar-dark" : "bg-light navbar-light";
+ string SocialDarkMode => DarkMode ? "text-light" : "text-dark";
 
  string NavMenuCssClass => _collapseNavMenu ? "navbar-collapse" : null;
 
