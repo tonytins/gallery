@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Tonytins.Models
 {
     /// <summary>
@@ -7,6 +9,6 @@ namespace Tonytins.Models
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public GalleryModel[] Artwork { get; set; }
+        public IEnumerable<GalleryModel> Artwork { get; set; }
     }
 }

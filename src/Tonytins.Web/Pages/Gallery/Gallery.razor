@@ -13,8 +13,7 @@
 <h2>@PageName</h2>}
 @if (!string.IsNullOrEmpty(PageDescription.Value))
 {@PageDescription
-                <hr />
-}
+                <hr />}
 <div style="margin: 0 auto; margin-top: 10px;">
     @if (!IsReady)
     {
@@ -56,9 +55,9 @@ else
             PageDescription = gallery.Description.MarkdownToHtml();
             PageName = gallery.Title;
 
-            art = gallery.Artwork;
+            art = gallery.Artwork.AsParallel();
 
-            foreach (var art in art)
+            foreach (var art in gallery.Artwork)
                 CountArt++;
 
             IsReady = true;
