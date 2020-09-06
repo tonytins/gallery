@@ -4,8 +4,11 @@
 @inject HttpClient Http
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 <AlertComponent Display=@DisplayAlert Alert=@AlertType.Warning Message=@AlertMessage />
-@if (isReady)
+@if (!IsReady)
 {
+<LoadingComponent /> }
+            else
+            {
 <h2>@GalleryTitle</h2>
                 <hr />
                                 <div class="row justify-content-lg-center">
@@ -23,11 +26,11 @@
                                                         @if (!string.IsNullOrEmpty(Credits))
                                                         {
                                         <span class="d-inline-block"><small>by @Credits</small></span>}
-                                                        @if (!string.IsNullOrEmpty(Description))
+                                                        @if (!string.IsNullOrEmpty(Description.Value))
                                                         {
                                         <div class="card-text" style="padding: 5px;">
 
-                                            <p>@((MarkupString) Description)</p>
+                                            <p>@Description</p>
 
                                         </div>}
                                                         @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
@@ -50,14 +53,14 @@
     [Parameter] public string Database { get; set; }
 
     string Image { get; set; }
-    string Description { get; set; }
+    MarkupString Description { get; set; }
     string Title { get; set; }
     string GalleryTitle { get; set; }
     string Credits { get; set; }
     string Copyrights { get; set; }
     string AlertMessage { get; set; }
     bool DisplayAlert { get; set; }
-    bool isReady { get; set; } = false;
+    bool IsReady { get; set; } = false;
 
     bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
     string DarkModeCss => IsDarkMode ? Themes.DarkCards : Themes.Light;
@@ -68,6 +71,7 @@
         {
             var gallery = await Http.GetFromJsonAsync<GalleryTwoModel>(SiteHelper.JsonCDN($"gallery/{Database}"));
             GalleryTitle = gallery.Title;
+
             foreach (var art in gallery.Artwork)
             {
                 if (Key == art.Key)
@@ -76,14 +80,13 @@
                     Title = art.Title;
                     Credits = art.Credits;
                     Copyrights = art.Copyrights;
+                    Description = art.Description.MarkdownToHtml();
 
 
-                    if (!string.IsNullOrEmpty(art.Description))
-                        Description = SiteHelper.MarkdownToHtml(art.Description);
-
-                    isReady = true;
                 }
             }
+
+            IsReady = true;
         }
         catch (Exception err)
         {

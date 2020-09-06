@@ -2,6 +2,7 @@
 using System;
 using Ganss.XSS;
 using Markdig;
+using Microsoft.AspNetCore.Components;
 
 namespace Tonytins.Web
 {
@@ -20,7 +21,7 @@ namespace Tonytins.Web
 
         public static string ImageCDN(string image, string path) => $@"https://cdn.tonytins.xyz/images/{path}/{image}";
 
-        public static string MarkdownToHtml(string content)
+        public static MarkupString MarkdownToHtml(this string content)
         {
             try
             {
@@ -28,13 +29,13 @@ namespace Tonytins.Web
                     .DisableHtml()
                     .Build();
 
-                return Markdown.ToHtml(content, pipeline);
+                return (MarkupString)Markdown.ToHtml(content, pipeline);
             }
             catch (ArgumentNullException ex)
             {
                 Console.WriteLine($"{ex.StackTrace}{Environment.NewLine}{ex.Message}");
                 var santize = new HtmlSanitizer();
-                return santize.Sanitize(content);
+                return (MarkupString)santize.Sanitize(content);
             }
 
         }
