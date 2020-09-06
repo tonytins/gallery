@@ -9,10 +9,6 @@ html, body {
     display: inline-block;
 }
 
-a, .btn-link {
-    color: #0366d6;
-}
-
 .footerNifty {
     position: absolute;
     top: -20px;

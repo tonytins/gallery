@@ -2,7 +2,18 @@
 @using Tonytins.Models
 @using Tonytins.Web.Components
 @inject HttpClient Http
-@inject NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+<AlertComponent Display=@DisplayAlert Alert=@AlertType.Warning Message=@AlertMessage />
+<div class="text-right">
+    <span class="badge @DarkModeBadgeCss"><span class="fa fa-photo-video"></span> @CountArt</span>
+</div>
+@if (!string.IsNullOrEmpty(PageName))
+{
+<h2>@PageName</h2>}
+@if (!string.IsNullOrEmpty(PageDescription))
+{@((MarkupString) PageDescription)
+                    <hr />
+}
 <div style="margin: 0 auto; margin-top: 10px;">
     @if (art == null)
     {
@@ -20,22 +31,36 @@ else
                   Credits=@art.Credits />}
 </div>}
 </div>
-
-@code { GalleryModel[] art;
+@code {
+    GalleryModel[] art;
 
     [Parameter] public string Name { get; set; }
 
     string PageDescription { get; set; }
+    string PageName { get; set; }
+    string AlertMessage { get; set; }
+    bool DisplayAlert { get; set; }
+    int CountArt { get; set; }
+
+    bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+    string DarkModeBadgeCss => IsDarkMode ? "badge-secondary" : "badge-primary";
 
     protected override async Task OnParametersSetAsync()
     {
+        CountArt = 0;
+
         try
         {
-            var gallery = await Http.GetFromJsonAsync<GalleryModel[]>(SiteHelper.JsonCDN(Name));
-            art = gallery;
+            var gallery = await Http.GetFromJsonAsync<GalleryTwoModel>(SiteHelper.JsonCDN($"gallery/{Name}"));
+            PageDescription = SiteHelper.MarkdownToHtml(gallery.Description);
+            PageName = gallery.Title;
+            art = gallery.Artwork;
+            foreach (var art in art)
+                CountArt++;
         }
-        catch
+        catch (Exception err)
         {
-            NavigationManager.NavigateTo($"/v2/gallery/{Name}");
+            AlertMessage = err.Message;
+            DisplayAlert = true;
         }
     } }

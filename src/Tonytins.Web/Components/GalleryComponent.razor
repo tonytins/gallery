@@ -2,10 +2,9 @@
 <div class="card shadow-sm @DarkModeCss" style="margin-bottom: 10px;">
     <h4 class="card-header">@Title</h4>
     <a href=@Permalink><img class="card-img-top" src=@Image /></a>
-    <div class="card-body">
-        @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
-        {
-<p class="card-text">
+    @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
+    {
+<div class="card-footer">
     <div class="container">
         @if (!string.IsNullOrEmpty(Credits))
         {
@@ -15,18 +14,15 @@
         @if (!string.IsNullOrEmpty(Copyrights))
         {
 <div class="row">
-    <div class="col"><small class="text-muted">@Copyrights</small></div>
+    <div class="col"><small>@Copyrights</small></div>
 </div>}
 
     </div>
 
-</p>}
-
-    </div>
+</div>}
 </div>
 
-@code {
-    [Parameter] public string Image { get; set; }
+@code { [Parameter] public string Image { get; set; }
 
     [Parameter] public string Title { get; set; }
 
