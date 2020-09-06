@@ -9,42 +9,44 @@
 <h2>@GalleryTitle</h2>
                 <hr />
                                 <div class="row justify-content-lg-center">
-                                    <div class="col-sm"></div>
-                                    <div class="col-lg-auto">
-                                        <div class="card @DarkModeCss" style="margin: 0 auto; float: none;">
-                                            <div class="card-header"><h5>@Title</h5></div>
-                                            <img src=@SiteHelper.ImageCDN(Image, Database) class="tins-center-img" />
-                                            @if (!string.IsNullOrEmpty(Description))
-                                            {
-                            <div class="card-text" style="padding: 5px;">
-
-                                <p>@((MarkupString) Description)</p>
-
-                            </div>}
-                                            @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
-                                            {
-                            <div class="card-footer">
-                                <div class="container">
-                                    @if (!string.IsNullOrEmpty(Credits))
-                                    {
-                <div class="row">
-                    <div class="col">Art by @Credits</div>
-                </div>}
-                                    @if (!string.IsNullOrEmpty(Copyrights))
-                                    {
-                <div class="row">
-                    <div class="col"><small class="text-muted">@Copyrights</small></div>
-                </div>}
-
-                                </div>
-                            </div>}
-                                        </div>
+                                    <div class="col"></div>
+                                    <div class="col-lg">
+                                        <img src=@SiteHelper.ImageCDN(Image, Database) />
                                     </div>
-                                    <div class="col-sm"></div>
-                                </div>}
+                                    <div class="col"></div>
+                                </div>
 
-@code {
-    [Parameter] public string Key { get; set; }
+                                                <div class="row flex-lg-column">
+                                                    <div class="col-md"></div>
+                                                    <div class="col-sm">
+                                                        <h5 class="d-inline">@Title</h5>
+                                                        @if (!string.IsNullOrEmpty(Credits))
+                                                        {
+                                        <span class="d-inline-block"><small>by @Credits</small></span>}
+                                                        @if (!string.IsNullOrEmpty(Description))
+                                                        {
+                                        <div class="card-text" style="padding: 5px;">
+
+                                            <p>@((MarkupString) Description)</p>
+
+                                        </div>}
+                                                        @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
+                                                        {
+                                        <div class="container">
+
+                                            @if (!string.IsNullOrEmpty(Copyrights))
+                                            {
+                        <hr />
+                                                <div class="row">
+                                                    <div class="col"><small class="text-muted">@Copyrights</small></div>
+                                                </div>}
+
+                                        </div>}
+                                                    </div>
+                                                    <div class="col-md"></div>
+                                                </div>}
+
+@code { [Parameter] public string Key { get; set; }
     [Parameter] public string Database { get; set; }
 
     string Image { get; set; }
