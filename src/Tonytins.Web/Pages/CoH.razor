@@ -15,10 +15,9 @@
 <h4>Heroes</h4>
 @if (_heroes == null)
 {
-<LoadingComponent />
- }
-else
-{
+<LoadingComponent /> }
+            else
+            {
 <div class="card-columns">
     @foreach (var hero in _heroes)
     {
@@ -38,44 +37,44 @@ else
 
 @code { IEnumerable<HeroModel> _heroes;
 
-            bool IsVideoHidden { get; set; } = false;
-            string AlertMessage { get; set; }
-            bool DisplayAlert { get; set; }
-            bool IsReady { get; set; }
+    bool IsVideoHidden { get; set; } = false;
+    string AlertMessage { get; set; }
+    bool DisplayAlert { get; set; }
+    bool IsReady { get; set; }
 
-            string MonthYearNow => $"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTimeOffset.UtcNow.Month)} {DateTimeOffset.UtcNow.Year}";
+    string MonthYearNow => $"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTimeOffset.UtcNow.Month)} {DateTimeOffset.UtcNow.Year}";
 
-            protected override async Task OnInitializedAsync()
-            {
-                try
-                {
-                    _heroes = await Http.GetFromJsonAsync<IEnumerable<HeroModel>>(SiteHelper.JsonCDN("heroes"));
-                    IsReady = true;
-                }
-                catch (Exception err)
-                {
-                    AlertMessage = err.Message;
-                    DisplayAlert = true;
-                }
-            }
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _heroes = await Http.GetFromJsonAsync<IEnumerable<HeroModel>>(SiteHelper.JsonCDN(@"prod/heroes"));
+            IsReady = true;
+        }
+        catch (Exception err)
+        {
+            AlertMessage = err.Message;
+            DisplayAlert = true;
+        }
+    }
 
-            void ShowVideo(MouseEventArgs e)
-            {
-                IsVideoHidden = IsVideoHidden != true;
-            }
+    void ShowVideo(MouseEventArgs e)
+    {
+        IsVideoHidden = IsVideoHidden != true;
+    }
 
-            string ServerLink(string server)
-            {
-                switch (server.ToLowerInvariant())
-                {
-                    case "victory":
-                        return "https://cityofheroes.dev/";
-                    case "rebirth":
-                        return "https://play.cityofheroesrebirth.com/";
-                    case "homecoming":
-                        return "https://forums.homecomingservers.com/";
-                    case "city of heroes":
-                    default:
-                        return "https://web.archive.org/web/20120508032355/http://na.cityofheroes.com/en";
-                }
-            } }
+    string ServerLink(string server)
+    {
+        switch (server.ToLowerInvariant())
+        {
+            case "victory":
+                return "https://cityofheroes.dev/";
+            case "rebirth":
+                return "https://play.cityofheroesrebirth.com/";
+            case "homecoming":
+                return "https://forums.homecomingservers.com/";
+            case "city of heroes":
+            default:
+                return "https://web.archive.org/web/20120508032355/http://na.cityofheroes.com/en";
+        }
+    } }

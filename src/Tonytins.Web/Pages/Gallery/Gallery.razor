@@ -31,7 +31,7 @@ else
                   Credits=@art.Credits />}
 </div>}
 </div>
-@code { IEnumerable<GalleryModel> art;
+@code { IEnumerable<ArtworkModel> art;
 
     [Parameter] public string Name { get; set; }
 
@@ -51,7 +51,7 @@ else
 
         try
         {
-            var gallery = await Http.GetFromJsonAsync<GalleryTwoModel>(SiteHelper.JsonCDN($"gallery/{Name}"));
+            var gallery = await Http.GetFromJsonAsync<GalleryModel>(SiteHelper.JsonCDN($"prod/gallery/{Name}"));
             PageDescription = gallery.Description.MarkdownToHtml();
             PageName = gallery.Title;
 

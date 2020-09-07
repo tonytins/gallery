@@ -1,18 +1,14 @@
-// Anthony Leland licenses this file to you under the MIT license.
+using System.Collections.Generic;
+
 namespace Tonytins.Models
 {
+    /// <summary>
+    /// Gallery page
+    /// </summary>
     public class GalleryModel
     {
         public string Title { get; set; }
-
         public string Description { get; set; }
-
-        public string Image { get; set; }
-
-        public string Credits { get; set; }
-
-        public string Copyrights { get; set; }
-
-        public string Key { get; set; }
+        public IEnumerable<ArtworkModel> Artwork { get; set; }
     }
 }

@@ -69,7 +69,7 @@
     {
         try
         {
-            var gallery = await Http.GetFromJsonAsync<GalleryTwoModel>(SiteHelper.JsonCDN($"gallery/{Database}"));
+            var gallery = await Http.GetFromJsonAsync<GalleryModel>(SiteHelper.JsonCDN($"gallery/{Database}"));
             GalleryTitle = gallery.Title;
 
             foreach (var art in gallery.Artwork)
@@ -81,8 +81,6 @@
                     Credits = art.Credits;
                     Copyrights = art.Copyrights;
                     Description = art.Description.MarkdownToHtml();
-
-
                 }
             }
 
