@@ -16,8 +16,10 @@
             <LegalNoticesListComponent />
         </div>
         <div class="col">
-            <class class="btn-group-vertical">
-                <button class="btn btn-secondary" @onclick="ToggleDarkMode">Dark Mode</button>
+            <class class="btn-group-vertical" style="padding:10px;">
+                <button class="btn @BtnDarkMode" @onclick="ToggleDarkMode">
+                    <span class="fa fa-adjust"></span> Dark Mode
+                </button>
             </class>
         </div>
     </div>
@@ -48,6 +50,7 @@
     }
 
     string MainDarkModeCssClass => IsDarkMode ? "bg-dark text-light" : "bg-light text-dark";
+    string BtnDarkMode => IsDarkMode ? "btn-light" : "btn-secondary";
     string FooterDarkMode => IsDarkMode ? "bg-dark text-light" : "bg-secondary text-light";
 
     void TogglePreview()
