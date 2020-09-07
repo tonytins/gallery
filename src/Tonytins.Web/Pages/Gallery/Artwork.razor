@@ -6,9 +6,10 @@
 <AlertComponent Display=@DisplayAlert Alert=@AlertType.Warning Message=@AlertMessage />
 @if (!IsReady)
 {
-<LoadingComponent /> }
-            else
-            {
+<LoadingComponent />
+ }
+else
+{
 <h2>@GalleryTitle</h2>
                 <hr />
                                 <div class="row justify-content-lg-center">
@@ -69,7 +70,7 @@
     {
         try
         {
-            var gallery = await Http.GetFromJsonAsync<GalleryModel>(SiteHelper.JsonCDN($"prod/gallery/{Database}"));
+            var gallery = await Http.GetFromJsonAsync<GalleryModel>(SiteHelper.JsonCDN(Database, @"prod/gallery/"));
             GalleryTitle = gallery.Title;
 
             foreach (var art in gallery.Artwork)

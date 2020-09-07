@@ -1,7 +1,6 @@
 @page "/diagnostics"
 @page "/debug"
 @using System.Runtime.InteropServices;
-@using Tonytins.Web.Components
 <h2>Diagnostics</h2>
 <div class="container container-fluid">
     <div class="row">
@@ -11,9 +10,20 @@
         </div>
         <div class="col">
             <h3>Git</h3>
-            <p>Repository: <a href=@ThisAssembly.Git.RepositoryUrl>@ThisAssembly.Git.RepositoryUrl</a></p>
-            <p>Branch: @ThisAssembly.Git.Branch</p>
-            <p>Commit: @ThisAssembly.Git.Sha</p>
+            <p>Repository: <a href=@SanitizeRepoUrl>@SanitizeRepoUrl</a></p>
+            <p>Commit: <a href=@CommitUrl>@ThisAssembly.Git.Sha</a></p>
+            <p>Branch: <a href=@BranchUrl>@ThisAssembly.Git.Branch</a></p>
         </div>
     </div>
 </div>
+
+@code { static string SanitizeRepoUrl
+    {
+        get
+        {
+            var repo = ThisAssembly.Git.RepositoryUrl;
+            return repo.Substring(0, repo.Length - 4);
+        }
+    }
+    string BranchUrl = $@"{SanitizeRepoUrl}/tree/{@ThisAssembly.Git.Branch}";
+    string CommitUrl = $@"{SanitizeRepoUrl}/commit/{@ThisAssembly.Git.Sha}";}

@@ -13,7 +13,8 @@
 <h2>@PageName</h2>}
 @if (!string.IsNullOrEmpty(PageDescription.Value))
 {@PageDescription
-                <hr />}
+                <hr />
+}
 <div style="margin: 0 auto; margin-top: 10px;">
     @if (!IsReady)
     {
@@ -51,7 +52,7 @@ else
 
         try
         {
-            var gallery = await Http.GetFromJsonAsync<GalleryModel>(SiteHelper.JsonCDN($"prod/gallery/{Name}"));
+            var gallery = await Http.GetFromJsonAsync<GalleryModel>(SiteHelper.JsonCDN(Name, @"prod/gallery/"));
             PageDescription = gallery.Description.MarkdownToHtml();
             PageName = gallery.Title;
 

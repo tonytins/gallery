@@ -19,6 +19,8 @@ namespace Tonytins.Web
 
         public static string JsonCDN(string json) => $@"https://cdn.tonytins.xyz/db/{json}.json";
 
+        public static string JsonCDN(string json, string path) => $@"https://cdn.tonytins.xyz/db/{path}/{json}.json";
+
         public static string ImageCDN(string image, string path) => $@"https://cdn.tonytins.xyz/images/{path}/{image}";
 
         public static MarkupString MarkdownToHtml(this string content)
