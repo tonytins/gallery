@@ -1,52 +1,50 @@
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 @inject NavigationManager NavigationManager;
 <nav class="navbar navbar-expand-lg @NavBarDarkMode @NavMenuCssClass" @onclick="ToggleNavMenu">
- <a class="navbar navbar-brand" href="/">
-  <img src="../images/nav-logo.png" class="d-inline-block align-top" />
-  Tonytins
- </a>
- <ul class="nav navbar-nav">
-  <li class="nav-item px-3">
-   <NavLink Match="NavLinkMatch.All" class="nav-link" href="/coh">
-    <span class="fa fa-city tins-fa-padding" aria-hidden="true"></span>
-    City of Heroes
-   </NavLink>
-  </li>
-  <li class="nav-item px-3">
-   <NavLink Match="NavLinkMatch.All" class="nav-link" href="/gallery/giftart">
-    <span class="fa fa-heart tins-fa-padding" aria-hidden="true"></span>
-    Gift Art
-   </NavLink>
-  </li>
-  <li class="nav-item px-3">
-   <NavLink Match="NavLinkMatch.All" class="nav-link" href="/gallery/doc">
-    <span class="fa fa-archive tins-fa-padding" aria-hidden="true"></span>
-    D.O.C.
-   </NavLink>
-  </li>
- </ul>
- <ul class="ml-auto nav">
-  <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://github.com/tonytins"><span class="fab fa-github"></span></a></li>
-  <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://twitter.com/tonyt1ns"><span class="fab fa-twitter"></span></a></li>
-  <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://medium.com/@@tonytins"><span class="fab fa-medium"></span></a></li>
-  <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://www.xboxgamertag.com/search/tonytins/"><span class="fab fa-xbox"></span></a></li>
-  <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://twitch.tv/tonytins"><span class="fab fa-twitch"></span></a></li>
-  <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://steamcommunity.com/id/tonytins/"><span class="fab fa-steam"></span></a></li>
- </ul>
+    <a class="navbar navbar-brand" href="/">
+        <img src="../images/nav-logo.png" class="d-inline-block align-top" />
+        Tonytins
+    </a>
+    <ul class="nav navbar-nav">
+        <li class="nav-item px-3">
+            <NavLink Match="NavLinkMatch.All" class="nav-link" href="/coh">
+                <span class="fa fa-city tins-fa-padding" aria-hidden="true"></span>
+                City of Heroes
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink Match="NavLinkMatch.All" class="nav-link" href="/gallery/giftart">
+                <span class="fa fa-heart tins-fa-padding" aria-hidden="true"></span>
+                Gift Art
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink Match="NavLinkMatch.All" class="nav-link" href="/gallery/doc">
+                <span class="fa fa-archive tins-fa-padding" aria-hidden="true"></span>
+                D.O.C.
+            </NavLink>
+        </li>
+    </ul>
+    <ul class="ml-auto nav">
+        <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://steamcommunity.com/id/tonytins/"><span class="fab fa-steam"></span></a></li>
+        <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://www.deviantart.com/tonytins"><span class="fab fa-deviantart"></span></a></li>
+        <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://dev.to/tonytins"><span class="fab fa-dev"></span></a></li>
+        <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://github.com/tonytins"><span class="fab fa-github"></span></a></li>
+        <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://twitch.tv/tonytins"><span class="fab fa-twitch"></span></a></li>
+        <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://twitter.com/tonyt1ns"><span class="fab fa-twitter"></span></a></li>
+    </ul>
 </nav>
 
-@code {
+@code { [Parameter] public bool DarkMode { get; set; }
 
- [Parameter] public bool DarkMode { get; set; }
+    bool _collapseNavMenu = true;
 
- bool _collapseNavMenu = true;
+    string NavBarDarkMode => DarkMode ? "bg-dark navbar-dark" : "bg-light navbar-light";
+    string SocialDarkMode => DarkMode ? "text-light" : "text-dark";
 
- string NavBarDarkMode => DarkMode ? "bg-dark navbar-dark" : "bg-light navbar-light";
- string SocialDarkMode => DarkMode ? "text-light" : "text-dark";
+    string NavMenuCssClass => _collapseNavMenu ? "navbar-collapse" : null;
 
- string NavMenuCssClass => _collapseNavMenu ? "navbar-collapse" : null;
-
- void ToggleNavMenu()
- {
-  _collapseNavMenu = !_collapseNavMenu;
- } }
+    void ToggleNavMenu()
+    {
+        _collapseNavMenu = !_collapseNavMenu;
+    } }
