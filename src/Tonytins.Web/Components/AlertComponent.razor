@@ -1,4 +1,4 @@
-@using Markdig
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
 @if (Display)
 {
 <div class="alert alert-@AlertAsString">
@@ -8,9 +8,10 @@
     </div>
 </div>}
 
-@code { [Parameter] public bool Display { get; set; } = false;
+@code { [Parameter] public bool Display { get; set; } = true;
     [Parameter] public string Message { get; set; } = "Connection to API server failed.";
     [Parameter] public AlertType Alert { get; set; } = AlertType.Info;
+    [Parameter] public string AlertKey { get; set; }
 
     public string AlertAsString
     {
@@ -30,18 +31,24 @@
         }
     }
 
-    void Dismiss()
+    protected override async Task OnParametersSetAsync()
     {
-        Display = false;
+        var isDismissed = await localStorage.GetItemAsync<bool>(AlertKey);
+
+        if (!Display || !isDismissed)
+            Display = !Display;
     }
 
-    // https://www.dotnetperls.com/uppercase-first-letter
-    string UppercaseFirst(string s)
-    {
-        // Check for empty string.
-        if (string.IsNullOrEmpty(s))
-            return string.Empty;
 
-        // Return char and concat substring.
-        return char.ToUpper(s[0]) + s.Substring(1);
+    async Task Dismiss()
+    {
+        if (!string.IsNullOrEmpty(AlertKey))
+        {
+            var isDismissed = await localStorage.GetItemAsync<bool>(AlertKey);
+            await localStorage.SetItemAsync(AlertKey, !Display);
+            Display = isDismissed;
+        }
+
+        if (string.IsNullOrEmpty(AlertKey))
+            Display = !Display;
     } }

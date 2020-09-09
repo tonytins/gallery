@@ -2,26 +2,42 @@
 @using Tonytins.Web.Components
 @using Tonytins.Web.Components.Footer
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
-<div class="container-fluid shadow" style="padding-left: 0px; padding-right: 0px;">
+<div class="container-fluid shadow @MainDarkModeCssClass" style="padding-left: 0px; padding-right: 0px;">
+    <div class="row justify-content-center">
+        <div class="col-sm"></div>
+        <div class="col" id="adex"><AdexComponent /></div>
+        <div id="ifadblocker"><AlertComponent AlertKey="adack" Message="Please help support me by turning off your adblocker. Thanks." /></div>
+        <div class="col-sm"></div>
+    </div>
     <NavMenu DarkMode=@IsDarkMode />
-    <div class="main @MainDarkModeCssClass">
+    <div class="main">
         <div class="content px-4">
             @Body
         </div>
     </div>
-    <div class="row @MainDarkModeCssClass" style="margin-left: 0px; margin-right: 0px;">
-        <div class="col" style="padding:10px;"><AdexComponent /></div>
-        <div class="col-md"></div>
+    <div class="row justify-content-center" style="padding-top:10px;">
+        <div class="col-sm"></div>
         <div class="col">
             <LegalNoticesListComponent />
         </div>
         <div class="col">
-            <class class="btn-group-vertical" style="padding:10px;">
+            <ul class="nav">
+                <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://steamcommunity.com/id/tonytins/"><span class="fab fa-steam"></span></a></li>
+                <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://www.deviantart.com/tonytins"><span class="fab fa-deviantart"></span></a></li>
+                <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://dev.to/tonytins"><span class="fab fa-dev"></span></a></li>
+                <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://github.com/tonytins"><span class="fab fa-github"></span></a></li>
+                <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://twitch.tv/tonytins"><span class="fab fa-twitch"></span></a></li>
+                <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://twitter.com/tonyt1ns"><span class="fab fa-twitter"></span></a></li>
+            </ul>
+        </div>
+        <div class="col">
+            <class class="btn-group-vertical">
                 <button class="btn @BtnDarkMode" @onclick="ToggleDarkMode">
                     <span class="fa fa-adjust"></span> Dark Mode
                 </button>
             </class>
         </div>
+        <div class="col-sm"></div>
     </div>
 </div>
 
@@ -52,6 +68,7 @@
     string MainDarkModeCssClass => IsDarkMode ? "bg-dark text-light" : "bg-light text-dark";
     string BtnDarkMode => IsDarkMode ? "btn-light" : "btn-secondary";
     string FooterDarkMode => IsDarkMode ? "bg-dark text-light" : "bg-secondary text-light";
+    string SocialDarkMode => IsDarkMode ? "text-light" : "text-dark";
 
     void TogglePreview()
     {
