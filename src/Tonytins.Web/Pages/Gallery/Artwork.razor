@@ -6,11 +6,10 @@
 <AlertComponent Display=@DisplayAlert Alert=@AlertType.Warning Message=@AlertMessage />
 @if (!IsReady)
 {
-<LoadingComponent />
- }
-else
-{
-<h2>@GalleryTitle</h2>
+<LoadingComponent /> }
+            else
+            {
+<h2 class="d-inline-block"><a href="/gallery/@Database" class="@DarkModeText d-inline-block"><span class="fa fa-caret-left"></span></a> @GalleryTitle</h2>
                 <hr />
                                 <div class="row justify-content-lg-center">
                                     <div class="col"></div>
@@ -64,6 +63,7 @@ else
     bool IsReady { get; set; } = false;
 
     bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+    string DarkModeText => IsDarkMode ? "text-light" : "text-dark";
     string DarkModeCss => IsDarkMode ? Themes.DarkCards : Themes.Light;
 
     protected override async Task OnParametersSetAsync()
