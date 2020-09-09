@@ -14,13 +14,13 @@
             @Body
         </div>
     </div>
-    <div class="row justify-content-center" style="padding-top:10px;">
-        <div class="col-sm"></div>
+    <div class="row justify-content-sm-center" style="padding-top:10px;">
         <div class="col">
-            <LegalNoticesListComponent />
+            <h6>Tonytins</h6>
+            <small>This is my own personal website showcasing artwork, game content and much.</small>
         </div>
-        <div class="col">
-            <ul class="nav">
+        <div class="col-sm">
+            <ul class="nav mx-auto justify-content-center">
                 <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://steamcommunity.com/id/tonytins/"><span class="fab fa-steam"></span></a></li>
                 <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://www.deviantart.com/tonytins"><span class="fab fa-deviantart"></span></a></li>
                 <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://dev.to/tonytins"><span class="fab fa-dev"></span></a></li>
@@ -29,14 +29,19 @@
                 <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://twitter.com/tonyt1ns"><span class="fab fa-twitter"></span></a></li>
             </ul>
         </div>
-        <div class="col">
-            <class class="btn-group-vertical">
+        <div class="col text-center">
+            <div class="btn-group-vertical">
                 <button class="btn @BtnDarkMode" @onclick="ToggleDarkMode">
                     <span class="fa fa-adjust"></span> Dark Mode
                 </button>
-            </class>
+            </div>
         </div>
-        <div class="col-sm"></div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col"><LegalNoticesListComponent /></div>
+        <div class="col">
+        </div>
+        <div class="col"></div>
     </div>
 </div>
 
