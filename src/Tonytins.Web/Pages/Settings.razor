@@ -1,7 +1,8 @@
 @page "/diagnostics"
-@page "/debug"
+@page "/settings"
 @using System.Runtime.InteropServices;
-<h2>Diagnostics</h2>
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+<h2>Settings</h2>
 <div class="container container-fluid">
     <div class="row">
         <div class="col">
@@ -22,8 +23,28 @@
         get
         {
             var repo = ThisAssembly.Git.RepositoryUrl;
-            return repo.Substring(0, repo.Length - 4);
+            return repo.Substring(0, repo.Length - 3);
         }
     }
+
+    bool IsDarkMode
+    {
+        get
+        {
+            return localStorage.GetItem<bool>("darkmode");
+        }
+        set
+        {
+            localStorage.SetItem("darkmode", value);
+        }
+    }
+
+    void ToggleDarkMode()
+    {
+        IsDarkMode = !IsDarkMode;
+    } 
+
+    string BtnDarkMode => IsDarkMode ? "btn-light" : "btn-secondary";
+
     string BranchUrl = $@"{SanitizeRepoUrl}/tree/{@ThisAssembly.Git.Branch}";
     string CommitUrl = $@"{SanitizeRepoUrl}/commit/{@ThisAssembly.Git.Sha}";}
