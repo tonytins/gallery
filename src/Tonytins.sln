@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tonytins.Web.Components", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tonytins.Models", "Tonytins.Models\Tonytins.Models.csproj", "{0D24A448-F338-4851-B07C-B783BC94C6A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tonytins.Web", "Tonytins.Web\Tonytins.Web.csproj", "{35A02DBD-1047-4282-A9CD-148B03D62903}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tonytins.Web", "Tonytins.Web\Tonytins.Web.csproj", "{35A02DBD-1047-4282-A9CD-148B03D62903}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

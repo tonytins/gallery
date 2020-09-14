@@ -60,7 +60,8 @@ app {
     }
 
     .main .submission {
-        height: calc(100vh - 35px - 109px);
+        max-height: calc(100vh - 35px - 109px);
+        width: auto;
     }
 
     .main .top-row {

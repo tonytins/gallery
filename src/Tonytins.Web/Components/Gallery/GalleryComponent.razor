@@ -1,7 +1,9 @@
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 <div class="card shadow-sm @DarkModeCss" style="margin-bottom: 10px;">
     <h4 class="card-header">@Title</h4>
-    <a href=@Permalink><img class="card-img-top" src=@Image /></a>
+    <a href=@Permalink>
+        <img class="card-img" src=@Image />
+    </a>
     @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
     {
 <div class="card-footer">
@@ -37,9 +39,6 @@
     {
         get
         {
-            if (VersionTwo)
-                return $"/v2/gallery/{_permalink}";
-
             return $"/gallery/{_permalink}";
         }
         set
