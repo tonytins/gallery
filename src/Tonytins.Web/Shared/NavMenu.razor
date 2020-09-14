@@ -1,11 +1,15 @@
-@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
-@inject NavigationManager NavigationManager;
-<nav class="navbar navbar-expand-lg @NavBarDarkMode @NavMenuCssClass" @onclick="ToggleNavMenu">
-    <a class="navbar navbar-brand" href="/">
+<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">
         <img src="../images/nav-logo.png" class="d-inline-block align-top" />
         Tonytins
     </a>
-    <ul class="nav navbar-nav ml-auto">
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
         <li class="nav-item px-3">
             <NavLink Match="NavLinkMatch.All" class="nav-link" href="/coh">
                 <span class="fa fa-city tins-fa-padding" aria-hidden="true"></span>
@@ -25,18 +29,13 @@
             </NavLink>
         </li>
     </ul>
-</nav>
+</div>
 
-@code { [Parameter] public bool DarkMode { get; set; }
+@code { private bool collapseNavMenu = true;
 
-    bool _collapseNavMenu = true;
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
-    string NavBarDarkMode => DarkMode ? "bg-dark navbar-dark" : "bg-light navbar-light";
-    string SocialDarkMode => DarkMode ? "text-light" : "text-dark";
-
-    string NavMenuCssClass => _collapseNavMenu ? "navbar-collapse" : null;
-
-    void ToggleNavMenu()
+    private void ToggleNavMenu()
     {
-        _collapseNavMenu = !_collapseNavMenu;
+        collapseNavMenu = !collapseNavMenu;
     } }

@@ -1,4 +1,3 @@
-// Anthony Leland licenses this file to you under the MIT license.
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Tonytins.Web
 {
-    public static class Program
+    public class Program
     {
         public static async Task Main(string[] args)
         {
@@ -26,6 +25,7 @@ namespace Tonytins.Web
                 return sanantize;
             });
             builder.Services.AddBlazoredLocalStorage();
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
             await builder.Build().RunAsync();
         }

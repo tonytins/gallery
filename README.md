@@ -1,6 +1,6 @@
 # Tonytins
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
+[![GitHub license](https://img.shields.io/github/license/tonytins/tonytins.github.io)](https://github.com/tonytins/tonytins.github.io/blob/master/LICENSE) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 
 This is my personal website built using Blazor: WebAssembly. You're welcome to contribute.
 

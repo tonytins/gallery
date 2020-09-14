@@ -1,48 +1,23 @@
 @inherits LayoutComponentBase
-@using Tonytins.Web.Components
-@using Tonytins.Web.Components.Footer
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
-<div class="container-fluid shadow @MainDarkModeCssClass">
-    <div class="row justify-content-center">
-        <div class="col-sm"></div>
-        <div class="col" id="adex"><AdexComponent /></div>
-        <div class="col-sm"></div>
+<div class="sidebar">
+    <NavMenu />
+</div>
+
+<div class="main @MainDarkModeCssClass">
+    <div class="@DarkTopRow top-row px-4">
+        <button class="btn btn-primary" @onclick="ToggleDarkMode">
+            <span class="fa fa-moon"></span> Dark Mode
+        </button>
     </div>
-    <NavMenu DarkMode=@IsDarkMode />
-    <div class="main">
-        <div class="content px-4">
-            @Body
+
+    <div class="content px-4">
+        <div class="row justify-content-center">
+            <div class="col-sm"></div>
+            <div class="col" id="adex"><AdexComponent /></div>
+            <div class="col-sm"></div>
         </div>
-    </div>
-    <div class="row justify-content-sm-center" style="padding-top:10px;">
-        <div class="col">
-            <h6>About</h6>
-            <small>This is my own personal website showcasing artwork, game content and more.</small>
-        </div>
-        <div class="col-sm">
-            <ul class="nav mx-auto justify-content-center">
-                <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://steamcommunity.com/id/tonytins/"><span class="fab fa-steam"></span></a></li>
-                <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://www.deviantart.com/tonytins"><span class="fab fa-deviantart"></span></a></li>
-                <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://dev.to/tonytins"><span class="fab fa-dev"></span></a></li>
-                <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://github.com/tonytins"><span class="fab fa-github"></span></a></li>
-                <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://twitch.tv/tonytins"><span class="fab fa-twitch"></span></a></li>
-                <li class="nav-item px-1"><a class="@SocialDarkMode" href="https://twitter.com/tonyt1ns"><span class="fab fa-twitter"></span></a></li>
-            </ul>
-        </div>
-        <div class="col text-center">
-            <div class="btn-group-vertical">
-                <button class="btn @BtnDarkMode" @onclick="ToggleDarkMode">
-                    <span class="fa fa-moon"></span> Dark Mode
-                </button>
-            </div>
-        </div>
-    </div>
-    <hr />
-    <div class="row justify-content-center">
-        <div class="col"><LegalNoticesListComponent /></div>
-        <div class="col">
-        </div>
-        <div class="col"></div>
+        @Body
     </div>
 </div>
 
@@ -58,27 +33,11 @@
         }
     }
 
-    bool IsPreview
-    {
-        get
-        {
-            return localStorage.GetItem<bool>("preview");
-        }
-        set
-        {
-            localStorage.SetItem("preview", value);
-        }
-    }
-
     string MainDarkModeCssClass => IsDarkMode ? "bg-dark text-light" : "bg-light text-dark";
+    string DarkTopRow => IsDarkMode ? "dark-top-row" : null;
     string BtnDarkMode => IsDarkMode ? "btn-light" : "btn-secondary";
     string FooterDarkMode => IsDarkMode ? "bg-dark text-light" : "bg-secondary text-light";
     string SocialDarkMode => IsDarkMode ? "text-light" : "text-dark";
-
-    void TogglePreview()
-    {
-        IsPreview = !IsPreview;
-    }
 
     void ToggleDarkMode()
     {
