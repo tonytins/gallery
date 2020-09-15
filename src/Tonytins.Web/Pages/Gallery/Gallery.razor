@@ -11,8 +11,8 @@
 @if (!string.IsNullOrEmpty(PageName))
 {
 <h2>@PageName</h2>}
-@if (!string.IsNullOrEmpty(PageDescription.Value))
-{@PageDescription
+@if (!string.IsNullOrEmpty(PageDescription))
+{@PageDescription.MarkdownToHtml()
                 <hr />}
 <div style="margin: 0 auto; margin-top: 10px;">
     @if (!IsReady)
@@ -34,7 +34,7 @@ else
 
     [Parameter] public string Name { get; set; }
 
-    MarkupString PageDescription { get; set; }
+    string PageDescription { get; set; }
     string PageName { get; set; }
     string AlertMessage { get; set; }
     bool DisplayAlert { get; set; }
@@ -51,7 +51,7 @@ else
         try
         {
             var gallery = await Http.GetFromJsonAsync<GalleryModel>(SiteHelper.JsonCDN(Name, @"prod/gallery/"));
-            PageDescription = gallery.Description.MarkdownToHtml();
+            PageDescription = gallery.Description;
             PageName = gallery.Title;
 
             art = gallery.Artwork.AsParallel();

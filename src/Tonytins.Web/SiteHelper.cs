@@ -1,6 +1,4 @@
 // Anthony Leland licenses this file to you under the MIT license.
-using System;
-using Ganss.XSS;
 using Markdig;
 using Microsoft.AspNetCore.Components;
 
@@ -23,9 +21,15 @@ namespace Tonytins.Web
 
         public static string ImageCDN(string image, string path) => $@"https://cdn.tonytins.xyz/images/{path}/{image}";
 
+        /// <summary>
+        /// Converts and sanitizes any Markdown to HTML. If the content
+        /// is, for any reason, null or empty it will return a empty string.
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns>HTML</returns>
         public static MarkupString MarkdownToHtml(this string content)
         {
-            try
+            if (!string.IsNullOrEmpty(content))
             {
                 var pipeline = new MarkdownPipelineBuilder()
                     .DisableHtml()
@@ -33,13 +37,8 @@ namespace Tonytins.Web
 
                 return (MarkupString)Markdown.ToHtml(content, pipeline);
             }
-            catch (ArgumentNullException ex)
-            {
-                Console.WriteLine($"{ex.StackTrace}{Environment.NewLine}{ex.Message}");
-                var santize = new HtmlSanitizer();
-                return (MarkupString)santize.Sanitize(content);
-            }
-
+            else
+                return (MarkupString)string.Empty;
         }
     }
 }
