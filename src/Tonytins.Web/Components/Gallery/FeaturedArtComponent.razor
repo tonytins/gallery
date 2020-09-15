@@ -16,8 +16,7 @@ else
     @foreach (var art in art.Take(3))
     {
         var permalink = $"{Database}/{art.Key}";
-<GalleryComponent Title=@art.Title
-                  Image=@SiteHelper.ImageCDN(art.Image, $@"gallery/{Database}")
+<GalleryComponent Image=@SiteHelper.ImageCDN(art.Image, $@"gallery/{Database}")
                   Permalink=@permalink
                   Copyrights=@art.Copyrights
                   Credits=@art.Credits />}
