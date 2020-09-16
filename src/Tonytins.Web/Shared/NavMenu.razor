@@ -29,6 +29,17 @@
                             </NavLink>
                         </div>
                     </li>
+                    <li class="nav-item dropdown pl-2">
+                        <a class="nav-link dropdown-toggle" @onclick="ToggleGamesMenu">
+                            <span class="fa fa-gamepad px-2" aria-hidden="true"></span> Games
+                        </a>
+                        <div class="dropdown-menu pl-2 @GamesCssClass">
+                            <NavLink Match="NavLinkMatch.All" class="nav-link" href="/games/coh">
+                                <span class="fa fa-city tins-fa-padding" aria-hidden="true"></span>
+                                City of Heroes
+                            </NavLink>
+                        </div>
+                    </li>
                     <li class="nav-item px-3">
                         <NavLink Match="NavLinkMatch.All" class="nav-link" href="/settings">
                             <span class="fa fa-cog px-2" aria-hidden="true"></span>
@@ -44,13 +55,20 @@
 
 @code { bool collapseNavMenu = true;
     bool collapseGalleryMenu = true;
+    bool collapseGamesMenu = true;
 
     string NavMenuCssClass => collapseNavMenu ? "collapse" : string.Empty;
     string GalleryCssClass => collapseGalleryMenu ? string.Empty : "show";
+    string GamesCssClass => collapseGamesMenu ? string.Empty : "show";
 
     void ToggleGalleryNav()
     {
         collapseGalleryMenu = !collapseGalleryMenu;
+    }
+
+    void ToggleGamesMenu()
+    {
+        collapseGamesMenu = !collapseGamesMenu;
     }
 
     void ToggleNavMenu()
