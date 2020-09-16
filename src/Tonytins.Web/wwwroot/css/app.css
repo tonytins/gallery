@@ -75,11 +75,11 @@ app {
 }
 
 .bg-dark .layout-rows {
-    background-color: #05163D !important;
+    background-color: #03173d !important;
 }
 
     .bg-dark .layout-rows .dropdown-menu {
-        background-color: #05163D !important;
+        background-color: #03173d !important;
         border-color: transparent;
     }
 
