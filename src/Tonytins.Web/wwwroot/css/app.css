@@ -51,7 +51,7 @@ app {
 
 .sidebar .dropdown-menu {
     background-color: #05163D;
-    border-color: black;
+    border-color: transparent;
 }
 
 .main .media-display {
