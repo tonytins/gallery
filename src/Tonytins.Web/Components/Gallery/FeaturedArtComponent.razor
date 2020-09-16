@@ -6,14 +6,13 @@
 @if (!string.IsNullOrEmpty(PageName))
 {
 <h3>@PageName</h3>}
-<div style="margin: 0 auto; margin-top: 10px;">
     @if (!IsReady)
     {
 <LoadingComponent /> }
 else
 {
 <div class="card-columns">
-    @foreach (var art in art.Take(3))
+    @foreach (var art in art.Take(Iter))
     {
         var permalink = $"{Database}/{art.Key}";
 <GalleryComponent Image=@SiteHelper.ImageCDN(art.Image, $@"gallery/{Database}")
@@ -21,11 +20,12 @@ else
                   Copyrights=@art.Copyrights
                   Credits=@art.Credits />}
 </div>}
-</div>
 <hr />
-@code { IEnumerable<ArtworkModel> art;
+@code {
+    IEnumerable<ArtworkModel> art;
 
     [Parameter] public string Database { get; set; }
+    [Parameter] public int Iter { get; set; } = 3;
 
     MarkupString PageDescription { get; set; }
     string PageName { get; set; }

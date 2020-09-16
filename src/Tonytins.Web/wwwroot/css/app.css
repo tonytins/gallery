@@ -39,6 +39,18 @@ app {
     flex-direction: column;
 }
 
+.content {
+    margin-bottom: 70px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 30px; /* Vertically center the text there */
+}
+
 .top-row {
     height: 3.5rem;
     display: flex;
@@ -49,10 +61,53 @@ app {
     flex: 1;
 }
 
-.sidebar .dropdown-menu {
-    background-color: #05163D;
-    border-color: transparent;
+.bg-dark .night-light a {
+    color: lightcyan;
 }
+
+    .bg-dark .night-light a:hover {
+        color: lightblue;
+    }
+
+.layout-rows .dropdown-item {
+    background-color: transparent;
+}
+
+.bg-dark .layout-rows {
+    background-color: #05163D !important;
+}
+
+    .bg-dark .layout-rows .dropdown-menu {
+        background-color: #05163D !important;
+        border-color: transparent;
+    }
+
+    .bg-dark .layout-rows p {
+        color: white;
+    }
+
+
+.bg-light .layout-rows {
+    background-color: #cbd8f4 !important;
+}
+
+    .bg-light .layout-rows .dropdown-menu {
+        background-color: #cbd8f4 !important;
+        border-color: transparent;
+    }
+
+
+    .bg-light .layout-rows p {
+        color: black;
+    }
+
+    .bg-light .layout-rows a {
+        color: darkblue;
+    }
+
+        .bg-light .layout-rows a:hover {
+            color: cadetblue;
+        }
 
 .main .media-display {
     overflow: auto;

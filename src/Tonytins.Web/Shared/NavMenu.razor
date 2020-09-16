@@ -1,50 +1,52 @@
-<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">
-        <img src="../images/nav-logo.png" class="d-inline-block align-top" />
-        Tonytins
-    </a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
-
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item dropdown pl-2">
-            <a class="nav-link dropdown-toggle" @onclick="ToggleGalleryNav" >
-                <span class="fa fa-photo-video px-2" aria-hidden="true"></span> Galleries
+<header>
+    <nav class="layout-rows night-light navbar navbar-expand-sm navbar-toggleable-smmb-3" @onclick="ToggleNavMenu">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="../images/nav-logo.png" class="d-inline-block align-top" />
+                Tonytins
             </a>
-            <div class="dropdown-menu pl-2 @GalleryCssClass">
-                <NavLink Match="NavLinkMatch.All" class="dropdown-item" href="/gallery/main" @onclick="ToggleGalleryNav">
-                <span class="fa fa-paint-brush px-2" aria-hidden="true"></span>
-                Gallery
-            </NavLink>
-            <NavLink Match="NavLinkMatch.All" class="dropdown-item" href="/gallery/giftart" @onclick="ToggleGalleryNav">
-                <span class="fa fa-heart px-2" aria-hidden="true"></span>
-                Gift Art
-            </NavLink>
-            <NavLink Match="NavLinkMatch.All" class="dropdown-item" href="/gallery/doc" @onclick="ToggleGalleryNav">
-                <span class="fa fa-archive px-2" aria-hidden="true"></span>
-                D.O.C.
-            </NavLink>
+            <button class="navbar-toggler" @onclick="ToggleNavMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse d-sm-inline-flex flex-sm-row-reverse @collapseNavMenu">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item dropdown pl-2">
+                        <a class="nav-link dropdown-toggle" @onclick="ToggleGalleryNav">
+                            <span class="fa fa-photo-video px-2" aria-hidden="true"></span> Galleries
+                        </a>
+                        <div class="dropdown-menu pl-2 @GalleryCssClass">
+                            <NavLink Match="NavLinkMatch.All" class="dropdown-item" href="/gallery/main" @onclick="ToggleGalleryNav">
+                                <span class="fa fa-paint-brush px-2" aria-hidden="true"></span>
+                                Gallery
+                            </NavLink>
+                            <NavLink Match="NavLinkMatch.All" class="dropdown-item" href="/gallery/giftart" @onclick="ToggleGalleryNav">
+                                <span class="fa fa-heart px-2" aria-hidden="true"></span>
+                                Gift Art
+                            </NavLink>
+                            <NavLink Match="NavLinkMatch.All" class="dropdown-item" href="/gallery/doc" @onclick="ToggleGalleryNav">
+                                <span class="fa fa-archive px-2" aria-hidden="true"></span>
+                                D.O.C.
+                            </NavLink>
+                        </div>
+                    </li>
+                    <li class="nav-item px-3">
+                        <NavLink Match="NavLinkMatch.All" class="nav-link" href="/settings">
+                            <span class="fa fa-cog px-2" aria-hidden="true"></span>
+                            Settings
+                        </NavLink>
+                    </li>
+                </ul>
             </div>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink Match="NavLinkMatch.All" class="nav-link" href="/settings">
-                <span class="fa fa-cog px-2" aria-hidden="true"></span>
-                Settings
-            </NavLink>
-        </li>
-    </ul>
-</div>
 
-@code {
+        </div>
+    </nav>
+</header>
 
-    bool collapseNavMenu = true;
+@code { bool collapseNavMenu = true;
     bool collapseGalleryMenu = true;
 
-    string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-    string GalleryCssClass => collapseGalleryMenu ? null : "collapse";
+    string NavMenuCssClass => collapseNavMenu ? "collapse" : string.Empty;
+    string GalleryCssClass => collapseGalleryMenu ? string.Empty : "show";
 
     void ToggleGalleryNav()
     {
