@@ -16,7 +16,7 @@ This is my personal website built using Blazor: WebAssembly. You're welcome to c
 
 ### Prerequisites
 
-* .NET Core 3.1 SDK
+* .NET 5 RC1 or later
 
 ## License
 

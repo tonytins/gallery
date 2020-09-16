@@ -10,23 +10,24 @@
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink Match="NavLinkMatch.All" class="nav-link" href="/gallery/main">
+        <li class="nav-item dropdown pl-2">
+            <a class="nav-link dropdown-toggle" @onclick="ToggleGalleryNav" >
+                <span class="fa fa-photo-video px-2" aria-hidden="true"></span> Galleries
+            </a>
+            <div class="dropdown-menu pl-2 @GalleryCssClass">
+                <NavLink Match="NavLinkMatch.All" class="dropdown-item" href="/gallery/main" @onclick="ToggleGalleryNav">
                 <span class="fa fa-paint-brush px-2" aria-hidden="true"></span>
                 Gallery
             </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink Match="NavLinkMatch.All" class="nav-link" href="/gallery/giftart">
+            <NavLink Match="NavLinkMatch.All" class="dropdown-item" href="/gallery/giftart" @onclick="ToggleGalleryNav">
                 <span class="fa fa-heart px-2" aria-hidden="true"></span>
                 Gift Art
             </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink Match="NavLinkMatch.All" class="nav-link" href="/gallery/doc">
+            <NavLink Match="NavLinkMatch.All" class="dropdown-item" href="/gallery/doc" @onclick="ToggleGalleryNav">
                 <span class="fa fa-archive px-2" aria-hidden="true"></span>
                 D.O.C.
             </NavLink>
+            </div>
         </li>
         <li class="nav-item px-3">
             <NavLink Match="NavLinkMatch.All" class="nav-link" href="/settings">
@@ -37,11 +38,20 @@
     </ul>
 </div>
 
-@code { private bool collapseNavMenu = true;
+@code {
 
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    bool collapseNavMenu = true;
+    bool collapseGalleryMenu = true;
 
-    private void ToggleNavMenu()
+    string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    string GalleryCssClass => collapseGalleryMenu ? null : "collapse";
+
+    void ToggleGalleryNav()
+    {
+        collapseGalleryMenu = !collapseGalleryMenu;
+    }
+
+    void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
     } }
