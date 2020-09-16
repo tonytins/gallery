@@ -8,7 +8,7 @@ This is my personal website built using Blazor: WebAssembly. You're welcome to c
 
 | Service   | Status                                                                                                                                    |
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Github    | ![.NET Core](https://github.com/tonytins/tonytins.github.io/workflows/.NET%20Core/badge.svg)                                                                      |
+| Github    | ![.NET](https://github.com/tonytins/tonytins.github.io/workflows/.NET/badge.svg)                                                                      |
 | Github Pages | ![.NET Pages](https://github.com/tonytins/tonytins.github.io/workflows/.NET%20Pages/badge.svg) |
 | Travis CI | [![Build Status](https://travis-ci.org/tonytins/tonytins.github.io.svg?branch=master)](https://travis-ci.org/tonytins/tonytins.github.io) |
 
