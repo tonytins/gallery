@@ -1,8 +1,9 @@
 {
     "name": "Tonytins",
     "short_name": "tonytins",
-    "start_url": "./",
+    "start_url": "/",
     "display": "standalone",
+    "orientation": "landscape",
     "background_color": "#ffffff",
     "theme_color": "#03173d",
     "icons": [

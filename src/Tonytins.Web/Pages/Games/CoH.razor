@@ -6,34 +6,34 @@
 @using System.Collections.Generic
 @inject HttpClient Http
 <AlertComponent Display=@DisplayAlert Alert=@AlertType.Warning Message=@AlertMessage />
+<TitleHelper Name="City of Heroes" />
 <h3>City of Heroes</h3>
 <p>City of Heroes is a MMORPG where you create and play as a hero, villain or in-between based on many tropes and types. It was developed by developed by Paragon Studios, formally Cryptic Studios, and was published by NCsoft. On August 31, 2012, NCsoft terminated its Paragon Studios development team, ending all production on City of Heroes with the last day of services on November 30, 2012. In April 2019, source code capable of running a City of Heroes server was distributed widely. New servers have been created since then. As of @MonthYearNow, NCSoft has not taken action to shut down the servers.</p>
 <p><button class="btn btn-primary" @onclick="ShowVideo">Toggle Trailer</button></p>
 
 @if (IsVideoHidden)
 {
-    <p><YouTubeComponent Video="0eHB9zxtet4" /></p>}
+<p><YouTubeComponent Video="0eHB9zxtet4" /></p>}
 <h4>Heroes</h4>
 @if (_heroes == null)
 {
-    <LoadingComponent />
- }
-else
-{
-    <div class="card-columns">
-        @foreach (var hero in _heroes)
-        {
-            <HeroInfoboxComponent Name=@hero.Name
-                                  Image=@SiteHelper.ImageCDN(hero.Image, "heroes")
-                                  Origin=@hero.Origin
-                                  Archetype=@hero.Archetype
-                                  Primary=@hero.Primary
-                                  Secondary=@hero.Secondary
-                                  Supplemental=@hero.Supplemental
-                                  Affilation=@hero.Affilation
-                                  ServerName=@hero.Server
-                                  ServerLink=@ServerLink(hero.Server) />}
-    </div>}
+<LoadingComponent /> }
+            else
+            {
+<div class="card-columns">
+    @foreach (var hero in _heroes)
+    {
+<HeroInfoboxComponent Name=@hero.Name
+                      Image=@SiteHelper.ImageCDN(hero.Image, "heroes")
+                      Origin=@hero.Origin
+                      Archetype=@hero.Archetype
+                      Primary=@hero.Primary
+                      Secondary=@hero.Secondary
+                      Supplemental=@hero.Supplemental
+                      Affilation=@hero.Affilation
+                      ServerName=@hero.Server
+                      ServerLink=@ServerLink(hero.Server) />}
+</div>}
 
 
 
