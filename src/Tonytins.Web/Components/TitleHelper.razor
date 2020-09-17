@@ -1,0 +1,5 @@
+<Title Value=@NewTitle></Title>
+
+@code { [Parameter] public string Name { get; set; }
+
+    string NewTitle => $"{SiteConsts.SiteName} - {Name}"; }

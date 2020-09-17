@@ -5,23 +5,23 @@ on:
     branches: [master, develop]
     pull_request: [master, develop]
     schedule:
-        - cron: "0 0 * * 0"
+      - cron: "0 0 * * 0"
 
 jobs:
-    build:
-        runs-on: ${{ matrix.os }}
-        strategy:
-            matrix:
-                dotnet: ["5.0.100-rc.1.20452.10"]
-                os: [ubuntu-latest, windows-latest, macOS-latest]
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        dotnet: ["5.0.100-rc.1.20452.10"]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
 
-        steps:
-            - uses: actions/checkout@v2
-            - name: Setup .NET Core
-              uses: actions/setup-dotnet@v1
-              with:
-                  dotnet-version: ${{ matrix.dotnet }}
-            - name: Install dependencies
-              run: dotnet restore src
-            - name: Build
-              run: dotnet build src --configuration Release --no-restore
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+      - name: Install dependencies
+        run: dotnet restore src
+      - name: Build
+        run: dotnet build src -c Release --no-restore

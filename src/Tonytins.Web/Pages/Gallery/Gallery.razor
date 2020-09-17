@@ -10,7 +10,8 @@
 </div>
 @if (!string.IsNullOrEmpty(PageName))
 {
-<h2>@PageName</h2>}
+<TitleHelper Name=@PageName />
+                <h2>@PageName</h2>}
 @if (!string.IsNullOrEmpty(PageDescription))
 {@PageDescription.MarkdownToHtml()
                 <hr />}
