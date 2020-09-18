@@ -1,0 +1,107 @@
+@page "/gallery/{Database}/{Key}"
+@using Tonytins.Models
+@using Tonytins.Web.Components
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+<TitleHelper Name=@PageTitle />
+<AlertComponent Display=@DisplayAlert Alert=@AlertType.Warning Message=@AlertMessage />
+@if (!IsReady)
+{
+<LoadingComponent />
+ }
+else
+{
+<h2 class="d-inline-block"><a href="/gallery/@Database" class="@DarkModeText d-inline-block"><span class="fa fa-caret-left"></span></a> @GalleryTitle</h2>
+                <hr />
+                                <div class="row justify-content-lg-center">
+                                    <div class="col-sm"></div>
+                                    <div class="col-lg">
+                                        <div class="media-display">
+                                            <img class="submission" src=@SiteHelper.ImageCDN(Image, $@"gallery/{Database}") />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm"></div>
+                                </div>
+
+                                                <div class="row flex-lg-column">
+                                                    <div class="col-sm"></div>
+                                                    <div class="col-lg">
+                                                        <h5 class="d-inline">@SubmissionTitle</h5>
+                                                        @if (!string.IsNullOrEmpty(Credits))
+                                                        {
+                                        <span class="d-inline-block"><small>by @Credits</small></span>}
+                                                        @if (!string.IsNullOrEmpty(Description))
+                                                        {
+                                        <div class="card-text" style="padding: 5px;">
+                                            @Description.MarkdownToHtml()
+                                        </div>}
+                                                        @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
+                                                        {
+                                        <div class="container">
+
+                                            @if (!string.IsNullOrEmpty(Copyrights))
+                                            {
+                        <hr />
+                                                <div class="row">
+                                                    <div class="col"><small class="text-muted">@Copyrights</small></div>
+                                                </div>}
+
+                                        </div>}
+                                                    </div>
+                                                    <div class="col-sm"></div>
+                                                </div>}
+
+@code { [Parameter] public string Key { get; set; }
+    [Parameter] public string Database { get; set; }
+
+    string Image { get; set; }
+    string Description { get; set; }
+    string SubmissionTitle { get; set; }
+    string GalleryTitle { get; set; }
+    string Credits { get; set; }
+    string Copyrights { get; set; }
+    string AlertMessage { get; set; }
+    bool DisplayAlert { get; set; }
+    bool IsReady { get; set; } = false;
+
+    string PageTitle
+    {
+        get
+        {
+            if (!string.IsNullOrEmpty(Credits))
+                return $"{SubmissionTitle} by {Credits}";
+
+            return SubmissionTitle;
+        }
+    }
+
+    bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+    string DarkModeText => IsDarkMode ? "text-light" : "text-dark";
+
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            var gallery = await Http.GetFromJsonAsync<GalleryModel>(SiteHelper.JsonCDN(Database, @"prod/gallery/"));
+            GalleryTitle = gallery.Title;
+
+            foreach (var art in gallery.Artwork)
+            {
+                if (Key == art.Key)
+                {
+                    Image = art.Image;
+                    SubmissionTitle = art.Title;
+                    Credits = art.Credits;
+                    Copyrights = art.Copyrights;
+                    Description = art.Description;
+                }
+            }
+
+            IsReady = true;
+        }
+        catch (Exception err)
+        {
+            AlertMessage = err.Message;
+            DisplayAlert = true;
+        }
+    }}

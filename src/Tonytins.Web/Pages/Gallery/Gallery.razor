@@ -11,10 +11,17 @@
 @if (!string.IsNullOrEmpty(PageName))
 {
 <TitleHelper Name=@PageName />
-                <h2>@PageName</h2>}
+                <h2>@PageName</h2>
+ }
+            else
+            {
+<TitleHelper Name="Gallery" />
+}
 @if (!string.IsNullOrEmpty(PageDescription))
-{@PageDescription.MarkdownToHtml()
-                <hr />}
+{
+@PageDescription.MarkdownToHtml()
+                <hr />
+}
 <div style="margin: 0 auto; margin-top: 10px;">
     @if (!IsReady)
     {
@@ -22,16 +29,16 @@
 else
 {
 <div class="card-columns">
-    @foreach (var art in art)
+    @foreach (var art in submissions)
     {
-        var permalink = $"{Name}/{art.Key}";
 <GalleryComponent Image=@SiteHelper.ImageCDN(art.Image, $@"gallery/{Name}")
-                  Permalink=@permalink
+                  Permalink=@Permalink(Name, art.Key)
                   Copyrights=@art.Copyrights
-                  Credits=@art.Credits />}
+                  Credits=@art.Credits />
+}
 </div>}
 </div>
-@code { IEnumerable<ArtworkModel> art;
+@code { IEnumerable<ArtworkModel> submissions;
 
     [Parameter] public string Name { get; set; }
 
@@ -45,6 +52,11 @@ else
     bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
     string DarkModeBadgeCss => IsDarkMode ? "badge-secondary" : "badge-primary";
 
+    string Permalink(string name, string key)
+    {
+        return @$"{name}/{key}";
+    }
+
     protected override async Task OnParametersSetAsync()
     {
         CountArt = 0;
@@ -55,13 +67,12 @@ else
             PageDescription = gallery.Description;
             PageName = gallery.Title;
 
-            art = gallery.Artwork.AsParallel();
+            submissions = gallery.Artwork.AsParallel();
 
             foreach (var art in gallery.Artwork)
                 CountArt++;
 
             IsReady = true;
-
         }
         catch (Exception err)
         {
