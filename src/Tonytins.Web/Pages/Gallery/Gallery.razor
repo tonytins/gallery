@@ -32,7 +32,7 @@ else
     @foreach (var art in submissions)
     {
 <GalleryComponent Image=@SiteHelper.ImageCDN(art.Image, $@"gallery/{Name}")
-                  Permalink=@Permalink(Name, art.Key)
+                  Permalink=@SiteHelper.Permalink(Name, art.Key)
                   Copyrights=@art.Copyrights
                   Credits=@art.Credits />
 }
@@ -40,43 +40,38 @@ else
 </div>
 @code { IEnumerable<ArtworkModel> submissions;
 
-    [Parameter] public string Name { get; set; }
+ [Parameter] public string Name { get; set; }
 
-    string PageDescription { get; set; }
-    string PageName { get; set; }
-    string AlertMessage { get; set; }
-    bool DisplayAlert { get; set; }
-    int CountArt { get; set; }
-    bool IsReady { get; set; }
+ string PageDescription { get; set; }
+ string PageName { get; set; }
+ string AlertMessage { get; set; }
+ bool DisplayAlert { get; set; }
+ int CountArt { get; set; }
+ bool IsReady { get; set; }
 
-    bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
-    string DarkModeBadgeCss => IsDarkMode ? "badge-secondary" : "badge-primary";
+ bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+ string DarkModeBadgeCss => IsDarkMode ? "badge-secondary" : "badge-primary";
 
-    string Permalink(string name, string key)
-    {
-        return @$"{name}/{key}";
-    }
+ protected override async Task OnParametersSetAsync()
+ {
+     CountArt = 0;
 
-    protected override async Task OnParametersSetAsync()
-    {
-        CountArt = 0;
+     try
+     {
+         var gallery = await Http.GetFromJsonAsync<GalleryModel<ArtworkModel>>(SiteHelper.JsonCDN(Name, @"prod/gallery/"));
+         PageDescription = gallery.Description;
+         PageName = gallery.Title;
 
-        try
-        {
-            var gallery = await Http.GetFromJsonAsync<GalleryModel>(SiteHelper.JsonCDN(Name, @"prod/gallery/"));
-            PageDescription = gallery.Description;
-            PageName = gallery.Title;
+         submissions = gallery.Artwork.AsParallel();
 
-            submissions = gallery.Artwork.AsParallel();
+         foreach (var art in gallery.Artwork)
+             CountArt++;
 
-            foreach (var art in gallery.Artwork)
-                CountArt++;
-
-            IsReady = true;
-        }
-        catch (Exception err)
-        {
-            AlertMessage = err.Message;
-            DisplayAlert = true;
-        }
-    } }
+         IsReady = true;
+     }
+     catch (Exception err)
+     {
+         AlertMessage = err.Message;
+         DisplayAlert = true;
+     }
+ } }

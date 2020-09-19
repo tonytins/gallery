@@ -1,4 +1,4 @@
-@page "/gallery/{Database}/{Key}"
+@page "/comic/{Database}/{Key}"
 @using Tonytins.Models
 @using Tonytins.Web.Components
 @inject HttpClient Http
@@ -11,7 +11,7 @@
  }
 else
 {
-<h2 class="d-inline-block"><a href="/gallery/@Database" class="@DarkModeText d-inline-block"><span class="fa fa-caret-left"></span></a> @GalleryTitle</h2>
+<h2 class="d-inline-block"><a href="/comics/@Database" class="@DarkModeText d-inline-block"><span class="fa fa-caret-left"></span></a> @GalleryTitle</h2>
                 <hr />
                                 <div class="row justify-content-lg-center">
                                     <div class="col-sm"></div>
@@ -82,7 +82,7 @@ else
  {
      try
      {
-         var gallery = await Http.GetFromJsonAsync<GalleryModel<ArtworkModel>>(SiteHelper.JsonCDN(Database, @"prod/gallery/"));
+         var gallery = await Http.GetFromJsonAsync<GalleryModel<ComicsModel>>(SiteHelper.JsonCDN(Database, @"prod/comics/"));
          GalleryTitle = gallery.Title;
 
          foreach (var art in gallery.Artwork)
@@ -90,10 +90,8 @@ else
              if (Key == art.Key)
              {
                  Image = art.Image;
-                 SubmissionTitle = art.Title;
                  Credits = art.Credits;
                  Copyrights = art.Copyrights;
-                 Description = art.Description;
              }
          }
 

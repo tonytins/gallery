@@ -3,12 +3,14 @@
 <div class="main @MainDarkModeCssClass">
     <NavMenu />
     <div class="content container-lg night-light px-4">
+        @Body
         <div class="row justify-content-center">
             <div class="col-sm"></div>
-            <div class="col" id="adex"><AdexComponent /></div>
+            <div class="col" id="adex">
+            <p style="text-align: center">Advertisment</p>
+            <AdexComponent /></div>
             <div class="col-sm"></div>
         </div>
-        @Body
     </div>
     <SiteFooter />
 </div>

@@ -21,6 +21,11 @@ namespace Tonytins.Web
 
         public static string ImageCDN(string image, string path) => $@"https://cdn.tonytins.xyz/images/{path}/{image}";
 
+        public static string Permalink(string name, string key)
+        {
+            return @$"{name}/{key}";
+        }
+
         /// <summary>
         /// Converts and sanitizes any Markdown to HTML. If the content
         /// is, for any reason, null or empty it will return a empty string.

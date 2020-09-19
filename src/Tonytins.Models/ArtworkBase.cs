@@ -1,18 +1,13 @@
 // Anthony Leland licenses this file to you under the MIT license.
+using System;
+
 namespace Tonytins.Models
 {
-    public class ArtworkModel
+    public class ArtworkBase
     {
-        public string Title { get; set; }
-
-        public string Description { get; set; }
-
         public string Image { get; set; }
-
-        public string Credits { get; set; }
-
-        public string Copyrights { get; set; }
-
         public string Key { get; set; }
+        public string Credits { get; set; }
+        public string Copyrights { get; set; }
     }
 }
