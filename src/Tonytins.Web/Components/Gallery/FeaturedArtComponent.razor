@@ -12,15 +12,14 @@
 else
 {
 <div class="card-columns">
-    @foreach (var art in art.Take(Iter))
+    @foreach (var art in art)
     {
-        var permalink = $"{Database}/{art.Key}";
+        var permalink = @$"{Database}/{art.Key}";
 <GalleryComponent Image=@SiteHelper.ImageCDN(art.Image, $@"gallery/{Database}")
                   Permalink=@permalink
                   Copyrights=@art.Copyrights
                   Credits=@art.Credits />}
 </div>}
-<hr />
 @code {
     IEnumerable<ArtworkModel> art;
 
@@ -50,6 +49,7 @@ else
 
             art = gallery.Artwork
              .OrderBy(x => rng.Next(galArray.Length))
+             .Take(Iter)
              .AsParallel();
 
             IsReady = true;
