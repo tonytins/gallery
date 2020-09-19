@@ -24,24 +24,31 @@
 </div>
 
 @code { [Parameter] public string Image { get; set; }
-    [Parameter] public string Copyrights { get; set; }
+ [Parameter] public string Copyrights { get; set; }
+ [Parameter] public GalleryKind Kind { get; set; }
+ [Parameter] public string Credits { get; set; }
 
-    [Parameter] public string Credits { get; set; }
+ [Parameter]
+ public string Permalink
+ {
+     get
+     {
+         switch (Kind)
+         {
+             case GalleryKind.Comic:
+                 return $"/comic/{_permalink}";
+             case GalleryKind.Gallery:
+             default:
+                 return $"/gallery/{_permalink}";
+         }
+     }
+     set
+     {
+         _permalink = value;
+     }
+ }
 
-    [Parameter]
-    public string Permalink
-    {
-        get
-        {
-            return $"/gallery/{_permalink}";
-        }
-        set
-        {
-            _permalink = value;
-        }
-    }
+ bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+ string DarkModeCss => IsDarkMode ? Themes.DarkCards : Themes.Light;
 
-    bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
-    string DarkModeCss => IsDarkMode ? Themes.DarkCards : Themes.Light;
-
-    string _permalink = string.Empty; }
+ string _permalink = string.Empty; }

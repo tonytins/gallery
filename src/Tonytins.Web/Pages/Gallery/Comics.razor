@@ -28,8 +28,9 @@ else
 <div class="card-columns">
     @foreach (var art in submissions)
     {
-<GalleryComponent Image=@SiteHelper.ImageCDN(art.Image, $@"comic/{Name}")
+<GalleryComponent Image=@SiteHelper.ImageCDN(art.Image, $@"comics/{Name}")
                   Permalink=@SiteHelper.Permalink(Name, art.Key)
+                  Kind=@GalleryKind.Comic
                   Copyrights=@art.Copyrights
                   Credits=@art.Credits />
 }
@@ -52,11 +53,11 @@ else
  {
      try
      {
-         var gallery = await Http.GetFromJsonAsync<GalleryModel<ComicsModel>>(SiteHelper.JsonCDN(Name, @"prod/gallery/"));
+         var gallery = await Http.GetFromJsonAsync<GalleryModel<ComicsModel>>(SiteHelper.JsonCDN(Name, @"prod/comics/"));
          PageDescription = gallery.Description;
          PageName = gallery.Title;
 
-         submissions = gallery.Artwork.AsParallel();
+         submissions = gallery.Artwork;
 
          IsReady = true;
      }

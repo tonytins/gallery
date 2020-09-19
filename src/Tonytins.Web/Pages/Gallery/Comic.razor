@@ -17,7 +17,7 @@ else
                                     <div class="col-sm"></div>
                                     <div class="col-lg">
                                         <div class="media-display">
-                                            <img class="submission" src=@SiteHelper.ImageCDN(Image, $@"gallery/{Database}") />
+                                            <img class="submission" src=@SiteHelper.ImageCDN(Image, $@"comics/{Database}") />
                                         </div>
                                     </div>
                                     <div class="col-sm"></div>
@@ -30,11 +30,6 @@ else
                                                         @if (!string.IsNullOrEmpty(Credits))
                                                         {
                                         <span class="d-inline-block"><small>by @Credits</small></span>}
-                                                        @if (!string.IsNullOrEmpty(Description))
-                                                        {
-                                        <div class="card-text" style="padding: 5px;">
-                                            @Description.MarkdownToHtml()
-                                        </div>}
                                                         @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
                                                         {
                                         <div class="container">
@@ -50,6 +45,7 @@ else
                                                     </div>
                                                     <div class="col-sm"></div>
                                                 </div>}
+<hr />
 
 @code { [Parameter] public string Key { get; set; }
  [Parameter] public string Database { get; set; }
