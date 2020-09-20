@@ -28,16 +28,16 @@
                                                         <div class="container text-center">
                                                             @if (!string.IsNullOrEmpty(Back))
                                                             {
-                                                        <h3 class="d-inline-block"><a href="/comic/@Database/@Back" class="@DarkModeText">
-                                                            <span class="fa fa-angle-left"></span>
-                                                        </a></h3>}
-                                                        <h2 class="d-inline-block"><a href="/comics/@Database" class="@DarkModeText d-inline-block"></a>@GalleryTitle</h2>
+                                                        <h4 class="d-inline-block"><a href="/comic/@Database/@Back" class="@DarkModeText">
+                                                            <span class="fa fa-arrow-left"></span>
+                                                        </a></h4>}
+                                                        <h3 class="d-inline-block"><a href="/comics/@Database" class="@DarkModeText d-inline-block"></a>@GalleryTitle</h3>
                                                             @if (!string.IsNullOrEmpty(Forward))
                                                             {
-                                                                <h3 class="d-inline-block">
+                                                                <h4 class="d-inline-block">
                                                         <a href="/comic/@Database/@Forward" class="@DarkModeText">
-                                                            <span class="fa fa-angle-right"></span>
-                                                        </a> </h3>}
+                                                            <span class="fa fa-arrow-right"></span>
+                                                        </a> </h4>}
                                                         </div>
                                                         @if (!string.IsNullOrEmpty(Credits) || !string.IsNullOrEmpty(Copyrights))
                                                         {
