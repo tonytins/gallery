@@ -1,5 +1,5 @@
-<Title Value=@NewTitle></Title>
+<Title Value=@GetTitle></Title>
 
 @code { [Parameter] public string Name { get; set; }
 
-    string NewTitle => $"{SiteConsts.SiteName} - {Name}"; }
+    string GetTitle => $"{Name} - {SiteConsts.SiteName}"; }

@@ -42,7 +42,7 @@ else
         {
             var rng = new Random();
 
-            var gallery = await Http.GetFromJsonAsync<GalleryModel>(SiteHelper.JsonCDN(Database, @"prod/gallery/"));
+            var gallery = await Http.GetFromJsonAsync<GalleryModel<ArtworkModel>>(SiteHelper.JsonCDN(Database, @"prod/gallery/"));
 
             PageName = gallery.Title;
 
