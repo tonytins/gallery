@@ -6,7 +6,7 @@ namespace Tonytins.Models
 {
     public class ComicsModel : ArtworkBase
     {
-        public Guid Prev { get; set; }
-        public Guid Next { get; set; }
+        public string Backward { get; set; }
+        public string Forward { get; set; }
     }
 }
