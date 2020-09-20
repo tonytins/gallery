@@ -12,52 +12,51 @@
 else
 {
 <div class="card-columns">
-    @foreach (var art in art.Take(Iter))
+    @foreach (var art in art)
     {
-        var permalink = $"{Database}/{art.Key}";
+        var permalink = @$"{Database}/{art.Key}";
 <GalleryComponent Image=@SiteHelper.ImageCDN(art.Image, $@"gallery/{Database}")
                   Permalink=@permalink
                   Copyrights=@art.Copyrights
                   Credits=@art.Credits />}
 </div>}
-<hr />
 @code {
-    IEnumerable<ArtworkModel> art;
+ IEnumerable<ArtworkModel> art;
 
-    [Parameter] public string Database { get; set; }
-    [Parameter] public int Iter { get; set; } = 3;
+ [Parameter] public string Database { get; set; }
+ [Parameter] public int Iter { get; set; } = 3;
 
-    MarkupString PageDescription { get; set; }
-    string PageName { get; set; }
-    string AlertMessage { get; set; }
-    bool DisplayAlert { get; set; }
-    bool IsReady { get; set; }
+ MarkupString PageDescription { get; set; }
+ string PageName { get; set; }
+ string AlertMessage { get; set; }
+ bool DisplayAlert { get; set; }
+ bool IsReady { get; set; }
 
-    bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
-    string DarkModeBadgeCss => IsDarkMode ? "badge-secondary" : "badge-primary";
+ bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+ string DarkModeBadgeCss => IsDarkMode ? "badge-secondary" : "badge-primary";
 
-    protected override async Task OnParametersSetAsync()
-    {
-        try
-        {
-            var rng = new Random();
+ protected override async Task OnParametersSetAsync()
+ {
+     try
+     {
+         var rng = new Random();
 
-            var gallery = await Http.GetFromJsonAsync<GalleryModel<ArtworkModel>>(SiteHelper.JsonCDN(Database, @"prod/gallery/"));
+         var gallery = await Http.GetFromJsonAsync<GalleryModel<ArtworkModel>>(SiteHelper.JsonCDN(Database, @"prod/gallery/"));
 
-            PageName = gallery.Title;
+         PageName = gallery.Title;
 
-            var galArray = gallery.Artwork.ToArray();
+         var galArray = gallery.Artwork.ToArray();
 
-            art = gallery.Artwork
-             .OrderBy(x => rng.Next(galArray.Length))
-             .AsParallel();
+         art = gallery.Artwork
+          .OrderBy(x => rng.Next(galArray.Length))
+          .Take(Iter)
+          .AsParallel();
 
-            IsReady = true;
-
-        }
-        catch (Exception err)
-        {
-            AlertMessage = err.Message;
-            DisplayAlert = true;
-        }
-    } }
+         IsReady = true;
+     }
+     catch (Exception err)
+     {
+         AlertMessage = err.Message;
+         DisplayAlert = true;
+     }
+ } }
