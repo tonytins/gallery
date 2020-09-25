@@ -1,0 +1,69 @@
+@page "/comics/{Name}"
+@using Tonytins.Models
+@using Tonytins.Web.Components
+@using System.Collections.Generic
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+<AlertComponent Display=@DisplayAlert Alert=@AlertType.Warning Message=@AlertMessage />
+@if (!string.IsNullOrEmpty(PageName))
+{
+<TitleHelper Name=@PageName />
+                <h2>@PageName</h2>
+ }
+            else
+            {
+<TitleHelper Name="Comics" />
+}
+@if (!string.IsNullOrEmpty(PageDescription))
+{
+@PageDescription.MarkdownToHtml()
+                <hr />
+}
+<div style="margin: 0 auto; margin-top: 10px;">
+    @if (!IsReady)
+    {
+<LoadingComponent /> }
+else
+{
+<div class="card-columns">
+    @foreach (var art in submissions)
+    {
+<GalleryComponent Image=@SiteHelper.ImageCDN(art.Image, $@"comics/{Name}")
+                  Permalink=@SiteHelper.Permalink(Name, art.Key)
+                  Kind=@GalleryKind.Comic
+                  Copyrights=@art.Copyrights
+                  Credits=@art.Credits />
+}
+</div>}
+</div>
+@code { IEnumerable<ComicsModel> submissions;
+
+ [Parameter] public string Name { get; set; }
+
+ string PageDescription { get; set; }
+ string PageName { get; set; }
+ string AlertMessage { get; set; }
+ bool DisplayAlert { get; set; }
+ bool IsReady { get; set; }
+
+ bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+ string DarkModeBadgeCss => IsDarkMode ? "badge-secondary" : "badge-primary";
+
+ protected override async Task OnParametersSetAsync()
+ {
+     try
+     {
+         var gallery = await Http.GetFromJsonAsync<GalleryModel<ComicsModel>>(SiteHelper.JsonCDN(Name, @"prod/comics/"));
+         PageDescription = gallery.Description;
+         PageName = gallery.Title;
+
+         submissions = gallery.Artwork;
+
+         IsReady = true;
+     }
+     catch (Exception err)
+     {
+         AlertMessage = err.Message;
+         DisplayAlert = true;
+     }
+ } }
