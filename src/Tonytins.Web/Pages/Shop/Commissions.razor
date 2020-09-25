@@ -9,10 +9,9 @@
 <h3>Commissions</h3>
 @if (_comms == null)
 {
-<LoadingComponent />
- }
-else
-{
+<LoadingComponent /> }
+            else
+            {
 <div class="flex-column">
     @foreach (var comm in _comms)
     {
@@ -33,7 +32,7 @@ else
         try
         {
             var comms = await Http.GetFromJsonAsync<CommissionsModel>(SiteHelper.JsonCDN("comms", "prod"));
-            _comms = comms.Commisions;
+            _comms = comms.Commissions;
             Culture = comms.Country;
             IsReady = true;
         }
