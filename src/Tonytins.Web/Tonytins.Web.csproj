@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
         <!-- Temporarily disabled until I figure out the "Value cannot be null. (Parameter 'input')" error. -->
         <PublishTrimmed>false</PublishTrimmed>
         <UserSecretsId>0be6657e-93b9-4bba-9247-9f15da9e9b12</UserSecretsId>
@@ -25,10 +24,6 @@
     <ItemGroup>
         <ProjectReference Include="..\Tonytins.Models\Tonytins.Models.csproj" />
         <ProjectReference Include="..\Tonytins.Web.Components\Tonytins.Web.Components.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
     </ItemGroup>
 
 </Project>

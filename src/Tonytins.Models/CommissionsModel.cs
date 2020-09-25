@@ -5,7 +5,7 @@ namespace Tonytins.Models
     public class CommissionsModel
     {
         public string Country { get; set; }
-        public IEnumerable<CommissionInfo> Commisions { get; set; }
+        public IEnumerable<CommissionInfo> Commissions { get; set; }
     }
 
     public class CommissionInfo
