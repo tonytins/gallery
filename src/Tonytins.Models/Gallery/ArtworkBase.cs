@@ -1,7 +1,7 @@
 // Anthony Leland licenses this file to you under the MIT license.
 using System;
 
-namespace Tonytins.Models
+namespace Tonytins.Models.Gallery
 {
     public class ArtworkBase
     {

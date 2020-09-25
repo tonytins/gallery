@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tonytins.Models
+namespace Tonytins.Models.Gallery
 {
     public class ComicsModel : ArtworkBase
     {

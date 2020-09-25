@@ -1,0 +1,45 @@
+@page "/shop/commissions"
+@using Tonytins.Models
+@using Tonytins.Web.Components
+@using System.Collections.Generic
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+<AlertComponent Display=@DisplayAlert Alert=@AlertType.Warning Message=@AlertMessage />
+<TitleHelper Name="Commissions" />
+<h3>Commissions</h3>
+@if (_comms == null)
+{
+<LoadingComponent />
+ }
+else
+{
+<div class="flex-column">
+    @foreach (var comm in _comms)
+    {
+<CommComponent Name=@comm.Name Cost=@comm.Cost
+               Image=@comm.Image Extra=@comm.Extra
+               Details=@comm.Details Examples=@comm.Examples
+               Notes=@comm.Notes Local=@Culture />}
+</div>}
+@code { IEnumerable<CommissionInfo> _comms;
+
+    string Culture { get; set; }
+    string AlertMessage { get; set; }
+    bool DisplayAlert { get; set; }
+    bool IsReady { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var comms = await Http.GetFromJsonAsync<CommissionsModel>(SiteHelper.JsonCDN("comms", "prod"));
+            _comms = comms.Commisions;
+            Culture = comms.Country;
+            IsReady = true;
+        }
+        catch (Exception err)
+        {
+            AlertMessage = err.Message;
+            DisplayAlert = true;
+        }
+    } }
