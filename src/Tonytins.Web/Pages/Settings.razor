@@ -1,7 +1,9 @@
 @page "/diagnostics"
 @page "/settings"
 @using System.Runtime.InteropServices;
+@using Tonytins.Web.Components
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+<TitleHelper Name="Settings" />
 <div class="container container-fluid">
     <TitleHelper Name="Settings" />
     <div class="row">

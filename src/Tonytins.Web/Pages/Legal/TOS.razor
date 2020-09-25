@@ -1,0 +1,58 @@
+@page "/legal/copyrights"
+@page "/legal/terms"
+@page "/legal/licenses"
+@page "/legal/usage"
+@using Tonytins.Web.Components
+<TitleHelper Name="Terms of Service" />
+<h2>Terms of Service</h2>
+<h3>Digital Art Commissions</h3>
+<TermsComponent Title="Payment" Terms=@payment />
+<TermsComponent Title="I don't accept the follow" Terms=@prohibited />
+<h3>Copyright</h3>
+<p>Zack Casey, Anthony Foxclaw, Super Anthony, John, Cirria, Cookie Girl, Aidan Cheddar, Tom &copy; Tonytins<br /><a href="/gallery/giftart">Works of my characters</a> are &copy; their respective artists.</p>
+<h3>Usage</h3>
+<h4>Creative Commons</h4>
+<p>Though copyrighted by me, the usage of my characters are licensed under the Creative Commons CC-BY 4.0 terms.</p>
+<p>
+    <button class="btn btn-primary" @onclick="ToggleCCBy">CC-BY 4.0</button>
+    <a class="btn btn-primary" href="https://creativecommons.org/licenses/by/4.0/">Simplified Version</a>
+</p>
+
+@if (isCCBY)
+{
+<CCBYComponent />
+}
+
+<h4>Open Source</h4>
+<p>This site is licensed under the MIT license.</p>
+<p>
+    <button class="btn btn-primary" @onclick="ToggleMIT">MIT License</button>
+</p>
+@if (isMIT)
+{
+<MITComponent Author="Tonytins" />
+}
+
+@code { bool isCCBY = false;
+    bool isMIT = false;
+
+    string[] payment = new[]
+    {
+         "Simple and quick sketch. Lines won't be percise.",
+         "Portaits show character from neck and shoulder up.",
+         "No defined background, only quick abstract."
+     };
+
+    string[] prohibited = new[]
+    {
+        "I will not draw anything offensive, violent or gore."
+ };
+
+    void ToggleCCBy()
+    {
+        isCCBY = !isCCBY;
+    }
+    void ToggleMIT()
+    {
+        isMIT = !isMIT;
+    } }
