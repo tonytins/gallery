@@ -1,0 +1,9 @@
+<h4>@Term</h4>
+<ul>
+    @foreach (var term in Terms)
+    {
+<li>@term</li>}
+</ul>
+
+@code { [Parameter] public string Term { get; set; }
+    [Parameter] public IEnumerable<string> Terms { get; set; } }

@@ -19,6 +19,10 @@ namespace Tonytins.Web
 
         public static string JsonCDN(string json, string path) => $@"https://cdn.tonytins.xyz/db/{path}/{json}.json";
 
+        public static string LocalCDN(string json, string path) => $@"../data/{path}/{json}.json";
+
+        public static string LocalCDN(string json) => $@"../data/{json}.json";
+
         public static string ImageCDN(string image, string path) => $@"https://cdn.tonytins.xyz/images/{path}/{image}";
 
         public static string Permalink(string name, string key)
