@@ -1,13 +1,10 @@
-@page "/gallery/{Name}"
+@page "/comics/{Name}"
 @using Tonytins.Models.Gallery
 @using Tonytins.Web.Components
 @using System.Collections.Generic
 @inject HttpClient Http
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 <AlertComponent Display=@DisplayAlert Alert=@AlertType.Warning Message=@AlertMessage />
-<div class="text-right">
-    <span class="badge @DarkModeBadgeCss"><span class="fa fa-photo-video"></span> @CountArt</span>
-</div>
 @if (!string.IsNullOrEmpty(PageName))
 {
 <TitleHelper Name=@PageName />
@@ -15,7 +12,7 @@
  }
             else
             {
-<TitleHelper Name="Gallery" />
+<TitleHelper Name="Comics" />
 }
 @if (!string.IsNullOrEmpty(PageDescription))
 {
@@ -31,14 +28,15 @@ else
 <div class="card-columns">
     @foreach (var art in submissions)
     {
-<GalleryComponent Image=@SiteHelper.ImageCDN(art.Image, $@"gallery/{Name}")
+<GalleryComponent Image=@SiteHelper.ImageCDN(art.Image, $@"comics/{Name}")
                   Permalink=@SiteHelper.Permalink(Name, art.Key)
+                  Kind=@GalleryKind.Comic
                   Copyrights=@art.Copyrights
                   Credits=@art.Credits />
 }
 </div>}
 </div>
-@code { IEnumerable<ArtworkModel> submissions;
+@code { IEnumerable<ComicsModel> submissions;
 
  [Parameter] public string Name { get; set; }
 
@@ -46,7 +44,6 @@ else
  string PageName { get; set; }
  string AlertMessage { get; set; }
  bool DisplayAlert { get; set; }
- int CountArt { get; set; }
  bool IsReady { get; set; }
 
  bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
@@ -54,18 +51,13 @@ else
 
  protected override async Task OnParametersSetAsync()
  {
-     CountArt = 0;
-
      try
      {
-         var gallery = await Http.GetFromJsonAsync<GalleryModel<ArtworkModel>>(SiteHelper.JsonCDN(Name, @"prod/gallery/"));
+         var gallery = await Http.GetFromJsonAsync<GalleryModel<ComicsModel>>(SiteHelper.JsonCDN(Name, @"prod/comics/"));
          PageDescription = gallery.Description;
          PageName = gallery.Title;
 
-         submissions = gallery.Artwork.AsParallel();
-
-         foreach (var art in gallery.Artwork)
-             CountArt++;
+         submissions = gallery.Artwork;
 
          IsReady = true;
      }

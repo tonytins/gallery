@@ -1,0 +1,60 @@
+@using System.Globalization
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+<div class="mb-3">
+    <div class="row">
+        @if (!string.IsNullOrEmpty(Image))
+        {
+
+<div class="col-md">
+    <img class="rounded float-left" style="max-height: 256px;" src=@SiteHelper.ImageCDN(Image, @"gallery/main") />
+</div>}
+        <div class="col-md-8">
+            <div class="row"><h4>@Name</h4></div>
+            <div class="row"><b>Base Cost</b>: @LocalCost</div>
+            @if (Extra != 0)
+            {
+<div class="row">
+    <b>Extra Characters</b>:
+    +@LocalExtra per character
+</div>}
+            @if (Details.ToArray().Length != 0)
+            {
+<div class="row">
+    <b>Details</b>
+    <ul>
+        @foreach (var detail in Details)
+        {
+<li>@detail</li>
+}
+    </ul>
+</div>}
+            @if (Examples.ToArray().Length != 0)
+            {
+<div class="row">
+    @foreach (var example in Examples)
+    {
+<div class="col-sm">
+    <img class="rounded img-thumbnail" style="max-height: 200px;" src=@SiteHelper.ImageCDN(example, @"gallery/main") />
+</div>}
+</div>}
+
+        </div>
+        @if (!string.IsNullOrEmpty(Notes))
+        {
+<div class="col">
+    @Notes.MarkdownToHtml()
+</div>}
+    </div>
+</div>
+
+@code { [Parameter] public string Name { get; set; }
+    [Parameter] public string Image { get; set; }
+    [Parameter] public decimal Cost { get; set; }
+    [Parameter] public decimal Extra { get; set; }
+    [Parameter] public IEnumerable<string> Details { get; set; }
+    [Parameter] public IEnumerable<string> Examples { get; set; }
+    [Parameter] public string Notes { get; set; }
+    [Parameter] public string Local { get; set; }
+
+    string LocalExtra => Extra.ToString("C", new CultureInfo(Local));
+    string LocalCost => Cost.ToString("C", new CultureInfo(Local)); }

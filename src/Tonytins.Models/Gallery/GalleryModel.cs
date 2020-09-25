@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Tonytins.Models
+namespace Tonytins.Models.Gallery
 {
     /// <summary>
     /// Gallery page
