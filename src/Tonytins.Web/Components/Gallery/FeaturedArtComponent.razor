@@ -5,12 +5,12 @@
 <AlertComponent Display=@DisplayAlert Alert=@AlertType.Warning Message=@AlertMessage />
 @if (!string.IsNullOrEmpty(PageName))
 {
-<h3>@PageName</h3>}
-    @if (!IsReady)
-    {
-<LoadingComponent /> }
-else
+<a style="text-decoration: none;" href=@($@"/gallery/{Database}")><h3>@PageName</h3></a>}
+@if (!IsReady)
 {
+<LoadingComponent /> }
+            else
+            {
 <div class="card-columns">
     @foreach (var art in art)
     {
@@ -20,43 +20,42 @@ else
                   Copyrights=@art.Copyrights
                   Credits=@art.Credits />}
 </div>}
-@code {
- IEnumerable<ArtworkModel> art;
+@code { IEnumerable<ArtworkModel> art;
 
- [Parameter] public string Database { get; set; }
- [Parameter] public int Iter { get; set; } = 3;
+            [Parameter] public string Database { get; set; }
+            [Parameter] public int Iter { get; set; } = 3;
 
- MarkupString PageDescription { get; set; }
- string PageName { get; set; }
- string AlertMessage { get; set; }
- bool DisplayAlert { get; set; }
- bool IsReady { get; set; }
+            MarkupString PageDescription { get; set; }
+            string PageName { get; set; }
+            string AlertMessage { get; set; }
+            bool DisplayAlert { get; set; }
+            bool IsReady { get; set; }
 
- bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
- string DarkModeBadgeCss => IsDarkMode ? "badge-secondary" : "badge-primary";
+            bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+            string DarkModeBadgeCss => IsDarkMode ? "badge-secondary" : "badge-primary";
 
- protected override async Task OnParametersSetAsync()
- {
-     try
-     {
-         var rng = new Random();
+            protected override async Task OnParametersSetAsync()
+            {
+                try
+                {
+                    var rng = new Random();
 
-         var gallery = await Http.GetFromJsonAsync<GalleryModel<ArtworkModel>>(SiteHelper.JsonCDN(Database, @"prod/gallery/"));
+                    var gallery = await Http.GetFromJsonAsync<GalleryModel<ArtworkModel>>(SiteHelper.JsonCDN(Database, @"prod/gallery/"));
 
-         PageName = gallery.Title;
+                    PageName = gallery.Title;
 
-         var galArray = gallery.Artwork.ToArray();
+                    var galArray = gallery.Artwork.ToArray();
 
-         art = gallery.Artwork
-          .OrderBy(x => rng.Next(galArray.Length))
-          .Take(Iter)
-          .AsParallel();
+                    art = gallery.Artwork
+                     .OrderBy(x => rng.Next(galArray.Length))
+                     .Take(Iter)
+                     .AsParallel();
 
-         IsReady = true;
-     }
-     catch (Exception err)
-     {
-         AlertMessage = err.Message;
-         DisplayAlert = true;
-     }
- } }
+                    IsReady = true;
+                }
+                catch (Exception err)
+                {
+                    AlertMessage = err.Message;
+                    DisplayAlert = true;
+                }
+            } }
