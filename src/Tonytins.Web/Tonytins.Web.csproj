@@ -9,13 +9,13 @@
 
     <ItemGroup>
         <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
-        <PackageReference Include="GitInfo" Version="2.0.34">
+        <PackageReference Include="GitInfo" Version="2.1.2">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="HtmlSanitizer" Version="5.0.343" />
+        <PackageReference Include="HtmlSanitizer" Version="5.0.353" />
         <PackageReference Include="Markdig" Version="0.21.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web.Extensions" Version="5.0.0-preview.8.20414.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web.Extensions" Version="5.0.0-preview9.20467.1" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0-rc.1.20451.17" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0-rc.1.20451.17" PrivateAssets="all" />
         <PackageReference Include="System.Net.Http.Json" Version="5.0.0-rc.1.20451.14" />
