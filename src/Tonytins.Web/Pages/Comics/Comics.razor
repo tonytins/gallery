@@ -1,4 +1,5 @@
 @page "/comics/{Name}"
+@using Tonytins.Models
 @using Tonytins.Models.Gallery
 @using Tonytins.Web.Components
 @using System.Collections.Generic
@@ -8,17 +9,14 @@
 @if (!string.IsNullOrEmpty(PageName))
 {
 <TitleHelper Name=@PageName />
-                <h2>@PageName</h2>
- }
-            else
-            {
-<TitleHelper Name="Comics" />
-}
+                <h2>@PageName</h2> }
+                            else
+                            {
+                <TitleHelper Name="Comics" />}
 @if (!string.IsNullOrEmpty(PageDescription))
 {
 @PageDescription.MarkdownToHtml()
-                <hr />
-}
+                <hr />}
 <div style="margin: 0 auto; margin-top: 10px;">
     @if (!IsReady)
     {
@@ -32,38 +30,37 @@ else
                   Permalink=@SiteHelper.Permalink(Name, art.Key)
                   Kind=@GalleryKind.Comic
                   Copyrights=@art.Copyrights
-                  Credits=@art.Credits />
-}
+                  Credits=@art.Credits />}
 </div>}
 </div>
 @code { IEnumerable<ComicsModel> submissions;
 
- [Parameter] public string Name { get; set; }
+    [Parameter] public string Name { get; set; }
 
- string PageDescription { get; set; }
- string PageName { get; set; }
- string AlertMessage { get; set; }
- bool DisplayAlert { get; set; }
- bool IsReady { get; set; }
+    string PageDescription { get; set; }
+    string PageName { get; set; }
+    string AlertMessage { get; set; }
+    bool DisplayAlert { get; set; }
+    bool IsReady { get; set; }
 
- bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
- string DarkModeBadgeCss => IsDarkMode ? "badge-secondary" : "badge-primary";
+    bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
+    string DarkModeBadgeCss => IsDarkMode ? "badge-secondary" : "badge-primary";
 
- protected override async Task OnParametersSetAsync()
- {
-     try
-     {
-         var gallery = await Http.GetFromJsonAsync<GalleryModel<ComicsModel>>(SiteHelper.JsonCDN(Name, @"prod/comics/"));
-         PageDescription = gallery.Description;
-         PageName = gallery.Title;
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            var gallery = await Http.GetFromJsonAsync<GalleryBase<ComicsModel>>(SiteHelper.JsonCDN(Name, @"prod/comics/"));
+            PageDescription = gallery.Description;
+            PageName = gallery.Title;
 
-         submissions = gallery.Artwork;
+            submissions = gallery.Gallery;
 
-         IsReady = true;
-     }
-     catch (Exception err)
-     {
-         AlertMessage = err.Message;
-         DisplayAlert = true;
-     }
- } }
+            IsReady = true;
+        }
+        catch (Exception err)
+        {
+            AlertMessage = err.Message;
+            DisplayAlert = true;
+        }
+    } }

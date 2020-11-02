@@ -3,16 +3,13 @@
     <div class="card-header">
         <h5>@Name</h5>
     </div>
+    @if (!string.IsNullOrEmpty(Image))
+    {
+<img class="card-img-top" width="286" height="190" src="@Image" />}
     <div class="card-body">
         <div class="card-text">
             <div class="row">
-                <p>@Description</p>
-            </div>
-            <div class="row">
-                <p>Species: @Species</p>
-            </div>
-            <div class="row">
-                <p>Species: @Species</p>
+                <p>@Description.MarkdownToHtml()</p>
             </div>
         </div>
     </div>

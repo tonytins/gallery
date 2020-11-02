@@ -15,9 +15,28 @@ namespace Tonytins.Web
         /// <returns></returns>
         public static string ResolveImagePath(string image, string path) => @$"../images/{path}/{image}";
 
-        public static string JsonCDN(string json) => $@"https://cdn.tonytins.xyz/db/{json}.json";
+        public static string JsonCDN(string json, bool dev = false)
+        {
+            if (dev)
+                return $@"https://cdn.tonytins.xyz/db/dev/{json}.json";
 
-        public static string JsonCDN(string json, string path) => $@"https://cdn.tonytins.xyz/db/{path}/{json}.json";
+            return $@"https://cdn.tonytins.xyz/db/prod/{json}.json";
+        }
+
+        /// <summary>
+        /// Resolves link to the CDN
+        /// </summary>
+        /// <param name="json">JSON file</param>
+        /// <param name="path">Path to the JSON file</param>
+        /// <param name="dev">Use development branch or not</param>
+        /// <returns>CDN URL</returns>
+        public static string JsonCDN(string json, string path, bool dev = false)
+        {
+            if (dev)
+                return $@"https://cdn.tonytins.xyz/db/dev/{path}/{json}.json";
+
+            return $@"https://cdn.tonytins.xyz/db/prod/{path}/{json}.json";
+        }
 
         public static string LocalCDN(string json, string path) => $@"../data/{path}/{json}.json";
 

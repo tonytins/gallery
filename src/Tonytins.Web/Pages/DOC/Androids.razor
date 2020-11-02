@@ -1,14 +1,8 @@
-@page "/gallery/{Name}"
+@page "/docs/androids"
 @using Tonytins.Models
-@using Tonytins.Models.Gallery
 @using Tonytins.Web.Components
 @using System.Collections.Generic
 @inject HttpClient Http
-@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
-<AlertComponent Display=@DisplayAlert Alert=@AlertType.Warning Message=@AlertMessage />
-<div class="text-right">
-    <span class="badge @DarkModeBadgeCss"><span class="fa fa-photo-video"></span> @CountArt</span>
-</div>
 @if (!string.IsNullOrEmpty(PageName))
 {
 <TitleHelper Name=@PageName />
@@ -16,7 +10,7 @@
  }
             else
             {
-<TitleHelper Name="Gallery" />
+<TitleHelper Name=@PageName />
 }
 @if (!string.IsNullOrEmpty(PageDescription))
 {
@@ -30,15 +24,13 @@
 else
 {
 <div class="card-columns">
-    @foreach (var art in submissions)
+    @foreach (var android in androids)
     {
-<GalleryComponent Image=@SiteHelper.ImageCDN(art.Image, $@"gallery/{Name}")
-                  Permalink=@SiteHelper.Permalink(Name, art.Key)
-                  Copyrights=@art.Copyrights
-                  Credits=@art.Credits />}
+<AndroidComponent Name=@android.Name Description=@android.Description />}
 </div>}
 </div>
-@code { IEnumerable<ArtworkModel> submissions;
+
+@code { IEnumerable<AndroidModel> androids;
 
     [Parameter] public string Name { get; set; }
 
@@ -49,20 +41,15 @@ else
     int CountArt { get; set; }
     bool IsReady { get; set; }
 
-    bool IsDarkMode => localStorage.GetItem<bool>("darkmode");
-    string DarkModeBadgeCss => IsDarkMode ? "badge-secondary" : "badge-primary";
-
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
-        CountArt = 0;
-
         try
         {
-            var gallery = await Http.GetFromJsonAsync<GalleryBase<ArtworkModel>>(SiteHelper.JsonCDN(Name, "gallery", true));
+            var gallery = await Http.GetFromJsonAsync<GalleryBase<AndroidModel>>(SiteHelper.JsonCDN(Name, $@"doc/{Name}", true));
             PageDescription = gallery.Description;
             PageName = gallery.Title;
 
-            submissions = gallery.Gallery.AsParallel();
+            androids = gallery.Gallery.AsParallel();
 
             foreach (var art in gallery.Gallery)
                 CountArt++;
